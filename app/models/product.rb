@@ -5,4 +5,6 @@ class Product < ApplicationRecord
   validates :reference, uniqueness: true, presence: true
   validates :category, presence: true
   validates :price, presence: true
+
+  mount_uploader :photo, PhotoUploader
 end
