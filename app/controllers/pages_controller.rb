@@ -1,5 +1,5 @@
 class PagesController < ActionController::Base
-  def index
+  def home
   end
 
   def location
