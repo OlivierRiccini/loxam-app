@@ -1,1 +1,11 @@
 <h1>COUCOU FROM HOME PAGE</h1>
+
+<ul>
+  <% @products.each do |product| %>
+    <li><h3><%= link_to product_path(product) do %><%= product.name %> <% end %></h3>
+      <p>Réf: <%= product.reference %></p>
+      <p><strong>Category: <%= product.category %></strong></p>
+      <%= cl_image_tag product.photo %>
+      <p><strong>Prix <%= product.price %> € / jour</strong></p></li>
+  <% end %>
+</ul>

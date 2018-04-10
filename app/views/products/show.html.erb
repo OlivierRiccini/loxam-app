@@ -1,2 +1,7 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h1><%= @product.name %></h1>
+<p>Réf: <%= @product.reference %></p>
+<p><strong>Category: <%= @product.category %></strong></p>
+<%= cl_image_tag @product.photo %>
+<p>Characteristics: - <%= @product.characteristics %></p>
+<p>Déscription <%= @product.description %></p>
+<p><strong>Prix <%= @product.price %> € / jour</strong>, Déposit <%= @product.deposit %> €</p></li>

@@ -1,8 +1,11 @@
 class ProductsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :show ]
   def index
   end
 
   def show
+    @product = Product.find(params[:id])
+    authorize @product
   end
 
   def new

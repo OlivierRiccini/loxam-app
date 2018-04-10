@@ -13,11 +13,12 @@ Rails.application.routes.draw do
   get 'conditions_generales_de_vente', to: "pages#conditions_generales_de_vente"
   get 'documentations', to: "pages#documentations"
 
-  resources :product
-  resources :user do
+  resources :products
+
+  resources :users do
     get 'mon_espace', to: "users#show"
-    resources :document
+    resources :documents
   end
 
-  resources :promo
+  resources :promos
 end

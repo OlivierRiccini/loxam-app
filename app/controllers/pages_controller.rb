@@ -1,5 +1,6 @@
 class PagesController < ActionController::Base
   def home
+    @products = Product.all
   end
 
   def location
