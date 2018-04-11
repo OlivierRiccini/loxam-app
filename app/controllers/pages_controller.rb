@@ -3,6 +3,9 @@ class PagesController < ActionController::Base
     @products = Product.all
   end
 
+  def mon_espace
+  end
+
   def location
   end
 
