@@ -5,14 +5,20 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'font-awesome-sass', '~> 4.7'
+gem 'simple_form'
+
+
 gem 'devise'
 gem "pundit"
 gem 'figaro'
 gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
-gem 'bootstrap-sass'
-gem 'simple_form'
 gem 'faker'
+
+gem "letter_opener", group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use postgresql as the database for Active Record
