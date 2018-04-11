@@ -25,3 +25,25 @@ categories = [ 'espaces verts', 'isolation - projection peinture & enduit', 'ele
   new_product.remote_photo_url = "https://picsum.photos/200/300/?random"
   new_product.save
 end
+
+puts "Products created!"
+
+types = ['facture', 'facture', 'facture', 'facture', 'avoir']
+
+10.times do
+  company = Faker::Company.name
+  new_user = User.create(company: company, email: "contact@#{company}.com", password: company)
+  new_user.remote_avatar_url = "https://picsum.photos/50/60/?random"
+  new_user.save
+  5.times do
+    new_document = Document.create(document_type: types.sample, user_id: new_user.id)
+    rand(1..30).times do
+      Transaction.create(product_id: rand(1..50), document_id: new_document.id)
+    end
+  end
+  puts "New company #{company} with 5 documents created!"
+end
+
+puts "DB CREATED!"
+
+
