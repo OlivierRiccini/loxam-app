@@ -4,6 +4,21 @@ class PagesController < ActionController::Base
   end
 
   def mon_espace
+    @user = current_user
+    @documents = Document.where(user_id: @user.id)
+
+    @products = []
+
+    @documents.each do |document|
+      document.transactions.each do |transaction|
+        @products << Product.find(transaction.product_id)
+      end
+    end
+
+    popular_products = @products.each_with_object(Hash.new(0)) do
+      |m,h| h[m] += 1
+    end
+    @popular_products = popular_products.sort_by{ |k,v| v }.last(5).reverse
   end
 
   def location

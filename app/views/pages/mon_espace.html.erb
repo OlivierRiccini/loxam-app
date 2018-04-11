@@ -1,0 +1,17 @@
+<h1><%= @user.company %></h1>
+
+<ul>
+  <% @documents.each do |document| %>
+    <li><strong><%= document.document_type %></strong>
+      <% @products.each do |product| %>
+        <%= link_to product_path(product) do %><%= product.name %> - <%= product.price %>€<% end %>
+        <br>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Top 5 products you rent!</h3>
+<% @popular_products.each do |product| %>
+  <p><strong><%= product[0].name %></strong> loué <%= product[1]%> fois!</p>
+<% end %>
