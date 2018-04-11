@@ -4,5 +4,5 @@ class Document < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :documents, through: :transactions
 
-  validates :type, presence: true
+  validates :document_type, presence: true
 end
