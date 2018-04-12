@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :documents
   get 'mon_espace', to: "pages#mon_espace"
+  get 'admin_dashboard', to: "pages#admin_dashboard"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "pages#home"
 
@@ -21,11 +22,6 @@ Rails.application.routes.draw do
   get 'documentations', to: "pages#documentations"
 
   resources :products
-
-  # resources :users do
-  #   get 'mon_espace', to: "pages#mon_espace"
-  #   resources :documents
-  # end
 
   resources :promos
 end

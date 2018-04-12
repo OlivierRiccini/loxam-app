@@ -6,30 +6,36 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    return true
-  end
-
-  def show?
-    return true
+    admin_list?
   end
 
   def new?
-    return true
+    record.user == user || admin_list?
   end
 
   def create?
-    return true
+    record.user == user || admin_list?
   end
 
   def edit?
-    return true
+    record.user == user || admin_list?
   end
 
   def update?
-    return true
+    record.user == user || admin_list?
   end
 
   def destroy?
-    return true
+    admin_list?
+  end
+
+  def admin_dashboard?
+    admin_list?
+  end
+
+  private
+
+  def admin_list?
+    !user.nil? && user.admin
   end
 end
