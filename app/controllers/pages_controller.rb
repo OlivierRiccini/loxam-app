@@ -1,6 +1,8 @@
-class PagesController < ActionController::Base
+class PagesController < ApplicationController
+  before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard ]
+  skip_before_action :authenticate_user!, only: [ :home ]
+
   def home
-    @products = Product.all
   end
 
   def mon_espace
@@ -19,6 +21,12 @@ class PagesController < ActionController::Base
       |m,h| h[m] += 1
     end
     @popular_products = popular_products.sort_by{ |k,v| v }.last(5).reverse
+  end
+
+  def admin_dashboard
+    @user = current_user
+    authorize @user
+    @users = User.all
   end
 
   def location
@@ -46,5 +54,11 @@ class PagesController < ActionController::Base
   end
 
   def documentations
+  end
+
+  private
+
+  def all_products
+    @products = Product.all
   end
 end
