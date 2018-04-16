@@ -1,9 +1,9 @@
 <h1>Hola! from admin dashboard </h1>
-
+<!--
 <% @lines.each do |line| %>
   <p><%= line %></p>
-<% end %>
-
+<% end %> -->
+<p>admin? <%= current_user.admin %></p>
 <ul>
   <% @users.each do |user| %>
     <li><%= user.company %></li>
@@ -15,6 +15,7 @@
 <br>
 <ul>
   <% @products.each do |product| %>
-    <li><%= link_to product.name, product_path(product) %></li>
+    <li><%= link_to product.name, product_path(product) %> -
+      <%= link_to "Supprimer ce poduit", product_path(product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %></li>
   <% end %>
 </ul>

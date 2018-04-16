@@ -1,2 +1,16 @@
 <h1>Products#new</h1>
-<p>Find me in app/views/products/new.html.erb</p>
+<%= simple_form_for @new_product do |f| %>
+  <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :reference %>
+    <%= f.input :category %>
+    <%= f.input :price %>
+    <%= f.input :characteristics %>
+    <%= f.input :deposit %>
+    <%= f.input :technical_sheet %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
+    <%= f.input :video %>
+    <%= f.input :loxam_link %>
+    <%= f.button :submit %>
+<% end %>

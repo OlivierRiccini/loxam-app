@@ -30,8 +30,6 @@ class PagesController < ApplicationController
 
     @lines = []
 
-
-
     # File.open("http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT", "r").each do |line|
     #   @lines << line
     # end
