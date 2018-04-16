@@ -16,6 +16,7 @@
 <ul>
   <% @products.each do |product| %>
     <li><%= link_to product.name, product_path(product) %> -
-      <%= link_to "Supprimer ce poduit", product_path(product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %></li>
+      <%= link_to "Supprimer ce poduit", product_path(product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %> -
+      <%= link_to "Modifier produit", edit_product_path(product) %></li>
   <% end %>
 </ul>

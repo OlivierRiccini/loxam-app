@@ -10,15 +10,15 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @new_product = Product.new
-    authorize @new_product
+    @product = Product.new
+    authorize @product
   end
 
   def create
-    @new_product = Product.new(product_params)
-    authorize @new_product
+    @product = Product.new(product_params)
+    authorize @product
 
-    if @new_product.save
+    if @product.save
       redirect_to admin_dashboard_path
     else
       render new_product_path
@@ -31,6 +31,10 @@ class ProductsController < ApplicationController
 
   def update
     authorize @product
+
+    @product.update(product_params)
+
+    redirect_to product_path(@product)
   end
 
   def destroy
