@@ -27,6 +27,19 @@ class PagesController < ApplicationController
     @user = current_user
     authorize @user
     @users = User.all
+
+    @lines = []
+
+
+
+    # File.open("http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT", "r").each do |line|
+    #   @lines << line
+    # end
+
+    text = Net::HTTP.get( URI.parse( "http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT" ) )
+    text.split("\n").each do |line|
+      @lines << line.split(" ")
+    end
   end
 
   def location

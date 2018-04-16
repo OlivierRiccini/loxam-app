@@ -1,5 +1,9 @@
 <h1>Hola! from admin dashboard </h1>
-<h3><%= current_user.admin %></h3>
+
+<% @lines.each do |line| %>
+  <p><%= line %></p>
+<% end %>
+
 <ul>
   <% @users.each do |user| %>
     <li><%= user.company %></li>
