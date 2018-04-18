@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   after_create :send_welcome_email
+  after_create :subscribe_to_newsletter
+
 
   validates :company, presence: true
   # Include default devise modules. Others available are:
@@ -15,5 +17,9 @@ class User < ApplicationRecord
 
   def send_welcome_email
     UserMailer.welcome(self).deliver_now
+  end
+
+  def subscribe_to_newsletter
+    SubscribeToNewsletterService.new(self).call
   end
 end

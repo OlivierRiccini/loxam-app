@@ -22,6 +22,5 @@ Rails.application.routes.draw do
   get 'documentations', to: "pages#documentations"
 
   resources :products
-
   resources :promos
 end
