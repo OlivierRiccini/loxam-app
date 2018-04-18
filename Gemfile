@@ -17,6 +17,7 @@ gem 'figaro'
 gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
 gem 'faker'
+gem 'gibbon'
 
 gem "letter_opener", group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

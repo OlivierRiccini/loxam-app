@@ -4,7 +4,8 @@
   <% @documents.each do |document| %>
     <li><strong><%= document.document_type %></strong>
       <% @products.each do |product| %>
-        <%= link_to product_path(product) do %><%= product.name %> - <%= product.price %>€<% end %>
+        <%= link_to product_path(product) do %>
+          <%= product.name %> - <%= product.price %>€<% end %>
         <br>
       <% end %>
     </li>
