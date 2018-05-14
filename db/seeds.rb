@@ -11,10 +11,17 @@ categories = [ 'espaces verts', 'isolation - projection peinture & enduit', 'ele
                'perçage & fixation', 'élevation', 'pompes', 'plomberie génie climatique',
                'véhicule & transports', 'base de vie']
 
+categories.each do |category|
+  Category.create(name: category)
+  puts "Category #{category} created!"
+end
+
+puts "Categories created!"
+
 50.times do
   new_product = Product.create(name: Faker::Vehicle.manufacture,
+                               category_id: rand(20..categories.size),
                                reference: Faker::Vehicle.vin,
-                               category: categories.sample,
                                price: rand(20..1000),
                                characteristics: Faker::Lorem.sentences(2),
                                description: Faker::Lorem.paragraph,
@@ -26,7 +33,9 @@ categories = [ 'espaces verts', 'isolation - projection peinture & enduit', 'ele
   new_product.save
 end
 
+
 puts "Products created!"
+
 
 types = ['facture', 'facture', 'facture', 'facture', 'avoir']
 

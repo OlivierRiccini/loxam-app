@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   get 'conditions_generales_de_vente', to: "pages#conditions_generales_de_vente"
   get 'documentations', to: "pages#documentations"
 
+  get ':name/products', to: "categories#show", as: "category"
+
+  resources :categories, only: [ :new, :create, :edit, :update, :destroy]
   resources :products
   resources :promos
 end

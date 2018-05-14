@@ -4,10 +4,20 @@
   background: white;
   transition: all 0.3s ease;
   height: 90px;
+  width: 100vw;
   padding: 0px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 9;
+}
+
+
+@media screen and (max-width: 991px) {
+  .navbar-wagon {
+    position: fixed;
+    top: 0;
+  }
 }
 
 /* Logo */
@@ -37,7 +47,7 @@
 
 /* Navbar link */
 .navbar-wagon-link {
-  color: #616668;
+  color: $font-color;
   font-size: 14px;
 }
 .navbar-wagon-link:hover {

@@ -1,1 +1,19 @@
-
+<div id="toggle-categories-arrow"><span>Categories <i class="fa fa-arrow-right"></i></span></div>
+<div class="container">
+  <div class="tags-catgories-container">
+    <% @categories.each do |category| %>
+      <%= link_to category_path(category.name), class: 'category-tag' do %>
+        <%= category.name.capitalize %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="tags-catgories-container-small-screen">
+    <ul>
+      <% @categories.each do |category| %>
+        <li class="category-tag-small-screen"><%= link_to category_path(category.name) do %>
+        <%= category.name.capitalize %>
+      <% end %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
