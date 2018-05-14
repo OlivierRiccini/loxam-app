@@ -1,0 +1,10 @@
+.loxam-btn {
+  border: 1px solid $loxam-color;
+  color: $loxam-color;
+  padding: 5px 10px;
+  border-radius: 2px;
+  &:hover {
+    border-color: rgba(225, 12, 34, 0.6);
+    color: rgba(225, 12, 34, 0.6);
+  }
+}

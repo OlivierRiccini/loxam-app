@@ -7,4 +7,15 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+// app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap-sprockets
+//= require_tree .
+
+console.log('Hello World from Webpacker');
+
+$('.dropdown-toggle').click(function() {
+  $('.dropdown-menu').toggle('.dropdown-menu');
+});
