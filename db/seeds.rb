@@ -20,7 +20,7 @@ puts "Categories created!"
 
 50.times do
   new_product = Product.create(name: Faker::Vehicle.manufacture,
-                               category_id: rand(20..categories.size),
+                               category_id: rand(0..15),
                                reference: Faker::Vehicle.vin,
                                price: rand(20..1000),
                                characteristics: Faker::Lorem.sentences(2),

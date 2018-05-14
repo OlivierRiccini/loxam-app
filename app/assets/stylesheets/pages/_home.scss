@@ -49,12 +49,13 @@
 .category-tag-small-screen {
   color: $font-color;
   font-size: 14px;
-   a {
+}
+
+.category-tag {
+  color: $font-color;
+  &:hover {
+    text-decoration: none;
     color: $font-color;
-    &:hover {
-      text-decoration: none;
-      color: $font-color;
-    };
   };
 }
 

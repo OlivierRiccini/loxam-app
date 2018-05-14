@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show ]
 
   def show
-    @products = Product.where(category_id: params[:id])
+    @products = Product.where(category_id: @category.id)
     authorize @products
   end
 
