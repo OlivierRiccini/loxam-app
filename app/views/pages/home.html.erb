@@ -17,3 +17,15 @@
     </ul>
   </div>
 </div>
+
+<div class="container">
+  <ul>
+    <% @best_searches.each do |product| %>
+      <li><%= link_to product_path(product) do %>
+        <%= product.name %>
+          <% end %>
+          <%= product.nb_of_searches %>
+        </li>
+    <% end %>
+  </ul>
+</div>

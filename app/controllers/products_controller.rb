@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
 
   def show
     authorize @product
+    i = @product.nb_of_searches + 1
+    @product.update(nb_of_searches: i)
   end
 
   def new
