@@ -1,5 +1,5 @@
 <div id="toggle-categories-arrow"><span>Categories <i class="fa fa-arrow-right"></i></span></div>
-<div class="catgories-container">
+<div class="container catgories-container">
   <div class="tags-catgories-container">
     <% @categories.each do |category| %>
       <%= link_to category_path(category.name), class: 'category-tag' do %>
@@ -7,6 +7,7 @@
       <% end %>
     <% end %>
   </div>
+</div>
   <div class="tags-catgories-container-small-screen">
     <ul>
       <% @categories.each do |category| %>
