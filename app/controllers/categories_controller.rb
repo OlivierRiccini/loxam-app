@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   def show
     @products = Product.where(category_id: @category.id)
     authorize @products
+    @categories = Category.all
   end
 
   def new

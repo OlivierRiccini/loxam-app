@@ -1,27 +1,31 @@
 class PagesController < ApplicationController
   before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard ]
+  before_action :all_categories, only: [ :home, :mon_espace, :admin_dashboard ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   def home
     @categories = Category.all
 
     @best_searches_choice = Product.where(best_searches_choice: true)
-    @best_searches_auto = Product.order("nb_of_searches DESC").first(4)
+    @best_searches_auto = Product.order("nb_of_searches DESC").first(8)
 
     @best_searches = []
 
-    if !@best_searches_choice.nil? && @best_searches_choice.size < 4
+    if !@best_searches_choice.nil? && @best_searches_choice.size < 8
       @best_searches_choice.each do |product|
         @best_searches << product
       end
-      Product.order("nb_of_searches DESC").first(4 - @best_searches_choice.size).each do |product|
+      Product.order("nb_of_searches DESC").first(8 - @best_searches_choice.size).each do |product|
         @best_searches << product
       end
     else
-      @best_searches_auto.first(4).each do |product|
+      @best_searches_auto.first(8).each do |product|
         @best_searches << product
       end
     end
+
+    # Used in new message form on home page
+    @message = Message.new
   end
 
   def mon_espace
@@ -90,5 +94,9 @@ class PagesController < ApplicationController
 
   def all_products
     @products = Product.all
+  end
+
+  def all_categories
+    @categories = Category.all
   end
 end

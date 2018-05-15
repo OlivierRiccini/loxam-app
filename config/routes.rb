@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   resources :categories, only: [ :new, :create, :edit, :update, :destroy]
   resources :products
   resources :promos
+  resources :messages, only: [ :show, :create, :edit, :destroy ]
 end
