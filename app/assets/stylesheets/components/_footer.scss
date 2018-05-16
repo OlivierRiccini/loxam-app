@@ -1,0 +1,57 @@
+.socials {
+  background-color: #fff;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  text-align: center;
+  padding: 35px 0;
+  margin-top: 70px;
+  h2 {
+    color: $loxam-color;
+    font-size: 28px;
+  };
+  a {
+    color: $font-color;
+    font-size: 36px;
+    padding: 0 10px;
+    transition: all 0.3s;
+    &:hover {
+      color: $loxam-color;
+    }
+  }
+}
+
+.footer {
+  background-color: $loxam-color;
+  padding: 25px 0;
+  .col-xs-12 {
+    text-align: center;
+  };
+  ul {
+    list-style: none;
+    padding: 0;
+  };
+  h4 {
+    color: #fff;
+    font-size: 16px;
+  }
+  a {
+    color: #fff;
+    font-size: 14px;
+    font-weight: lighter;
+  }
+}
+
+.sub-footer {
+  background-color: #fff;
+  padding: 25px 0;
+  text-align: center;
+  p {
+    font-size: 12px;
+    margin: 10px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .socials {
+    margin-top: 150px;
+  }
+}

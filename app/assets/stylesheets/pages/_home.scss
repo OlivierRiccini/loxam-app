@@ -1,1 +1,35 @@
-// Specific CSS for your home-page
+.title-les-plus-recherchés {
+  color: $loxam-color;
+  font-size: 28px;
+  text-align: center;
+  margin: 0 0 10px 0;
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  border-radius: 2px;
+}
+
+.contact-column {
+  position: sticky;
+  top: 0;
+}
+
+.promo-container, .row-les-nouveautes {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 991px) {
+  .main-container {
+    position: relative;
+    top: 100px;
+  };
+  .col-product-card, .col-best-searches {
+    margin-top: 50px;
+  };
+  .contact-column {
+    position: static;
+  };
+  .col-product-card {
+    margin-top: 10px;
+  }
+}

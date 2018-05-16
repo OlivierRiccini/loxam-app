@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411194416) do
+ActiveRecord::Schema.define(version: 20180516155510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.bigint "user_id"
@@ -23,10 +29,17 @@ ActiveRecord::Schema.define(version: 20180411194416) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "reference"
-    t.string "category"
     t.integer "price"
     t.text "characteristics"
     t.text "description"
@@ -37,13 +50,22 @@ ActiveRecord::Schema.define(version: 20180411194416) do
     t.string "loxam_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.integer "nb_of_searches", default: 0
+    t.boolean "best_searches_choice", default: false
+    t.boolean "new_product_choice", default: false
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "promos", force: :cascade do |t|
     t.string "catalogue"
-    t.string "display"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "media"
+    t.string "title"
+    t.boolean "display", default: false
+    t.text "description"
+    t.boolean "display_description", default: false
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -77,6 +99,7 @@ ActiveRecord::Schema.define(version: 20180411194416) do
   end
 
   add_foreign_key "documents", "users"
+  add_foreign_key "products", "categories"
   add_foreign_key "transactions", "documents"
   add_foreign_key "transactions", "products"
 end

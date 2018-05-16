@@ -3,15 +3,21 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LoxamApp</title>
+    <title>Loxam City Bastia : Location de materiel pour batiment, TP, industrie</title>
+    <meta name="description" content="Location et vente de mat&amp;eacute;riel et outillage pour le batiment, les travaux publics et l'industrie">
+    <meta name="keywords" content="location matériel, materiel travaux, batiment, rennovation, achat materiel corse, location amteriel corse, louer outils, location outil, loxam, loxam corse, loxam bastia, location outil nettoyage, outil beton, outil batiment, outil peinture, outil electrique">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/categories' %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+      <%= yield %>
+      <%= javascript_pack_tag 'application' %>
+    <%= render 'shared/footer' %>
   </body>
 </html>

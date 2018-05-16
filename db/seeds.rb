@@ -11,10 +11,17 @@ categories = [ 'espaces verts', 'isolation - projection peinture & enduit', 'ele
                'perçage & fixation', 'élevation', 'pompes', 'plomberie génie climatique',
                'véhicule & transports', 'base de vie']
 
+categories.each do |category|
+  Category.create(name: category)
+  puts "Category #{category} created!"
+end
+
+puts "Categories created!"
+
 50.times do
   new_product = Product.create(name: Faker::Vehicle.manufacture,
+                               category_id: rand(0..15),
                                reference: Faker::Vehicle.vin,
-                               category: categories.sample,
                                price: rand(20..1000),
                                characteristics: Faker::Lorem.sentences(2),
                                description: Faker::Lorem.paragraph,
@@ -22,11 +29,13 @@ categories = [ 'espaces verts', 'isolation - projection peinture & enduit', 'ele
                                technical_sheet: "http//#{Faker::Vehicle.manufacture}/technical_sheet",
                                video: "http//#{Faker::Vehicle.manufacture}/video",
                                loxam_link: "http//#{Faker::Vehicle.manufacture}/loxam.fr")
-  new_product.remote_photo_url = "https://picsum.photos/200/300/?random"
+  new_product.remote_photo_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526474527/loxam-machine.png"
   new_product.save
 end
 
+
 puts "Products created!"
+
 
 types = ['facture', 'facture', 'facture', 'facture', 'avoir']
 
@@ -43,6 +52,12 @@ types = ['facture', 'facture', 'facture', 'facture', 'avoir']
   end
   puts "New company #{company} with 5 documents created!"
 end
+
+promo = Promo.new(title: "Betonnière")
+promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"
+promo.save
+
+puts "Promo!"
 
 puts "DB CREATED!"
 

@@ -1,22 +1,61 @@
-<h1>COUCOU FROM HOME PAGE</h1>
-<% if user_signed_in? %>
-  <%= link_to destroy_user_session_path, method: :delete do %>
-    <%= t(".sign_out", default: "Log out") %>
-  <% end %>
-<% else %>
-  <%= link_to 'Connexion', new_user_session_path %>
-  <%= link_to 'Créer un compte', new_user_registration_path %>
-<% end %>
-<br>
-<br>
-<br>
-<br>
-<ul>
-  <% @products.each do |product| %>
-    <li><h3><%= link_to product_path(product) do %><%= product.name %> <% end %></h3>
-      <p>Réf: <%= product.reference %></p>
-      <p><strong>Category: <%= product.category %></strong></p>
-      <%= cl_image_tag product.photo %>
-      <p><strong>Prix <%= product.price %> € / jour</strong></p></li>
-  <% end %>
-</ul>
+<div class="container main-container">
+  <div class="row main-row">
+    <div class="col-sm-12 col-md-7 col-best-searches">
+      <!-- Les plus recherchés -->
+      <div class="row row-les-plus-recherches">
+        <h2 class="title-les-plus-recherchés">LES PLUS RECHERCHÉS</h2>
+        <% @best_searches.each do |product| %>
+          <div class="col-xs-12 col-sm-6 col-product-card">
+            <div class="product-card">
+              <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <div class="card-infos">
+              <h3><%= product.name %></h3>
+                <div class="card-price-and-btn">
+                  <p>à partir de <span class="price"><%= product.price %>€</span>/jour H.T</p>
+                  <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+        <!-- Les nouveautés -->
+      <div class="row row-les-nouveautes">
+        <h2 class="title-les-plus-recherchés">LES NOUVEAUTÉS</h2>
+        <% @new_products.each do |product| %>
+          <div class="col-xs-12 col-sm-6 col-product-card">
+            <div class="product-card">
+              <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <div class="card-infos">
+              <h3><%= product.name %></h3>
+                <div class="card-price-and-btn">
+                  <p>à partir de <span class="price"><%= product.price %>€</span>/jour H.T</p>
+                  <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-5 contact-column">
+      <!-- Demande de devis -->
+      <div class="contact-container">
+        <h2>DEMANDE DE DEVIS</h2>
+        <%= render 'messages/form' %>
+      </div>
+      <!-- Promos -->
+      <div class="promo-container">
+        <h2>PROMOS</h2>
+        <div class="promo-card-image">
+          <% if @promo.display_description %>
+            <h3><%= @promo.title %></h3>
+            <p><%= @promo.description %></p>
+          <% end %>
+          <%= cl_image_tag @promo.media %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

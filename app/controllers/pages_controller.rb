@@ -1,8 +1,54 @@
 class PagesController < ApplicationController
   before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard ]
-  skip_before_action :authenticate_user!, only: [ :home ]
+  before_action :all_categories, only: [ :home, :mon_espace, :admin_dashboard ]
+  skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   def home
+    @categories = Category.all
+
+    # Les plus recherchés
+    @best_searches_choice = Product.where(best_searches_choice: true)
+    @best_searches_auto = Product.order("nb_of_searches DESC").first(4)
+
+    @best_searches = []
+
+    if !@best_searches_choice.nil? && @best_searches_choice.size < 4
+      @best_searches_choice.each do |product|
+        @best_searches << product
+      end
+      Product.order("nb_of_searches DESC").first(4 - @best_searches_choice.size).each do |product|
+        @best_searches << product
+      end
+    else
+      @best_searches_auto.first(4).each do |product|
+        @best_searches << product
+      end
+    end
+
+    # Les nouveautés
+    @new_product_choice = Product.where(new_product_choice: true)
+    @new_product_auto = Product.order("created_at DESC").first(4)
+
+    @new_products = []
+
+    if !@new_product_choice.nil? && @new_product_choice.size < 4
+      @new_product_choice.each do |product|
+        @@new_products << product
+      end
+      Product.order("nb_of_searches DESC").first(4 - @new_product_choice.size).each do |product|
+        @new_products << product
+      end
+    else
+      @new_product_auto.first(4).each do |product|
+        @new_products << product
+      end
+    end
+
+    # Used in new message form on home page
+    @message = Message.new
+
+    # Displaying promo
+    @promo = Promo.where(display: true).last
   end
 
   def mon_espace
@@ -71,5 +117,9 @@ class PagesController < ApplicationController
 
   def all_products
     @products = Product.all
+  end
+
+  def all_categories
+    @categories = Category.all
   end
 end
