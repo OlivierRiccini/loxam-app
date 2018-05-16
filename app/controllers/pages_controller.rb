@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard ]
-  before_action :all_categories, only: [ :home, :mon_espace, :admin_dashboard ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   def home
@@ -72,7 +71,7 @@ class PagesController < ApplicationController
   def admin_dashboard
     @user = current_user
     authorize @user
-    @users = User.all
+    @users = User.all.where(admin: false)
 
     @lines = []
 
@@ -84,6 +83,8 @@ class PagesController < ApplicationController
     text.split("\n").each do |line|
       @lines << line.split(" ")
     end
+
+    @promos = Promo.all
   end
 
   def location
@@ -117,9 +118,5 @@ class PagesController < ApplicationController
 
   def all_products
     @products = Product.all
-  end
-
-  def all_categories
-    @categories = Category.all
   end
 end

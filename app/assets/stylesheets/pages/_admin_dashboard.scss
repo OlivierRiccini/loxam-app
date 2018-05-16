@@ -1,0 +1,33 @@
+.dashboard-container {
+  background-color: #fff;
+}
+
+.dashboard-section {
+  display: none;
+}
+
+.dashboard-section-active {
+  display: block;
+}
+
+.tabs {
+  color: #fff;
+}
+
+.tab {
+  background-color: $loxam-color;
+  padding: 15px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #fff;
+    color: $loxam-color;
+  }
+}
+
+.tab-active {
+  background-color: #fff;
+  color: $loxam-color;
+}
