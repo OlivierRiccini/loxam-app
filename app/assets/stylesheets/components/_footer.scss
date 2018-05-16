@@ -12,6 +12,10 @@
     color: $font-color;
     font-size: 36px;
     padding: 0 10px;
+    transition: all 0.3s;
+    &:hover {
+      color: $loxam-color;
+    }
   }
 }
 
