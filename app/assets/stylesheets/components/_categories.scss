@@ -19,6 +19,7 @@
 .tags-catgories-container-small-screen {
   display: none;
   position: absolute;
+  z-index: 9;
   top: 130px;
   left: 0;
   width: 70%;

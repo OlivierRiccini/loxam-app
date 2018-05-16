@@ -7,25 +7,28 @@ class PagesController < ApplicationController
     @categories = Category.all
 
     @best_searches_choice = Product.where(best_searches_choice: true)
-    @best_searches_auto = Product.order("nb_of_searches DESC").first(8)
+    @best_searches_auto = Product.order("nb_of_searches DESC").first(4)
 
     @best_searches = []
 
-    if !@best_searches_choice.nil? && @best_searches_choice.size < 8
+    if !@best_searches_choice.nil? && @best_searches_choice.size < 4
       @best_searches_choice.each do |product|
         @best_searches << product
       end
-      Product.order("nb_of_searches DESC").first(8 - @best_searches_choice.size).each do |product|
+      Product.order("nb_of_searches DESC").first(4 - @best_searches_choice.size).each do |product|
         @best_searches << product
       end
     else
-      @best_searches_auto.first(8).each do |product|
+      @best_searches_auto.first(4).each do |product|
         @best_searches << product
       end
     end
 
     # Used in new message form on home page
     @message = Message.new
+
+    # Displaying promo
+    @promo = Promo.where(display: true).last
   end
 
   def mon_espace

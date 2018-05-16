@@ -1,6 +1,11 @@
 <h1><%= @category.name %></h1>
 <ul>
   <% @products.each do |product| %>
-    <li><%= product.name %></li>
+    <li>
+      <%= link_to product_path(product) do %>
+        <%= product.name %>
+      <% end %>
+      <%= cl_image_tag product.photo %>
+    </li>
   <% end %>
 </ul>

@@ -29,7 +29,7 @@ puts "Categories created!"
                                technical_sheet: "http//#{Faker::Vehicle.manufacture}/technical_sheet",
                                video: "http//#{Faker::Vehicle.manufacture}/video",
                                loxam_link: "http//#{Faker::Vehicle.manufacture}/loxam.fr")
-  new_product.remote_photo_url = "https://picsum.photos/200/300/?random"
+  new_product.remote_photo_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526474527/loxam-machine.png"
   new_product.save
 end
 
@@ -52,6 +52,12 @@ types = ['facture', 'facture', 'facture', 'facture', 'avoir']
   end
   puts "New company #{company} with 5 documents created!"
 end
+
+promo = Promo.new(title: "Betonnière")
+promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"
+promo.save
+
+puts "Promo!"
 
 puts "DB CREATED!"
 

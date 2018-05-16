@@ -3,8 +3,9 @@
   color: $loxam-color;
   padding: 5px 10px;
   border-radius: 2px;
+  transition: all 0.3s;
   &:hover {
-    border-color: rgba(225, 12, 34, 0.6);
-    color: rgba(225, 12, 34, 0.6);
+    background-color: $loxam-color;
+    color: #fff;
   }
 }
