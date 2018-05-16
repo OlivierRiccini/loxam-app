@@ -17,3 +17,19 @@
 .promo-container, .row-les-nouveautes {
   margin-top: 50px;
 }
+
+@media screen and (max-width: 991px) {
+  .main-container {
+    position: relative;
+    top: 100px;
+  };
+  .col-product-card, .col-best-searches {
+    margin-top: 50px;
+  };
+  .contact-column {
+    position: static;
+  };
+  .col-product-card {
+    margin-top: 10px;
+  }
+}

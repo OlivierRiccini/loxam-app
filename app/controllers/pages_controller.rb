@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   def home
     @categories = Category.all
 
+    # Les plus recherchés
     @best_searches_choice = Product.where(best_searches_choice: true)
     @best_searches_auto = Product.order("nb_of_searches DESC").first(4)
 
@@ -21,6 +22,25 @@ class PagesController < ApplicationController
     else
       @best_searches_auto.first(4).each do |product|
         @best_searches << product
+      end
+    end
+
+    # Les nouveautés
+    @new_product_choice = Product.where(new_product_choice: true)
+    @new_product_auto = Product.order("created_at DESC").first(4)
+
+    @new_products = []
+
+    if !@new_product_choice.nil? && @new_product_choice.size < 4
+      @new_product_choice.each do |product|
+        @@new_products << product
+      end
+      Product.order("nb_of_searches DESC").first(4 - @new_product_choice.size).each do |product|
+        @new_products << product
+      end
+    else
+      @new_product_auto.first(4).each do |product|
+        @new_products << product
       end
     end
 

@@ -1,0 +1,33 @@
+<div class="socials">
+  <h2>RESTONS CONNECTÉS</h2>
+  <a href="https://www.facebook.com/LoxamBastia/" target="_blank"><i class="fa fa-facebook-square"></i></a>
+  <a href="https://www.instagram.com/loxam_city_bastia/" target="_blank"><i class="fa fa-instagram"></i></a>
+</div>
+<div class="footer">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <ul>
+        <h4>NOTRE MÉTIER</h4>
+        <li><%= link_to 'Minilease', minilease_path %></li>
+        <li><%= link_to 'Garantie dommages', garantie_dommages_path %></li>
+        <li><%= link_to 'Conditions générales de location',conditions_generales_de_location_path %></li>
+        <li><%= link_to 'Conditions générales de vente',conditions_generales_de_vente_path %></li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <ul>
+        <h4>SERVICES & INFOS</h4>
+        <li><%= link_to 'Vente',vente_path %></li>
+        <li><%= link_to 'Location', location_path %></li>
+        <li><%= link_to 'Documentation', documentations_path %></li>
+        <li><%= link_to 'Nous contacter', contact_path %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="sub-footer">
+  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+    <%= image_tag 'logo' %>
+  <% end %>
+  <p>Copyright <i class="fa fa-copyright"></i> <%= Time.now.year %></p>
+</div>

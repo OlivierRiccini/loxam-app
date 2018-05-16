@@ -1,11 +1,19 @@
-<h1><%= @category.name %></h1>
-<ul>
-  <% @products.each do |product| %>
-    <li>
-      <%= link_to product_path(product) do %>
-        <%= product.name %>
-      <% end %>
-      <%= cl_image_tag product.photo %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <h1><%= @category.name %></h1>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-xs-12 col-sm-6 col-md-3 col-product-card">
+        <div class="product-card">
+          <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+          <div class="card-infos">
+          <h3><%= product.name %></h3>
+            <div class="card-price-and-btn">
+              <p>à partir de <span class="price"><%= product.price %>€</span>/jour H.T</p>
+              <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
