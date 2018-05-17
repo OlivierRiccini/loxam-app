@@ -1,7 +1,12 @@
 class MessagesController < ApplicationController
-  before_action :find_message, only: [ :destroy ]
+  before_action :find_message, only: [ :destroy, :show ]
   skip_after_action :verify_authorized, only: [ :check!, :uncheck! ]
   skip_before_action :authenticate_user!, only: [ :create ]
+
+  def show
+    authorize @message
+    @message.update(checked: true)
+  end
 
   def create
     @message = Message.new(message_params)
@@ -28,7 +33,7 @@ class MessagesController < ApplicationController
       if @message.save
         format.js
       else
-        format.html { render damien_dashboard_path }
+        format.html { render admin_dashboard_path }
         format.js
       end
     end
@@ -43,9 +48,18 @@ class MessagesController < ApplicationController
       if @message.save
         format.js
       else
-        format.html { render damien_dashboard_path }
+        format.html { render admin_dashboard_path }
         format.js
       end
+    end
+  end
+
+  def destroy
+    authorize @message
+    @message.destroy
+
+    respond_to do |format|
+      format.js
     end
   end
 

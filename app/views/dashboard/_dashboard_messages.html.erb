@@ -1,28 +1,48 @@
 <div class="dashboard-section dashboard-messages-section" data-section="messages">
   <div class="container-messages">
-  <p>You have <strong><%= Message.count %></strong> messages in your inbox, and you still have <span class="nb-unchecked-messages" style="text-decoration: underline;"><%= Message.where(checked: false).count %></span> unread messages</p>
-  <% @messages.each do |message| %>
-    <% if message.checked %>
-      <div class="message" data-message-id="<%= message.id %>">
+    <p>Coucou!
+    <% if Message.where(checked: false).count == 0 %>
+      Tu n'as pas de nouveaux messages
+    <% elsif Message.where(checked: false).count ==  1 %>
+      Tu as <strong>1</strong> nouveau message!
     <% else %>
-      <div class="message" style="background-color: #ccc" data-message-id="<%= message.id %>">
+      Tu as <strong><span class="nb-unchecked-messages" style="text-decoration: underline;"><%= Message.where(checked: false).count %></span></strong> nouveaux messages!
     <% end %>
-      <div class="message-display-part">
-        <span><%= message.created_at.strftime("%^b %d %Y at %I:%M%p") %></span>
-        <span><%= message.name %></span>
-        <span><%= message.email %></span>
-      <div class="message-state-action" data-message-id="<%= message.id %>">
-        <% if message.checked %>
-          <%= link_to 'Mark as unchecked', message_uncheck_path(message), remote: true, method: :post %>
-        <% else %>
-          <%= link_to 'Mark as checked', message_check_path(message), remote: true, method: :post %>
-        <% end %>
+    <% if Message.count == 0 %>
+      et ta boite de messagerie est vide...
+    <% elsif Message.count == 1 %>
+      Il n'a qu'un seul message dans ta messagerie.
+    <% else %>
+      Il y'a <strong><span id="nb-messages"><%= Message.count %></span></strong> messages dans ta messagerie.</p>
+    <% end %>
+
+    <% @messages.each do |message| %>
+      <% if message.checked %>
+        <div class="message message-row-<%= message.id %>" data-message-id="<%= message.id %>">
+      <% else %>
+        <div class="message" style="background-color: #ccc" data-message-id="<%= message.id %>">
+      <% end %>
+        <div class="message-display-part">
+          <span><%= message.created_at.strftime("%^b %d %Y at %I:%M%p") %></span>
+          <span><%= message.name %></span>
+
+        <div class="message-actions">
+          <div class="message-state-action" data-message-id="<%= message.id %>">
+            <% if message.checked %>
+              <%= link_to 'Unchecker', message_uncheck_path(message), remote: true, method: :post %>
+            <% else %>
+              <%= link_to 'Checker', message_check_path(message), remote: true, method: :post %>
+            <% end %>
+          </div>
+            <%= link_to message_path(message), target: '_blank' do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+            <%= link_to message_path(message), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce message Jano?"} do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
-      </div>
-      <div class="message-hidden-part">
-        <span><%= message.content %></span>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 </div>

@@ -25,15 +25,15 @@ tabs.forEach(function(tab) {
 })
 
 
-/// reload message section
+// / reload message section
 function reload() {
   $('.container-messages').load(document.URL +  ' .container-messages');
 }
 
-setInterval(reload, 2000);
+setInterval(reload, 5000);
 
 function reloadNotif() {
   $('.reload-notif').load(document.URL +  ' .reload-notif');
 }
 
-setInterval(reloadNotif, 2000);
+setInterval(reloadNotif, 5000);

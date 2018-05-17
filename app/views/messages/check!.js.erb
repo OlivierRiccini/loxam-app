@@ -10,10 +10,10 @@ var messageBoxes = document.querySelectorAll('.message');
   <% if message.checked %>
     messageBoxes.forEach(function(messageBox) {
       if ( messageBox.dataset.messageId === '<%= message.id %>') {
-        messageBox.style.backgroundColor = '#F4F4F4';
+        messageBox.style.backgroundColor = '#fff';
         var actionDiv = messageBox.querySelector('.message-state-action');
         actionDiv.innerHTML =
-        '<%= link_to 'Mark as unchecked', message_uncheck_path(message), remote: true, method: :post %>';
+        '<%= link_to 'Unchecker', message_uncheck_path(message), remote: true, method: :post %>';
       }
     });
   <% end %>

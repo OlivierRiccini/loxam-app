@@ -14,7 +14,7 @@ var messagesStateAction = document.querySelectorAll('.message-state-action');
         messageBox.style.backgroundColor = '#ccc';
         var actionDiv = messageBox.querySelector('.message-state-action');
         actionDiv.innerHTML =
-        '<%= link_to 'Mark as checked', message_check_path(message), remote: true, method: :post %>';
+        '<%= link_to 'Checker', message_check_path(message), remote: true, method: :post %>';
       }
     });
   <% end %>

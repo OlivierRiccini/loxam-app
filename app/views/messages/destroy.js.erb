@@ -1,0 +1,11 @@
+var message = document.querySelector('[data-message-id="<%= @message.id %>"]');
+console.log(message);
+message.parentNode.removeChild(message);
+
+var nbUncheckedMessages = document.querySelectorAll('.nb-unchecked-messages');
+
+nbUncheckedMessages.forEach(function(nbUnchecked) {
+  nbUnchecked.innerText = '<%= Message.where(checked: false).count %>';
+});
+
+document.getElementById('nb-messages').innerText = '<%= Message.count %>';
