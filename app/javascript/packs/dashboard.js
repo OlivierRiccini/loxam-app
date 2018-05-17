@@ -1,9 +1,3 @@
-// const categoriesSection = document.querySelector('.dashboard-categories-section');
-// const productsSection = document.querySelector('.dashboard-products-section');
-// const promosSection = document.querySelector('.dashboard-promos-section');
-// const usersSection = document.querySelector('.dashboard-users-section');
-// const documentsSection = document.querySelector('.dashboard-documents-section');
-// const statsSection = document.querySelector('.dashboard-stats-section');
 const dashboardSections = document.querySelectorAll('.dashboard-section');
 const tabs = document.querySelectorAll('.tab');
 
@@ -29,3 +23,17 @@ tabs.forEach(function(tab) {
       displaySection(tab);
         });
 })
+
+
+/// reload message section
+function reload() {
+  $('.container-messages').load(document.URL +  ' .container-messages');
+}
+
+setInterval(reload, 2000);
+
+function reloadNotif() {
+  $('.reload-notif').load(document.URL +  ' .reload-notif');
+}
+
+setInterval(reloadNotif, 2000);

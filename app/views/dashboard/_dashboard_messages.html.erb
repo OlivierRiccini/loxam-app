@@ -1,3 +1,28 @@
 <div class="dashboard-section dashboard-messages-section" data-section="messages">
-  <h3>Messages</h3>
+  <div class="container-messages">
+  <p>You have <strong><%= Message.count %></strong> messages in your inbox, and you still have <span class="nb-unchecked-messages" style="text-decoration: underline;"><%= Message.where(checked: false).count %></span> unread messages</p>
+  <% @messages.each do |message| %>
+    <% if message.checked %>
+      <div class="message" data-message-id="<%= message.id %>">
+    <% else %>
+      <div class="message" style="background-color: #ccc" data-message-id="<%= message.id %>">
+    <% end %>
+      <div class="message-display-part">
+        <span><%= message.created_at.strftime("%^b %d %Y at %I:%M%p") %></span>
+        <span><%= message.name %></span>
+        <span><%= message.email %></span>
+      <div class="message-state-action" data-message-id="<%= message.id %>">
+        <% if message.checked %>
+          <%= link_to 'Mark as unchecked', message_uncheck_path(message), remote: true, method: :post %>
+        <% else %>
+          <%= link_to 'Mark as checked', message_check_path(message), remote: true, method: :post %>
+        <% end %>
+      </div>
+      </div>
+      <div class="message-hidden-part">
+        <span><%= message.content %></span>
+      </div>
+    </div>
+  <% end %>
+</div>
 </div>

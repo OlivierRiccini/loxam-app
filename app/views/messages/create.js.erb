@@ -1,0 +1,41 @@
+<% if @message.valid? %>
+  const formContainer = document.querySelector('.form-container')
+  formContainer.innerHTML = `
+  <div class="thanks-message-container">
+    <h3 id="thanks-message">Thanks for your message!</h3>
+  </div>`;
+<% else %>
+
+  function erros(field, messageError) {
+    var fieldError = document.getElementById(`${field}-errro`);
+    fieldError.innerText = messageError;
+    fieldError.style.color = 'rgb(225, 12, 34)';
+    document.querySelector(`.message_${field} label`).style.color = 'rgb(225, 12, 34)';
+    document.getElementById(`message_${field}`).style.borderColor = 'rgb(225, 12, 34)';
+  }
+
+  function noErros(field) {
+    document.getElementById(`${field}-errro`).innerText = '';
+    document.querySelector(`.message_${field} label`).style.color = '#000000';
+    document.getElementById(`message_${field}`).style.borderColor = '#ccc';
+  }
+
+  <% if @message.errors[:name][0].nil? %>
+    noErros('name');
+  <% else %>
+    erros('name', '<%= @message.errors[:name][0] %>');
+  <% end %>
+
+  <% if @message.errors[:email][0].nil? %>
+    noErros('email');
+  <% else %>
+    erros('email', '<%= @message.errors[:email][0] %>');
+  <% end %>
+
+  <% if @message.errors[:content][0].nil? %>
+    noErros('content');
+  <% else %>
+    erros('content', '<%= @message.errors[:content][0] %>');
+  <% end %>
+
+<% end %>

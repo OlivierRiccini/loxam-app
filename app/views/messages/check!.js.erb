@@ -1,0 +1,20 @@
+var nbUncheckedMessages = document.querySelectorAll('.nb-unchecked-messages');
+
+nbUncheckedMessages.forEach(function(nbUnchecked) {
+  nbUnchecked.innerText = '<%= Message.where(checked: false).count %>';
+});
+
+var messageBoxes = document.querySelectorAll('.message');
+
+<% Message.all.each do |message| %>
+  <% if message.checked %>
+    messageBoxes.forEach(function(messageBox) {
+      if ( messageBox.dataset.messageId === '<%= message.id %>') {
+        messageBox.style.backgroundColor = '#F4F4F4';
+        var actionDiv = messageBox.querySelector('.message-state-action');
+        actionDiv.innerHTML =
+        '<%= link_to 'Mark as unchecked', message_uncheck_path(message), remote: true, method: :post %>';
+      }
+    });
+  <% end %>
+<% end %>

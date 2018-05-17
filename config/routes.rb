@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   resources :categories, only: [ :new, :create, :edit, :update, :destroy]
   resources :products
   resources :promos
-  resources :messages, only: [ :show, :create, :edit, :destroy ]
+  resources :messages, only: [ :create, :destroy ] do
+    post '/check', to: 'messages#check!'
+    post '/uncheck', to: 'messages#uncheck!'
+  end
 end

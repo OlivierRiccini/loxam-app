@@ -31,3 +31,31 @@
   background-color: #fff;
   color: $loxam-color;
 }
+
+
+/// Message section
+.message-display-part {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.message-hidden-part {
+  display: none;
+}
+
+.notification {
+  background-color: #fff;
+  color: $loxam-color;
+  border: 1px solid $loxam-color;
+  boder-radius: 50%;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -35%;
+  left: -8%;
+}
