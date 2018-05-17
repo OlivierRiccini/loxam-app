@@ -15,4 +15,13 @@ form {
 
 .btn-send-message {
   margin-top: 15px;
+  cursor: pointer;
+}
+
+.send-new-message:hover {
+  text-decoration: none;
+}
+
+.thanks-message-container, .send-new-message {
+  text-align: center;
 }

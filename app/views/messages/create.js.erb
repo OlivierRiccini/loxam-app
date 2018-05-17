@@ -1,10 +1,11 @@
 <% if @message.valid? %>
-  const formContainer = document.querySelector('.form-container')
+  var formContainer = document.querySelector('.form-container')
   formContainer.innerHTML = `
   <div class="thanks-message-container">
-    <h3 id="thanks-message">Thanks for your message!</h3>
+    <p id="thanks-message">Merci pour votre message!
+    Nous reviendrons vers vous dans les plus brefs délais</p>
+    <a href="#" class="send-new-message loxam-btn">Envoyer un autre message</a>
   </div>`;
-
 <% else %>
 
   function erros(field, messageError) {

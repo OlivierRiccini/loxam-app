@@ -30,4 +30,4 @@ $('#toggle-categories-arrow').click(function() {
      $('#toggle-categories-arrow span').html(categories);
      $('.tags-catgories-container-small-screen').animate({ width: 'hide' });
   }
-})
+});

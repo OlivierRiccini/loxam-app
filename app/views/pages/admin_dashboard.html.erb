@@ -1,14 +1,14 @@
 <div class="dashboard-body">
-  <h1 class="text-center">Hola! from admin dashboard</h1>
+  <h1 class="text-center title-dashboard">Hola! from your dashboard</h1>
 
   <div class="container dashboard-container">
     <div class="row tabs">
-      <div class="col-xs-2 tab" data-section="messages"><div class="reload-notif"><span class="nb-unchecked-messages notification"><%= Message.where(checked: false).count %></span></div> Messages</div>
-      <div class="col-xs-2 tab" data-section="categories">Catégories</div>
-      <div class="col-xs-2 tab" data-section="products">Matériels</div>
-      <div class="col-xs-2 tab" data-section="promos">Promos</div>
-      <div class="col-xs-2 tab" data-section="users">Clients/Facturation</div>
-      <div class="col-xs-2 tab tab-active" data-section="stats">Stats</div>
+      <div class="col-xs-4 col-sm-2 tab" data-section="messages"><div class="reload-notif"><span class="nb-unchecked-messages notification"><%= Message.where(checked: false).count %></span></div> Messages</div>
+      <div class="col-xs-4 col-sm-2 tab" data-section="categories">Catégories</div>
+      <div class="col-xs-4 col-sm-2 tab" data-section="products">Matériels</div>
+      <div class="col-xs-4 col-sm-2 tab" data-section="promos">Promos</div>
+      <div class="col-xs-4 col-sm-2 tab" data-section="users">Clients/Fact°</div>
+      <div class="col-xs-4 col-sm-2 tab tab-active" data-section="stats">Stats</div>
     </div>
     <%= render "dashboard/dashboard_messages" %>
     <%= render "dashboard/dashboard_categories" %>
