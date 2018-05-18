@@ -15,34 +15,35 @@
     <% else %>
       Il y'a <strong><span id="nb-messages"><%= Message.count %></span></strong> messages dans ta messagerie.</p>
     <% end %>
+    <div class="container-messages-body">
+      <% @messages.each do |message| %>
+        <% if message.checked %>
+          <div class="message message-row-<%= message.id %>" data-message-id="<%= message.id %>">
+        <% else %>
+          <div class="message" style="background-color: #F4F4F4" data-message-id="<%= message.id %>">
+        <% end %>
+          <div class="message-display-part">
+            <span><%= message.created_at.strftime("%^b %d %Y at %I:%M%p") %></span>
+            <span><%= message.name %></span>
 
-    <% @messages.each do |message| %>
-      <% if message.checked %>
-        <div class="message message-row-<%= message.id %>" data-message-id="<%= message.id %>">
-      <% else %>
-        <div class="message" style="background-color: #ccc" data-message-id="<%= message.id %>">
-      <% end %>
-        <div class="message-display-part">
-          <span><%= message.created_at.strftime("%^b %d %Y at %I:%M%p") %></span>
-          <span><%= message.name %></span>
-
-        <div class="message-actions">
-          <div class="message-state-action" data-message-id="<%= message.id %>">
-            <% if message.checked %>
-              <%= link_to 'Unchecker', message_uncheck_path(message), remote: true, method: :post %>
-            <% else %>
-              <%= link_to 'Checker', message_check_path(message), remote: true, method: :post %>
-            <% end %>
-          </div>
-            <%= link_to message_path(message), target: '_blank' do %>
-              <i class="fa fa-search"></i>
-            <% end %>
-            <%= link_to message_path(message), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce message Jano?"} do %>
-              <i class="fa fa-trash"></i>
-            <% end %>
+          <div class="message-actions">
+            <div class="message-state-action" data-message-id="<%= message.id %>">
+              <% if message.checked %>
+                <%= link_to 'Unchecker', message_uncheck_path(message), remote: true, method: :post %>
+              <% else %>
+                <%= link_to 'Checker', message_check_path(message), remote: true, method: :post %>
+              <% end %>
+            </div>
+              <%= link_to message_path(message), target: '_blank' do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+              <%= link_to message_path(message), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce message Jano?"} do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

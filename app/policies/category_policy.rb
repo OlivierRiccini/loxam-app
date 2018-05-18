@@ -10,19 +10,19 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def new?
-    record.user == user || admin_list?
+    admin_list?
   end
 
   def create?
-    record.user == user || admin_list?
+    admin_list?
   end
 
   def edit?
-    record.user == user || admin_list?
+    admin_list?
   end
 
   def update?
-    record.user == user || admin_list?
+    admin_list?
   end
 
   def destroy?

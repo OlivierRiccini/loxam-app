@@ -11,7 +11,7 @@ var messagesStateAction = document.querySelectorAll('.message-state-action');
   <% if !message.checked %>
     messageBoxes.forEach(function(messageBox) {
       if ( messageBox.dataset.messageId === '<%= message.id %>') {
-        messageBox.style.backgroundColor = '#ccc';
+        messageBox.style.backgroundColor = '#F4F4F4';
         var actionDiv = messageBox.querySelector('.message-state-action');
         actionDiv.innerHTML =
         '<%= link_to 'Checker', message_check_path(message), remote: true, method: :post %>';

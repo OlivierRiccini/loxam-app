@@ -86,6 +86,9 @@ class PagesController < ApplicationController
 
     @promos = Promo.all
     @messages = Message.order("created_at DESC").all
+    @categories = Category.order("created_at DESC").all
+    # Category new
+    @category = Category.new
   end
 
   def location
