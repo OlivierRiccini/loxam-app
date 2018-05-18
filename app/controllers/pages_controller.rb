@@ -79,14 +79,15 @@ class PagesController < ApplicationController
     #   @lines << line
     # end
 
-    text = Net::HTTP.get( URI.parse( "http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT" ) )
-    text.split("\n").each do |line|
-      @lines << line.split(" ")
-    end
+    # text = Net::HTTP.get( URI.parse( "http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT" ) )
+    # text.split("\n").each do |line|
+    #   @lines << line.split(" ")
+    # end
 
     @promos = Promo.all
     @messages = Message.order("created_at DESC").all
     @categories = Category.order("created_at DESC").all
+    @products = Product.order("created_at DESC").all
     # Category new
     @category = Category.new
 

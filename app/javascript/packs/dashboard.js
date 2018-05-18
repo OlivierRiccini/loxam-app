@@ -37,3 +37,11 @@ function reloadNotif() {
 }
 
 setInterval(reloadNotif, 5000);
+
+
+// Add a product button
+const btnAddProduct = document.getElementById('add-product');
+
+$('#add-product').click(function() {
+  $('.row-product-form').slideToggle();
+})

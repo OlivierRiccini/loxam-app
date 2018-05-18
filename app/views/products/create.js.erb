@@ -1,0 +1,33 @@
+var rowProductsDashboard  = document.querySelector('.row-products-dashboard');
+
+var newProduct = `
+<div class="col-xs-12 col-sm-6 col-md-3 col-product-card">
+  <div class="product-card product-card-dashboard">
+    <div class="product-card-image" style="background-image: url('<%= cl_image_path @product.photo %>'); ">
+      <%= link_to product_path(@product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    </div>
+    <div class="card-infos">
+      <h3><%= @product.name %></h3>
+    </div>
+    <ul>
+      <li><strong>Référence:</strong> <%= @product.reference %></li>
+      <li><strong>Catégorie:</strong> <%= @product.category.name %></li>
+      <li><strong>Prix:</strong> <%= @product.price %>€/jour</li>
+      <li><strong>Deposit:</strong> <%= @product.deposit %>€</li>
+      <li><strong>Video:</strong> <%= @product.video %></li>
+      <li><strong>Lien Loxam:</strong> <%= @product.loxam_link %></li>
+      <li><strong>Fiche technique:</strong> <%= @product.technical_sheet %></li>
+    </ul>
+    <%= link_to 'Détails', product_path(@product), class: 'loxam-btn' %>
+  </div>
+</div>`;
+
+<% if @product.valid? %>
+  rowProductsDashboard.insertAdjacentHTML('afterbegin', newProduct);
+<% end %>
+
+var nbOfProducts = document.querySelector('nb-of-products');
+nbOfProducts.innerHTML = 'Il y a <strong><%= Product.count %></strong> matériels'
+

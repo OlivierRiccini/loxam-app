@@ -23,8 +23,8 @@ Rails.application.routes.draw do
 
   get ':name/products', to: "categories#show", as: "category_products"
 
-  resources :categories, only: [ :create, :update, :destroy]
-  resources :products
+  resources :categories, only: [ :create, :update, :destroy ]
+  resources :products, only: [ :show, :create, :update, :destroy ]
   resources :promos
   resources :messages, only: [ :show, :create, :destroy ] do
     post '/check', to: 'messages#check!'

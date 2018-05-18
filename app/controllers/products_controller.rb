@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show ]
-  before_action :find_product, only: [ :edit, :update, :destroy, :show ]
+  before_action :find_product, only: [ :show, :edit, :update, :destroy ]
 
   def index
   end
@@ -21,10 +21,12 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     authorize @product
 
-    if @product.save
-      redirect_to admin_dashboard_path
-    else
-      render new_product_path
+    respond_to do |format|
+      if @product.save
+        format.js
+      else
+        format.js
+      end
     end
   end
 
@@ -50,7 +52,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :reference, :category, :price, :characteristics,
+    params.require(:product).permit(:name, :reference, :category_id, :price, :characteristics,
                                     :description, :deposit, :technical_sheet,
                                     :photo, :video, :loxam_link)
   end

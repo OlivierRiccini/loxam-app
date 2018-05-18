@@ -1,5 +1,5 @@
 <div class="row row-product-form">
-  <%= simple_form_for @product do |f| %>
+  <%= simple_form_for @product, remote: true do |f| %>
     <%= f.error_notification %>
     <div class="col-xs-12 col-sm-6">
       <%= f.input :name %>

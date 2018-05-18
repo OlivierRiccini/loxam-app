@@ -7,7 +7,7 @@
     <% @promos.each do |promo| %>
       <li><%= link_to promo.title, promo_path(promo) %> -
         <%= link_to "Supprimer cette poduit", promo_path(promo), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer cete promo Jano?"}, class: 'action-btn red-btn' %> -
-        <%= link_to "Modifier promo", edit_product_path(promo) %></li>
+        <%= link_to "Modifier promo", edit_promo_path(promo) %></li>
     <% end %>
   </ul>
 </div>
