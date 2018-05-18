@@ -1,13 +1,24 @@
 <div class="dashboard-section dashboard-products-section" data-section="products">
-  <h3>Matériels</h3>
-  <%= link_to 'Ajouter un produit', new_product_path %>
-  <br>
-  <br>
-  <ul>
-    <% @products.each do |product| %>
-      <li><%= link_to product.name, product_path(product) %> -
-        <%= link_to "Supprimer ce poduit", product_path(product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %> -
-        <%= link_to "Modifier produit", edit_product_path(product) %></li>
-    <% end %>
-  </ul>
+  <div class="row">
+    <h3>Matériels</h3>
+    <h4>Il y a <strong><%= Product.count %></strong> matériels</h4>
+    <h4>Ajouter un matériel <i class="fa fa-plus-square"></i></h4>
+  </div>
+  <%= render 'products/form' %>
+    <div class="row">
+      <% @products.each do |product| %>
+          <div class="col-xs-6 col-sm-3 col-product-card">
+            <div class="product-card">
+              <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <div class="card-infos">
+              <h3><%= product.name %></h3>
+                <div class="card-price-and-btn">
+                  <p>à partir de <span class="price"><%= product.price %>€</span>/jour H.T</p>
+                  <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
 </div>

@@ -89,6 +89,9 @@ class PagesController < ApplicationController
     @categories = Category.order("created_at DESC").all
     # Category new
     @category = Category.new
+
+    # Product new
+    @product = Product.new
   end
 
   def location
