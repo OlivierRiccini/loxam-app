@@ -1,0 +1,117 @@
+var card = document.getElementById('col-product-card-<%= @product.id %>');
+document.getElementById(`pop-up-edit-product-<%= @product.id %>`).remove('pop-up-product-active');
+
+card.innerHTML =
+  `<div class="product-card product-card-dashboard">
+    <% if @product.photo? %>
+      <div class="product-card-image" style="background-image: url('<%= cl_image_path @product.photo %>'); ">
+    <% else %>
+      <div class="product-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
+    <% end %>
+    <i class="fa fa-edit edit-product-icon" data-product-id="<%= @product.id %>"></i>
+    <%= link_to product_path(@product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+    </div>
+    <div class="card-infos">
+    <h3><%= @product.name %></h3>
+    </div>
+    <ul>
+      <li><strong>Référence:</strong> <%= @product.reference %></li>
+      <li><strong>Catégorie:</strong> <%= @product.category.name %></li>
+      <li><strong>Prix:</strong> <%= @product.price %>€/jour</li>
+      <% if @product.technical_sheet? %>
+        <li><strong>Deposit:</strong> <%= @product.deposit %></li>
+      <% else %>
+        <li><strong style=" text-decoration: line-through;">Deposit</strong></li>
+      <% end %>
+      <% if @product.video? %>
+        <li><strong>Video</strong></li>
+      <% else %>
+        <li><strong style=" text-decoration: line-through;">video</strong></li>
+      <% end %>
+      <% if @product.loxam_link? %>
+        <li><strong>Loxam lien</strong></li>
+      <% else %>
+        <li><strong style=" text-decoration: line-through;">loxam_link</strong></li>
+      <% end %>
+      <% if @product.technical_sheet? %>
+        <li><strong>technical_sheet</strong></li>
+      <% else %>
+        <li><strong style=" text-decoration: line-through;">Fiche technique</strong></li>
+      <% end %>
+      <% if @product.features? %>
+        <li><strong>Caractéristiques</strong></li>
+      <% else %>
+        <li><strong style=" text-decoration: line-through;">features</strong></li>
+      <% end %>
+      <% if @product.description? %>
+        <li><strong>Description</strong></li>
+      <% else %>
+        <li><strong style=" text-decoration: line-through;">Description</strong></li>
+      <% end %>
+    </ul>
+    <%= link_to 'Détails', product_path(@product), class: 'loxam-btn' %>
+  </div>
+</div>
+
+<div class="pop-up-product edit-product" id="pop-up-edit-product-<%= @product.id %>">
+  <i class="fa fa-times-circle close-popup"></i>
+  <%= simple_form_for @product, remote: true do |f| %>
+    <%= f.error_notification %>
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :name %>
+      <span class="error" id="name-error"></span>
+      <%= f.input :reference %>
+      <span class="error" id="reference-error"></span>
+      <%= f.association :category %>
+      <span class="error" id="category_id-error"></span>
+      <%= f.input :price %>
+      <span class="error" id="price-error"></span>
+      <%= f.input :deposit %>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :features %>
+      <%= f.input :description %>
+      <%= f.input :technical_sheet %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <%= f.input :photo %>
+          <%= f.input :photo_cache, as: :hidden %>
+          <span class="error" id="photo-error"></span>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <%= f.input :video %>
+        </div>
+      </div>
+      <%= f.input :loxam_link %>
+      <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
+    </div>
+  <% end %>
+  `;
+
+
+// edit product popup
+var editIcons = document.querySelectorAll('.edit-product-icon');
+var closeCrosses = document.querySelectorAll('.close-popup');
+
+document.getElementById(`pop-up-edit-product-<%= @product.id %>`).remove('pop-up-product-active');
+function showPopupEditProduct(product_id) {
+  const popUp = document.getElementById(`pop-up-edit-product-${product_id}`);
+  popUp.classList.add('pop-up-product-active');
+
+  function closePopup() {
+    popUp.classList.remove('pop-up-product-active');
+  };
+
+  closeCrosses.forEach(function(closeCrosse) {
+    closeCrosse.addEventListener('click', closePopup);
+  });
+}
+
+editIcons.forEach(function(editIcon) {
+  editIcon.addEventListener('click',
+    function() {
+      showPopupEditProduct(editIcon.dataset.productId);
+  });
+});

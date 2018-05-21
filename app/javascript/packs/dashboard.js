@@ -21,8 +21,8 @@ tabs.forEach(function(tab) {
   tab.addEventListener('click',
     function() {
       displaySection(tab);
-        });
-})
+  });
+});
 
 
 // / reload message section
@@ -45,3 +45,28 @@ const btnAddProduct = document.getElementById('add-product');
 $('#add-product').click(function() {
   $('.row-product-form').slideToggle();
 })
+
+// edit product popup
+const editIcons = document.querySelectorAll('.edit-product-icon');
+const closeCrosses = document.querySelectorAll('.close-popup');
+
+function showPopupEditProduct(product_id) {
+  const popUp = document.getElementById(`pop-up-edit-product-${product_id}`);
+  popUp.classList.add('pop-up-product-active');
+
+  function closePopup() {
+   popUp.classList.remove('pop-up-product-active');
+  };
+  closeCrosses.forEach(function(closeCrosse) {
+    closeCrosse.addEventListener('click', closePopup);
+  });
+}
+
+editIcons.forEach(function(editIcon) {
+  editIcon.addEventListener('click',
+    function() {
+      showPopupEditProduct(editIcon.dataset.productId);
+  });
+});
+
+

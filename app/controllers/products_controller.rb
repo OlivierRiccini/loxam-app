@@ -2,9 +2,6 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show ]
   before_action :find_product, only: [ :show, :edit, :update, :destroy ]
 
-  def index
-  end
-
   def show
     authorize @product
     i = @product.nb_of_searches + 1
@@ -20,7 +17,6 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     authorize @product
-
     respond_to do |format|
       if @product.save
         format.js
@@ -36,17 +32,24 @@ class ProductsController < ApplicationController
 
   def update
     authorize @product
-
-    @product.update(product_params)
-
-    redirect_to product_path(@product)
+    respond_to do |format|
+      if @product.update(product_params)
+        format.js
+      else
+        format.js
+      end
+    end
   end
 
   def destroy
     authorize @product
-    @product.destroy
-
-    redirect_to admin_dashboard_path
+    respond_to do |format|
+      if @product.destroy
+        format.js
+      else
+        format.js
+      end
+    end
   end
 
   private

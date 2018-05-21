@@ -34,7 +34,7 @@ class PagesController < ApplicationController
       @new_product_choice.each do |product|
         @@new_products << product
       end
-      Product.order("nb_of_searches DESC").first(4 - @new_product_choice.size).each do |product|
+      Product.order("created_at DESC").first(4 - @new_product_choice.size).each do |product|
         @new_products << product
       end
     else

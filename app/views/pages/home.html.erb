@@ -7,7 +7,11 @@
         <% @best_searches.each do |product| %>
           <div class="col-xs-12 col-sm-6 col-product-card">
             <div class="product-card">
-              <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <% if product.photo? %>
+                <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <% else %>
+                <div class="product-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); "></div>
+              <% end %>
               <div class="card-infos">
               <h3><%= product.name %></h3>
                 <div class="card-price-and-btn">
@@ -25,7 +29,11 @@
         <% @new_products.each do |product| %>
           <div class="col-xs-12 col-sm-6 col-product-card">
             <div class="product-card">
-              <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <% if product.photo? %>
+                <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+              <% else %>
+                <div class="product-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); "></div>
+              <% end %>
               <div class="card-infos">
               <h3><%= product.name %></h3>
                 <div class="card-price-and-btn">

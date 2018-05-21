@@ -1,33 +1,114 @@
-var rowProductsDashboard  = document.querySelector('.row-products-dashboard');
+<% if @product.valid? %>
+  var rowProductsDashboard  = document.querySelector('.row-products-dashboard');
 
-var newProduct = `
-<div class="col-xs-12 col-sm-6 col-md-3 col-product-card">
-  <div class="product-card product-card-dashboard">
-    <div class="product-card-image" style="background-image: url('<%= cl_image_path @product.photo %>'); ">
+  var newProduct = `
+  <div class="col-xs-12 col-sm-6 col-md-3 col-product-card" id ="col-product-card-<%= @product.id %>">
+    <div class="product-card product-card-dashboard">
+      <% if @product.photo? %>
+        <div class="product-card-image" style="background-image: url('<%= cl_image_path @product.photo %>'); ">
+      <% else %>
+        <div class="product-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
+      <% end %>
       <%= link_to product_path(@product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
         <i class="fa fa-trash"></i>
       <% end %>
+      </div>
+      <div class="card-infos">
+        <h3><%= @product.name %></h3>
+      </div>
+      <ul>
+        <li><strong>Référence:</strong> <%= @product.reference %></li>
+        <li><strong>Catégorie:</strong> <%= @product.category.name %></li>
+        <li><strong>Prix:</strong> <%= @product.price %>€/jour</li>
+        <% if @product.technical_sheet? %>
+          <li><strong>Deposit:</strong> <%= @product.deposit %></li>
+        <% else %>
+          <li><strong style=" text-decoration: line-through;">Deposit:</strong> <%= @product.deposit %></li>
+        <% end %>
+        <% if @product.video? %>
+          <li><strong>Video:</strong> <%= @product.video %></li>
+        <% else %>
+          <li><strong style=" text-decoration: line-through;">video:</strong> <%= @product.video %></li>
+        <% end %>
+        <% if @product.loxam_link? %>
+          <li><strong>Loxam lien:</strong> <%= @product.loxam_link %></li>
+        <% else %>
+          <li><strong style=" text-decoration: line-through;">loxam_link:</strong> <%= @product.loxam_link %></li>
+        <% end %>
+        <% if @product.technical_sheet? %>
+          <li><strong>technical_sheet:</strong> <%= @product.technical_sheet %></li>
+        <% else %>
+          <li><strong style=" text-decoration: line-through;">Fiche technique:</strong> <%= @product.technical_sheet %></li>
+        <% end %>
+        <% if @product.features? %>
+          <li><strong>Caractéristiques:</strong> <%= @product.features %></li>
+        <% else %>
+          <li><strong style=" text-decoration: line-through;">features:</strong> <%= @product.features %></li>
+        <% end %>
+        <% if @product.description? %>
+          <li><strong>Description:</strong> <%= @product.description %></li>
+        <% else %>
+          <li><strong style=" text-decoration: line-through;">Description:</strong> <%= @product.description %></li>
+        <% end %>
+      </ul>
+      <%= link_to 'Détails', product_path(@product), class: 'loxam-btn' %>
     </div>
-    <div class="card-infos">
-      <h3><%= @product.name %></h3>
-    </div>
-    <ul>
-      <li><strong>Référence:</strong> <%= @product.reference %></li>
-      <li><strong>Catégorie:</strong> <%= @product.category.name %></li>
-      <li><strong>Prix:</strong> <%= @product.price %>€/jour</li>
-      <li><strong>Deposit:</strong> <%= @product.deposit %>€</li>
-      <li><strong>Video:</strong> <%= @product.video %></li>
-      <li><strong>Lien Loxam:</strong> <%= @product.loxam_link %></li>
-      <li><strong>Fiche technique:</strong> <%= @product.technical_sheet %></li>
-    </ul>
-    <%= link_to 'Détails', product_path(@product), class: 'loxam-btn' %>
-  </div>
-</div>`;
+  </div>`;
 
-<% if @product.valid? %>
-  rowProductsDashboard.insertAdjacentHTML('afterbegin', newProduct);
+<% else %>
+
+console.log('<%= @product %>');
+
+  function erros(field, messageError) {
+    var fieldError = document.getElementById(`${field}-error`);
+    fieldError.innerText = messageError;
+    fieldError.style.color = 'rgb(225, 12, 34)';
+    if ( field === 'category_id' ) {
+      document.querySelector(`.product_category label`).style.color = 'rgb(225, 12, 34)';
+    } else {
+      document.querySelector(`.product_${field} label`).style.color = 'rgb(225, 12, 34)';
+      document.getElementById(`product_${field}`).style.borderColor = 'rgb(225, 12, 34)';
+    }
+  }
+
+  function noErros(field) {
+    document.getElementById(`${field}-error`).innerText = '';
+    if ( field === 'category_id' ) {
+      document.querySelector(`.product_category label`).style.color = '#000000';
+    } else {
+      document.querySelector(`.product_${field} label`).style.color = '#000000';
+      document.getElementById(`product_${field}`).style.borderColor = '#ccc';
+    }
+  }
+
+  <% if @product.errors[:name][0].nil? %>
+    noErros('name');
+  <% else %>
+    erros('name', '<%= @product.errors[:name][0] %>');
+  <% end %>
+
+  <% if @product.errors[:reference][0].nil? %>
+    noErros('reference');
+  <% else %>
+    erros('reference', '<%= @product.errors[:reference][0] %>');
+  <% end %>
+
+  <% if @product.errors[:category][0].nil? %>
+    noErros('category_id');
+  <% else %>
+    erros('category_id', '<%= @product.errors[:category][0] %>');
+  <% end %>
+
+  <% if @product.errors[:price][0].nil? %>
+    noErros('price');
+  <% else %>
+    erros('price', '<%= @product.errors[:price][0] %>');
+  <% end %>
+
+  // <% if @product.errors[:photo][0].nil? %>
+  //   noErros('photo');
+  // <% else %>
+  //   erros('photo', '<%= @product.errors[:photo][0] %>');
+  // <% end %>
+
 <% end %>
-
-var nbOfProducts = document.querySelector('nb-of-products');
-nbOfProducts.innerHTML = 'Il y a <strong><%= Product.count %></strong> matériels'
-
