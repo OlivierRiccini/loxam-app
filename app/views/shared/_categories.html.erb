@@ -3,7 +3,7 @@
   <div class="tags-catgories-container">
     <% @categories.each do |category| %>
       <%= link_to category_products_path(category.name), class: 'category-tag' do %>
-        <%= category.name.capitalize %>
+        <%= category.name.upcase %>
       <% end %>
     <% end %>
   </div>
@@ -12,7 +12,7 @@
     <ul>
       <% @categories.each do |category| %>
         <li class="category-tag-small-screen"><%= link_to category_products_path(category.name) do %>
-        <%= category.name.capitalize %>
+        <%= category.name.upcase %>
       <% end %></li>
       <% end %>
     </ul>

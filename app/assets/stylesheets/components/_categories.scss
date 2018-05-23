@@ -1,18 +1,29 @@
 .category-tag {
-  border: 1px solid $loxam-color;
   border-radius: 2px;
   padding: 5px 10px;
-  background-color: #fff;
-  color: $font-color;
+  background-color: $loxam-color;
+  color: #fff;
   margin: 5px;
   font-size: 14px;
   display: inline-block;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   cursor: pointer;
+  color: #fff;
+  transition: all 0.5s;
+  &:hover {
+    text-decoration: none;
+    background-color: #fff;
+    color: $loxam-color;
+  };
+}
+
+.tag-actif {
+  background-color: #fff;
+  color: $loxam-color;
 }
 
 .catgories-container {
-  text-align: center;
+  // text-align: center;
   margin-top: 10px;
 }
 
@@ -55,14 +66,6 @@
 .category-tag-small-screen {
   color: $font-color;
   font-size: 14px;
-}
-
-.category-tag {
-  color: $font-color;
-  &:hover {
-    text-decoration: none;
-    color: $font-color;
-  };
 }
 
 #toggle-categories-arrow {

@@ -31,3 +31,8 @@ $('#toggle-categories-arrow').click(function() {
      $('.tags-catgories-container-small-screen').animate({ width: 'hide' });
   }
 });
+
+
+$('.category-tag').click(function() {
+  $(this).toggleClass('tag-actif');
+});
