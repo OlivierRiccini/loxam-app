@@ -96,7 +96,7 @@ categories.each do |category|
       new_product[:category_id] = Category.where(name: category[:name]).take.id
     elsif product[:index] > category[:index] &&
       product[:index] < categories[categories.index(category) + 1 ][:index]
-      new_product[:category_id] = Category.where(name: category[:name]).take.id
+      new_product[:category_id] = Category.where(na  me: category[:name]).take.id
     end
     new_product.save
   end
