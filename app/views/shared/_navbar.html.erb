@@ -9,8 +9,13 @@
     <input type="text" required="" id="search-bar">
     <span class="highlight"></span>
     <span class="bar"></span>
-    <label id="search-label"><i class="fa fa-search"></i> Rechercher un matériel ou une référence</label>
+    <label id="search-label"><i class="fa fa-search"></i> Rechercher un matériel</label>
   </div>
+  <ul>
+    <% @products.each do |product| %>
+      <li class="product-item"><%= product.name %></li>
+    <% end %>
+  </ul>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
