@@ -11,8 +11,10 @@
     <span class="bar"></span>
     <label id="search-label"><i class="fa fa-search"></i> Rechercher un matériel</label>
     <ul id="search-list">
-      <% @products.each do |product| %>
-        <li class="product-item"><%= link_to product.name, product_path(product) %></li>
+      <% if !@products.nil? %>
+        <% @products.each do |product| %>
+          <li class="product-item"><%= link_to product.name, product_path(product) %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

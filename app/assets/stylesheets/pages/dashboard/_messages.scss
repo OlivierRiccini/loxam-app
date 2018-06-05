@@ -1,0 +1,62 @@
+/// Message section
+.container-messages {
+  color: $font-color;
+  p {
+    margin: 30px 0;
+  };
+}
+
+.container-messages-body {
+  height: 800px;
+  overflow: scroll;
+}
+
+.message-display-part {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+  margin: 10px 0;
+  &:hover {
+    background-color: #ccc;
+  }
+}
+
+.message-hidden-part {
+  display: none;
+}
+
+.notification {
+  background-color: #fff;
+  color: $loxam-color;
+  border: 1px solid $loxam-color;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -35%;
+  left: -8%;
+}
+
+.message-actions {
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+}
+
+.container-show-message {
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 991px) {
+  .dashboard-body, .container-show-message {
+    top: 85px;
+    position: relative;
+  }
+}

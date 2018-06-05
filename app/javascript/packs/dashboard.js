@@ -51,7 +51,7 @@ const editIcons = document.querySelectorAll('.edit-product-icon');
 const closeCrosses = document.querySelectorAll('.close-popup');
 
 function showPopupEditProduct(product_id) {
-  const popUp = document.getElementById(`pop-up-edit-product-${product_id}`);
+  var popUp = document.getElementById(`pop-up-edit-product-${product_id}`);
   popUp.classList.add('pop-up-product-active');
 
   function closePopup() {
@@ -66,6 +66,7 @@ editIcons.forEach(function(editIcon) {
   editIcon.addEventListener('click',
     function() {
       showPopupEditProduct(editIcon.dataset.productId);
+      console.log(editIcon.dataset.productId);
   });
 });
 
