@@ -10,12 +10,12 @@
     <span class="highlight"></span>
     <span class="bar"></span>
     <label id="search-label"><i class="fa fa-search"></i> Rechercher un matériel</label>
+    <ul id="search-list">
+      <% @products.each do |product| %>
+        <li class="product-item"><%= link_to product.name, product_path(product) %></li>
+      <% end %>
+    </ul>
   </div>
-  <ul>
-    <% @products.each do |product| %>
-      <li class="product-item"><%= product.name %></li>
-    <% end %>
-  </ul>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">

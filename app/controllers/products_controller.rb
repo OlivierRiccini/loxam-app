@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
     i = @product.nb_of_searches + 1
     @product.update(nb_of_searches: i)
     @categories = Category.all
+    @products = Product.all
   end
 
   def new
