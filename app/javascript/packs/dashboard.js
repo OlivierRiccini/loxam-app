@@ -66,7 +66,6 @@ editIcons.forEach(function(editIcon) {
   editIcon.addEventListener('click',
     function() {
       showPopupEditProduct(editIcon.dataset.productId);
-      console.log(editIcon.dataset.productId);
   });
 });
 

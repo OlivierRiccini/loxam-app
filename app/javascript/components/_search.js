@@ -15,7 +15,7 @@ function seach() {
     if ( event.type === "click" ) {
       item.parentElement.classList.remove('result-search');
       searchList.style.display = 'none';
-    } else if (item.text.includes(input)) {
+    } else if (item.text.toUpperCase().includes(input)) {
       item.parentElement.classList.add('result-search');
       searchList.style.display = 'block';
     } else {

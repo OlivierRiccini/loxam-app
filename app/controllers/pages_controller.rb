@@ -93,6 +93,9 @@ class PagesController < ApplicationController
 
     # Product new
     @product = Product.new
+
+    # Promo new
+    @promo = Promo.new
   end
 
   def location

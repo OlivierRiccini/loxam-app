@@ -1,0 +1,11 @@
+<%= simple_form_for @promo, remote: true do |f| %>
+  <%= f.error_notification %>
+    <%= f.input :title %>
+    <span class="error" id="title-error"></span>
+    <%= f.input :description %>
+    <span class="error" id="description-error"></span>
+    <%= f.input :media %>
+    <span class="error" id="media-error"></span>
+    <%= f.button :submit, class: 'loxam-btn btn-create-promo' %>
+  </div>
+<% end %>

@@ -1,13 +1,69 @@
 <div class="dashboard-section dashboard-promos-section" data-section="promos">
-  <h3>Promos</h3>
-  <%= link_to 'Ajouter un promo', new_promo_path %>
-  <br>
-  <br>
-  <ul>
+  <div class="container">
+    <h3>Promos</h3>
+    <h4 class="nb-of-promos">Il y a <strong><%= Promo.count %></strong> promos</h4>
+    <h4 class="add-a-promo-title">Ajouter une promo <i class="fa fa-plus-square" id="add-promo"></i></h4>
+  </div>
+  <div class="row row-promo-form">
+    <%= render 'promos/form' %>
+  </div>
+  <div class="row row-promos-dashboard">
     <% @promos.each do |promo| %>
-      <li><%= link_to promo.title, promo_path(promo) %> -
-        <%= link_to "Supprimer cette poduit", promo_path(promo), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer cete promo Jano?"}, class: 'action-btn red-btn' %> -
-        <%= link_to "Modifier promo", edit_promo_path(promo) %></li>
+      <div class="col-xs-12 col-sm-6 col-md-3 col-promo-card" id="col-promo-card-<%= promo.id %>">
+        <div class="promo-card promo-card-dashboard">
+          <% if promo.media? %>
+            <div class="promo-card-image" style="background-image: url('<%= cl_image_path promo.media %>'); ">
+          <% else %>
+            <div class="promo-card-media" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
+          <% end %>
+          <i class="fa fa-edit edit-promo-icon" data-promo-id="<%= promo.id %>"></i>
+          <%= link_to promo_path(promo), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer cette promo Jano?"} do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+          </div>
+          <div class="card-infos">
+            <h3><%= promo.title %></h3>
+          </div>
+          <ul class="card-infos-list">
+            <% if promo.catalogue? %>
+              <li><strong>Catalogue: </srong> <%= promo.catalogue %></li>
+            <% else %>
+              <li><strong style=" text-decoration: line-through;">Catalogue</strong></li>
+            <% end %>
+            <% if promo.description? %>
+              <li>Description: <%= promo.description %></li>
+            <% else %>
+              <li><strong style=" text-decoration: line-through;">Description</strong></li>
+            <% end %>
+            <% if promo.display %>
+              <li>Cette promo est affichée</li>
+              <% if promo.display_description %>
+                <li>La description est affichée</li>
+              <% else %>
+                 <li>La description n'est pas affichée</li>
+              <% end %>
+            <% else %>
+              <li>Cette promo n'est pas affichée</li>
+            <% end %>
+          </ul>
+          <%= link_to 'Détails', promo_path(promo), class: 'loxam-btn' %>
+        </div>
+      </div>
+
+      <div class="pop-up-promo edit-promo" id="pop-up-edit-promo-<%= promo.id %>">
+        <i class="fa fa-times-circle close-popup"></i>
+        <%= simple_form_for promo, remote: true do |f| %>
+          <%= f.error_notification %>
+            <%= f.input :title %>
+            <span class="error" id="title-error"></span>
+            <%= f.input :description %>
+            <span class="error" id="description-error"></span>
+            <%= f.input :media %>
+            <span class="error" id="media-error"></span>
+            <%= f.button :submit, class: 'loxam-btn btn-create-promo' %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>
