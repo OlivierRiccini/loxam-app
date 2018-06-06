@@ -1,0 +1,19 @@
+var promoCard = document.querySelector('#col-promo-card-<%= @promo.id %> .item-card-image');
+var cardInfos = document.querySelector('#col-promo-card-<%= @promo.id %> .card-infos');
+var cardInfosList = document.querySelector('#col-promo-card-<%= @promo.id %> .card-infos-list');
+var popUp = document.getElementById(`pop-up-edit-promo-<%= @promo.id %>`);
+
+popUp.classList.remove('pop-up-promo-active');
+
+<% if @promo.media? %>
+  promoCard.innerHTML =
+    `<div class="item-card-image" style="background-image: url('<%= cl_image_path @promo.media %>'); ">
+     </div>`;
+<% else %>
+  promoCard.innerHTML =
+    `<div class="item-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
+    </div>`;
+<% end %>
+
+cardInfos.innerHTML = `<h3><%= @promo.title %></h3>`;
+cardInfosList.innerHTML = `<p><%= @promo.description %></p>`;

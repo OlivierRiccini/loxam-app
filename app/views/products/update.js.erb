@@ -1,14 +1,15 @@
-var productCardImage = document.querySelector('#col-product-card-<%= @product.id %> .product-card-image');
+var productCardImage = document.querySelector('#col-product-card-<%= @product.id %> .item-card-image');
 var cardInfos = document.querySelector('#col-product-card-<%= @product.id %> .card-infos');
 var cardInfosList = document.querySelector('#col-product-card-<%= @product.id %> .card-infos-list');
 var popUp = document.getElementById(`pop-up-edit-product-<%= @product.id %>`);
+
 popUp.classList.remove('pop-up-product-active');
 
 <% if @product.photo? %>
-  productCardImage.HTML =
-  `<div class="product-card-image" style="background-image: url('<%= cl_image_path @product.photo %>'); ">`;
+  productCardImage.innerHTML =
+  `<div style="background-image: url('<%= cl_image_path @product.photo %>');"></div>`;
 <% else %>
-  `<div class="product-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">`;
+  `<div style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); "></div>`;
 <% end %>
 
 cardInfos.innerHTML = `<h3><%= @product.name %></h3>`;

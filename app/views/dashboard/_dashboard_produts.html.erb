@@ -2,25 +2,28 @@
   <div class="container">
     <h3>Matériels</h3>
     <h4 class="nb-of-products">Il y a <strong><%= Product.count %></strong> matériels</h4>
-    <h4 class="add-a-product-title">Ajouter un matériel <i class="fa fa-plus-square" id="add-product"></i></h4>
+    <h4 class="add-title">Ajouter un matériel <i class="fa fa-plus-square" id="add-product"></i></h4>
   </div>
-  <div class="row row-product-form">
+  <div class="row row-form" id="form-product">
     <%= render 'products/form' %>
   </div>
   <div class="row row-products-dashboard">
     <% @products.each do |product| %>
-      <div class="col-xs-12 col-sm-6 col-md-3 col-product-card" id="col-product-card-<%= product.id %>">
-        <div class="product-card product-card-dashboard">
-          <% if product.photo? %>
-            <div class="product-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); ">
-          <% else %>
-            <div class="product-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
-          <% end %>
+      <div class="col-xs-12 col-sm-6 col-md-3 col-item-card" id="col-product-card-<%= product.id %>">
+        <div class="item-card item-card-dashboard product-card-dashboard">
+          <div class="item-card-image">
+            <% if product.photo? %>
+              <div style="background-image: url('<%= cl_image_path product.photo %>'); ">
+              </div>
+            <% else %>
+              <div style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
+              </div>
+            <% end %>
+          </div>
           <i class="fa fa-edit edit-product-icon" data-product-id="<%= product.id %>"></i>
           <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
-            <i class="fa fa-trash"></i>
+          <i class="fa fa-trash"></i>
           <% end %>
-          </div>
           <div class="card-infos">
             <h3><%= product.name %></h3>
           </div>
@@ -63,7 +66,7 @@
         </div>
       </div>
 
-      <div class="pop-up-product edit-product" id="pop-up-edit-product-<%= product.id %>">
+      <div class="pop-up-product edit-item" id="pop-up-edit-product-<%= product.id %>">
         <i class="fa fa-times-circle close-popup"></i>
         <%= simple_form_for product, remote: true do |f| %>
           <%= f.error_notification %>

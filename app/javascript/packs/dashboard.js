@@ -26,47 +26,58 @@ tabs.forEach(function(tab) {
 
 
 // / reload message section
-function reload() {
-  $('.container-messages').load(document.URL +  ' .container-messages');
-}
 
-setInterval(reload, 5000);
+// function reload() {
+//   $('.container-messages').load(document.URL +  ' .container-messages');
+// }
 
-function reloadNotif() {
-  $('.reload-notif').load(document.URL +  ' .reload-notif');
-}
+// setInterval(reload, 5000);
 
-setInterval(reloadNotif, 5000);
+// function reloadNotif() {
+//   $('.reload-notif').load(document.URL +  ' .reload-notif');
+// }
+
+// setInterval(reloadNotif, 5000);
 
 
 // Add a product button
-const btnAddProduct = document.getElementById('add-product');
+// const btnAddProduct = document.getElementById('add-product');
 
 $('#add-product').click(function() {
-  $('.row-product-form').slideToggle();
+  $('#form-product').slideToggle();
 })
 
+$('#add-promo').click(function() {
+  $('#form-promo').slideToggle();
+})
 // edit product popup
-const editIcons = document.querySelectorAll('.edit-product-icon');
+const editIconsProducts = document.querySelectorAll('.edit-product-icon');
+const editIconsPromos = document.querySelectorAll('.edit-promo-icon');
 const closeCrosses = document.querySelectorAll('.close-popup');
 
-function showPopupEditProduct(product_id) {
-  var popUp = document.getElementById(`pop-up-edit-product-${product_id}`);
-  popUp.classList.add('pop-up-product-active');
+function showPopupEditItem(item, item_id) {
+  var popUp = document.getElementById(`pop-up-edit-${item}-${item_id}`);
+  popUp.classList.add(`pop-up-${item}-active`);
 
   function closePopup() {
-   popUp.classList.remove('pop-up-product-active');
+   popUp.classList.remove(`pop-up-${item}-active`);
   };
   closeCrosses.forEach(function(closeCrosse) {
     closeCrosse.addEventListener('click', closePopup);
   });
 }
 
-editIcons.forEach(function(editIcon) {
+editIconsProducts.forEach(function(editIcon) {
   editIcon.addEventListener('click',
     function() {
-      showPopupEditProduct(editIcon.dataset.productId);
+      showPopupEditItem('product', editIcon.dataset.productId);
   });
 });
 
+editIconsPromos.forEach(function(editIcon) {
+  editIcon.addEventListener('click',
+    function() {
+      showPopupEditItem('promo', editIcon.dataset.promoId);
+  });
+});
 

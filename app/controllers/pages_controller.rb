@@ -84,10 +84,10 @@ class PagesController < ApplicationController
     #   @lines << line.split(" ")
     # end
 
-    @promos = Promo.all
     @messages = Message.order("created_at DESC").all
     @categories = Category.order("created_at DESC").all
     @products = Product.order("created_at DESC").all
+    @promos = Promo.all.order("created_at DESC").all
     # Category new
     @category = Category.new
 

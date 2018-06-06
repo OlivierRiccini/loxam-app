@@ -10,11 +10,6 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  def new
-    @product = Product.new
-    authorize @product
-  end
-
   def create
     @product = Product.new(product_params)
     authorize @product
