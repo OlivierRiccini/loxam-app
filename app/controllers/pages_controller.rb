@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard ]
-  before_action :all_categories, only: [ :home, :mon_espace, :admin_dashboard ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   def home
@@ -35,7 +34,7 @@ class PagesController < ApplicationController
       @new_product_choice.each do |product|
         @@new_products << product
       end
-      Product.order("nb_of_searches DESC").first(4 - @new_product_choice.size).each do |product|
+      Product.order("created_at DESC").first(4 - @new_product_choice.size).each do |product|
         @new_products << product
       end
     else
@@ -72,7 +71,7 @@ class PagesController < ApplicationController
   def admin_dashboard
     @user = current_user
     authorize @user
-    @users = User.all
+    @users = User.all.where(admin: false)
 
     @lines = []
 
@@ -80,10 +79,23 @@ class PagesController < ApplicationController
     #   @lines << line
     # end
 
-    text = Net::HTTP.get( URI.parse( "http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT" ) )
-    text.split("\n").each do |line|
-      @lines << line.split(" ")
-    end
+    # text = Net::HTTP.get( URI.parse( "http://res.cloudinary.com/dto9foc0m/raw/upload/v1523893819/test.TXT" ) )
+    # text.split("\n").each do |line|
+    #   @lines << line.split(" ")
+    # end
+
+    @messages = Message.order("created_at DESC").all
+    @categories = Category.order("created_at DESC").all
+    @products = Product.order("created_at DESC").all
+    @promos = Promo.all.order("created_at DESC").all
+    # Category new
+    @category = Category.new
+
+    # Product new
+    @product = Product.new
+
+    # Promo new
+    @promo = Promo.new
   end
 
   def location
@@ -117,9 +129,5 @@ class PagesController < ApplicationController
 
   def all_products
     @products = Product.all
-  end
-
-  def all_categories
-    @categories = Category.all
   end
 end

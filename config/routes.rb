@@ -21,10 +21,13 @@ Rails.application.routes.draw do
   get 'conditions_generales_de_vente', to: "pages#conditions_generales_de_vente"
   get 'documentations', to: "pages#documentations"
 
-  get ':name/products', to: "categories#show", as: "category"
+  get ':name/products', to: "categories#show", as: "category_products"
 
-  resources :categories, only: [ :new, :create, :edit, :update, :destroy]
-  resources :products
+  resources :categories, only: [ :create, :update, :destroy ]
+  resources :products, only: [ :show, :create, :update, :destroy ]
   resources :promos
-  resources :messages, only: [ :show, :create, :edit, :destroy ]
+  resources :messages, only: [ :show, :create, :destroy ] do
+    post '/check', to: 'messages#check!'
+    post '/uncheck', to: 'messages#uncheck!'
+  end
 end

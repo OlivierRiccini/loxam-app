@@ -1,0 +1,39 @@
+/// Categories section
+.container-form-new-category {
+  margin: 50px 0;
+}
+
+.row-category {
+  margin: 5px 0;
+  padding: 5px;
+  font-size: 16px;
+  &:nth-child(n+1) {
+    background: $light-gray;
+  };
+  p {
+    margin-bottom: 0;
+  };
+  form {
+    display: flex;
+    align-items: center;
+    .form-group, input {
+      margin: 0;
+    };
+    .form-group {
+      margin-right: 10px;
+    };
+    input {
+      height: 30px;
+      font-size: 14px;
+    }
+  };
+  .category-name {
+    display: flex;
+    height: 30px;
+    align-items: center;
+  };
+  .category-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,114 @@
+.dashboard-container {
+  background-color: #fff;
+  color: $font-color;
+}
+
+.title-dashboard {
+  font-size: 26px;
+}
+
+.dashboard-section {
+  display: none;
+}
+
+.dashboard-section-active {
+  display: block;
+}
+
+.tabs {
+  color: #fff;
+}
+
+.tab {
+  background-color: $loxam-color;
+  padding: 15px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #fff;
+    color: $loxam-color;
+  }
+}
+
+.tab-active {
+  background-color: #fff;
+  color: $loxam-color;
+}
+
+/* For Products and Promos */
+.add-title  {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.fa-trash, .fa-edit {
+  font-size: 18px;
+  border: 1px solid $loxam-color;
+  padding: 5px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: $loxam-color;
+  position: absolute;
+  right: 15px;
+  &:hover {
+    color: $loxam-color;
+    background-color: #fff;
+  }
+};
+
+.fa-edit {
+  right: 45px;
+  top: 15px;
+}
+
+.row-form {
+  display: none;
+}
+
+#add-product, #add-promo {
+  font-size: 28px;
+  cursor: pointer;
+  color: $loxam-color;
+  transition: all 0.3s;
+  &:hover {
+    transform: rotate(90deg);
+  }
+}
+
+.pop-up-product, .pop-up-promo {
+  display: none;
+  position: fixed;
+  border-radius: 3px;
+  box-shadow: 2px 2px 6px rgba(100,100,100,0.1);
+  z-index: 9;
+  background-color: $light-gray;
+  top: 0;
+  right: 5%;
+  left: 5%;
+  width: 90%;
+  border: 1px solid #ccc;
+}
+
+.pop-up-product-active,
+.pop-up-promo-active {
+  display: block;
+}
+
+.fa-edit {
+  cursor: pointer;
+}
+
+.close-popup {
+  margin: 15px;
+  font-size: 32px;
+  color: $loxam-color;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+@import "dashboard/messages";
+@import "dashboard/categories";

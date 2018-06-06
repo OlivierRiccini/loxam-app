@@ -1,30 +1,24 @@
 class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show ]
-  before_action :find_product, only: [ :edit, :update, :destroy, :show ]
-
-  def index
-  end
+  before_action :find_product, only: [ :show, :edit, :update, :destroy ]
 
   def show
     authorize @product
     i = @product.nb_of_searches + 1
     @product.update(nb_of_searches: i)
     @categories = Category.all
-  end
-
-  def new
-    @product = Product.new
-    authorize @product
+    @products = Product.all
   end
 
   def create
     @product = Product.new(product_params)
     authorize @product
-
-    if @product.save
-      redirect_to admin_dashboard_path
-    else
-      render new_product_path
+    respond_to do |format|
+      if @product.save
+        format.js
+      else
+        format.js
+      end
     end
   end
 
@@ -34,23 +28,30 @@ class ProductsController < ApplicationController
 
   def update
     authorize @product
-
-    @product.update(product_params)
-
-    redirect_to product_path(@product)
+    respond_to do |format|
+      if @product.update(product_params)
+        format.js
+      else
+        format.js
+      end
+    end
   end
 
   def destroy
     authorize @product
-    @product.destroy
-
-    redirect_to admin_dashboard_path
+    respond_to do |format|
+      if @product.destroy
+        format.js
+      else
+        format.js
+      end
+    end
   end
 
   private
 
   def product_params
-    params.require(:product).permit(:name, :reference, :category, :price, :characteristics,
+    params.require(:product).permit(:name, :reference, :category_id, :price, :characteristics,
                                     :description, :deposit, :technical_sheet,
                                     :photo, :video, :loxam_link)
   end

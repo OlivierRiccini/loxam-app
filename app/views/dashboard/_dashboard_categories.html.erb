@@ -1,0 +1,26 @@
+<div class="dashboard-section dashboard-categories-section" data-section="categories">
+  <h3>Categories</h3>
+  <h4 class="nb-of-categories">Il y a <strong><%= Category.count %></strong> categories</h4>
+  <div class="container-form-new-category">
+    <%= render 'categories/form' %>
+  </div>
+  <div class="container-categories">
+    <% @categories.each do |category| %>
+    <div class="row row-category" id="row-category-<%= category.id %>">
+        <div class="col-sm-6 category-name">
+          <p><%= category.name.capitalize %></p>
+        </div>
+        <div class="col-sm-6 category-actions">
+          <%= simple_form_for category, remote: true  do |f| %>
+            <%= f.input :name, label: false %>
+            <span class="error"></span>
+            <%= f.button :submit, value: 'Modifier', class: 'loxam-btn btn-send' %>
+          <% end %>
+          <%= link_to category_path(category), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer cette categorie Jano?"} do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

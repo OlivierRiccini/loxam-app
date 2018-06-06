@@ -1,13 +1,15 @@
 <h1><%= @product.name %></h1>
 <p>Réf: <%= @product.reference %></p>
 <p><strong>Category: <%= @product.category %></strong></p>
-<%= cl_image_tag @product.photo %>
-<p>Characteristics: - <%= @product.characteristics %></p>
+<% if @product.photo? %>
+  <%= cl_image_tag @product.photo %>
+<% else %>
+  <img src="https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg" alt="default_photo">
+<% end %>
+<p>Caractéristiques: - <%= @product.features %></p>
 <p>Déscription <%= @product.description %></p>
 <p><strong>Prix <%= @product.price %> € / jour</strong>, Déposit <%= @product.deposit %> €</p></li>
 
 <%= link_to "Supprimer ce poduit", product_path(@product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %>
-<br>
-<%= link_to "Modifier produit", edit_product_path(@product) %>
 <br>
 <%= link_to "Retour au dashboard", admin_dashboard_path %>

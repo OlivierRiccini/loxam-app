@@ -1,8 +1,8 @@
-.col-product-card {
+.col-item-card {
   padding: 10px;
 }
 
-.product-card {
+.item-card {
   height: 400px;
   color: $font-color;
   background-color: #fff;
@@ -20,8 +20,11 @@
   }
 }
 
-.product-card-image {
+.item-card-image {
   height: 70%;
+}
+
+.item-card-image,.item-card-image div {
   background-size: cover;
   background-position: center;
 }
@@ -55,4 +58,53 @@
 .price {
   color: $loxam-color;
   font-weight: bolder;
+}
+
+/* Card for Dashboard */
+.item-card-dashboard {
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .item-card-image {
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+  };
+  .card-infos {
+    height: auto;
+  };
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      margin: 5px 0;
+    }
+  }
+}
+
+/* Card products Dashboard */
+.product-card-dashboard {
+  height: 600px;
+  .item-card-image {
+    height: 35%;
+    div {
+      height: 100%;
+    }
+  }
+}
+
+/* Card promos Dashboard */
+.promo-card-dashboard {
+  height: 400px;
+  .item-card-image {
+    height: 45%;
+    div {
+      height: 100%;
+    }
+  };
+  .card-infos-list {
+    overflow-wrap: break-word;
+  }
 }

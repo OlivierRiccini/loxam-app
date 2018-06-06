@@ -1,0 +1,98 @@
+<% if @promo.valid? %>
+  var rowPromosDashboard  = document.getElementById('row-promos-dashboard');
+
+  var newPromo = `
+  <div class="col-xs-12 col-sm-6 col-md-4 col-item-card" id="col-promo-card-<%= @promo.id %>">
+    <div class="item-card item-card-dashboard promo-card-dashboard">
+      <div class="item-card-image">
+        <% if @promo.media? %>
+          <div class="item-card-image" style="background-image: url('<%= cl_image_path @promo.media %>'); ">
+          </div>
+        <% else %>
+          <div class="item-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
+          </div>
+        <% end %>
+      </div>
+      <i class="fa fa-edit edit-promo-icon" data-promo-id="<%= @promo.id %>"></i>
+      <%= link_to promo_path(@promo), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer cette promo Jano?"} do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+      <div class="card-infos">
+        <h3><%= @promo.title %></h3>
+      </div>
+      <div class="card-infos-list">
+        <p><%= @promo.description %></p>
+      </div>
+      <%= link_to 'Détails', promo_path(@promo), class: 'loxam-btn' %>
+    </div>
+  </div>
+
+  <div class="pop-up-promo edit-item" id="pop-up-edit-promo-<%= @promo.id %>">
+    <i class="fa fa-times-circle close-popup"></i>
+    <%= simple_form_for @promo, remote: true do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :title %>
+      <span class="error" id="title-error"></span>
+      <%= f.input :description %>
+      <span class="error" id="description-error"></span>
+      <%= f.input :media %>
+      <span class="error" id="media-error"></span>
+      <%= f.button :submit, class: 'loxam-btn btn-create-promo' %>
+    <% end %>
+  </div>`;
+
+rowPromosDashboard.insertAdjacentHTML('afterbegin', newPromo);
+
+<% else %>
+
+  function erros(field, messageError) {
+    var fieldError = document.getElementById(`${field}-error`);
+    fieldError.innerText = messageError;
+    fieldError.style.color = 'rgb(225, 12, 34)';
+      document.querySelector(`.promo_${field} label`).style.color = 'rgb(225, 12, 34)';
+      document.getElementById(`promo_${field}`).style.borderColor = 'rgb(225, 12, 34)';
+  }
+
+  function noErros(field) {
+    document.getElementById(`${field}-error`).innerText = '';
+    document.querySelector(`.promo_${field} label`).style.color = '#000000';
+    document.getElementById(`promo_${field}`).style.borderColor = '#ccc';
+  }
+
+  <% if @promo.errors[:title][0].nil? %>
+    noErros('title');
+  <% else %>
+    erros('title', '<%= @promo.errors[:title][0] %>');
+  <% end %>
+
+  <% if @promo.errors[:description][0].nil? %>
+    noErros('description');
+  <% else %>
+    erros('description', '<%= @promo.errors[:description][0] %>');
+  <% end %>
+
+<% end %>
+
+const editNewPromo = document.querySelector('#col-promo-card-<%= @promo.id %> .edit-promo-icon');
+const closeCrossesNewPromo = document.querySelector('#pop-up-edit-promo-<%= @promo.id %> .close-popup');
+
+function showPopupEditPromo(promo_id) {
+  var popUp = document.getElementById(`pop-up-edit-promo-${promo_id}`);
+  popUp.classList.add('pop-up-promo-active');
+
+  function closePopup() {
+   popUp.classList.remove('pop-up-promo-active');
+  };
+
+  closeCrossesNewPromo.addEventListener('click', closePopup);
+}
+
+editNewPromo.addEventListener('click',
+    function() {
+      showPopupEditPromo('<%= @promo.id %>');
+  });
+
+var formInputs = document.querySelectorAll('#form-promo input');
+formInputs.forEach(function(input) {
+  input.value = "";
+});

@@ -1,0 +1,5 @@
+var rowCategory = document.getElementById('row-category-<%= @category.id %>');
+rowCategory.parentNode.removeChild(rowCategory);
+
+var nbOfCategories = document.querySelector('.nb-of-categories');
+nbOfCategories.innerHTML = 'Il y a <strong><%= Category.count %></strong> categories'

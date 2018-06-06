@@ -4,3 +4,24 @@ form {
     font-weight: lighter;
   }
 }
+
+.form-group {
+  margin: 15px 0 0 0;
+}
+
+.error {
+  font-size: 14px;
+}
+
+.btn-send {
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.send-new-message:hover {
+  text-decoration: none;
+}
+
+.thanks-message-container, .send-new-message {
+  text-align: center;
+}

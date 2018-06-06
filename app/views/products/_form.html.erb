@@ -1,15 +1,32 @@
-<%= simple_form_for @product do |f| %>
+<%= simple_form_for @product, remote: true do |f| %>
   <%= f.error_notification %>
+  <div class="col-xs-12 col-sm-6">
     <%= f.input :name %>
+    <span class="error" id="name-error"></span>
     <%= f.input :reference %>
-    <%= f.input :category %>
+    <span class="error" id="reference-error"></span>
+    <%= f.association :category %>
+    <span class="error" id="category_id-error"></span>
     <%= f.input :price %>
-    <%= f.input :characteristics %>
+    <span class="error" id="price-error"></span>
     <%= f.input :deposit %>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <%= f.input :features %>
+    <%= f.input :description %>
     <%= f.input :technical_sheet %>
-    <%= f.input :photo %>
-    <%= f.input :photo_cache, as: :hidden %>
-    <%= f.input :video %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <%= f.input :photo %>
+        <%= f.input :photo_cache, as: :hidden %>
+        <span class="error" id="photo-error"></span>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <%= f.input :video %>
+      </div>
+    </div>
     <%= f.input :loxam_link %>
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
+  </div>
 <% end %>
+

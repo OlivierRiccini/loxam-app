@@ -5,7 +5,6 @@
 
 .group {
   position:relative;
-  // margin-bottom: 25px;
 }
 
 #search-bar {
@@ -104,4 +103,35 @@ label#search-label {
 @keyframes inputHighlighter {
   from { background:$loxam-color; }
   to  { width:0; background:transparent; }
+}
+
+
+/* List search */
+
+#search-list {
+  display: none;
+  position: absolute;
+  list-style: none;
+  padding: 10px;
+  background-color: #fff;
+  z-index: 9;
+  max-height: 60vh;
+  overflow: scroll;
+  li {
+    margin: 5px 0;
+    border-bottom: 1px solid $light-gray;
+    display: none;
+    a {
+      color: $font-color;
+      font-size: 16px;
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: $light-gray;
+    }
+  };
+}
+
+.result-search {
+  display: block !important;
 }

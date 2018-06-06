@@ -1,0 +1,5 @@
+var promoCard = document.getElementById('col-promo-card-<%= @promo.id %>');
+promoCard.parentNode.removeChild(promoCard);
+
+var nbOfPromos = document.querySelector('.nb-of-promos');
+nbOfPromos.innerHTML = 'Il y a <strong><%= Promo.count %></strong> categories'
