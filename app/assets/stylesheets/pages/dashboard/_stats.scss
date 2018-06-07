@@ -1,0 +1,18 @@
+.dashboard-stats-section h3 {
+  margin: 60px auto 40px auto;
+}
+
+.ranking-list {
+  list-style: none;
+  height: 320px;
+  overflow: scroll;
+  font-size: 14px;
+  line-height: 1.8;
+  li {
+    display: flex;
+    justify-content: space-between;
+    background: $light-gray;
+    margin-bottom: 5px;
+    padding: 0 5px;
+  }
+}

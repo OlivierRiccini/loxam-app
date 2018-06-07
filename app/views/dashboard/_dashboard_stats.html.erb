@@ -1,4 +1,39 @@
 <div class="dashboard-section dashboard-stats-section dashboard-section-active" data-section="stats">
-  <h3>Stats</h3>
-  <canvas id="myChart"></canvas>
+  <div class="row">
+    <h3 class="text-center">Catégories les plus consultées</h3>
+    <div class="col-xs-12 col-sm-6">
+      <ul class="ranking-list">
+        <% i = 0 %>
+        <% @categories_hashes.each do |category| %>
+          <% i += 1 %>
+          <li><span><strong><%= i %></strong>&nbsp;&nbsp;<%= category[:name] %></span><span><strong><%= category[:nb_of_searches] %></strong></span></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <canvas id="myChartCategories" data-category-name="<%= @categories_names.first(5)%>" data-nb-searches="<%= @categories_nb_of_searches.first(5) %>"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <h3 class="text-center">Matériels les plus consultés</h3>
+    <div class="col-xs-12 col-sm-6">
+      <canvas id="myChartProducts" data-product-name="<%= @products_most_searched %>" data-nb-searches="<%= @products_nb_searches %>"></canvas>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <ul class="ranking-list">
+        <% j = 0 %>
+        <% @products_raking.each do |product| %>
+          <span><% j += 1 %>
+          <li><span><strong><%= j %></strong>&nbsp;&nbsp;<%= product.name %></span> <span><strong><%= product.nb_of_searches %></strong></span></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+    <div class="row">
+    <h3 class="text-center">Matériels les plus sauvegardés</h3>
+    <div class="col-xs-12 col-sm-6"></div>
+    <div class="col-xs-12 col-sm-6">
+      <canvas id="myChartSavedProducts" data-product-name="<%= @products_most_searched %>" data-nb-saved="<%= @products_nb_searches %>"></canvas>
+    </div>
+  </div>
 </div>

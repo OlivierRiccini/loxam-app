@@ -1,19 +1,36 @@
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+function chartFunction(ctx, type, label, labels, datas) {
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: type,
 
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
+      // The data for our dataset
+      data: {
+          labels: labels,
+          datasets: [{
+              label: label,
+              backgroundColor: 'rgb(225, 12, 34)',
+              borderColor: 'rgb(255, 255, 255)',
+              data: datas,
+          }]
+      },
 
-    // Configuration options go here
-    options: {}
-});
+      // Configuration options go here
+      options: {}
+  });
+};
+
+var ctxCategories = document.getElementById('myChartCategories').getContext('2d');
+var dataCategoriesName = $('#myChartCategories').data('category-name');
+var dataNbSearchCategories = $('#myChartCategories').data('nb-searches');
+
+var ctxProducts = document.getElementById('myChartProducts').getContext('2d');
+var dataProductsName = $('#myChartProducts').data('product-name');
+var dataNbSearches = $('#myChartProducts').data('nb-searches');
+
+var ctxProductsSaved = document.getElementById('myChartSavedProducts').getContext('2d');
+var dataProductsSavedName = $('#myChartSavedProducts').data('product-name');
+var dataNbProductsSavedName = $('#myChartSavedProducts').data('nb-saved');
+
+chartFunction(ctxCategories, 'doughnut', "Catégories les plus consultées", dataCategoriesName, dataNbSearchCategories);
+chartFunction(ctxProducts, 'bar',"Matériels les plus consultées", dataProductsName, dataNbSearches);
+chartFunction(ctxProductsSaved, 'bar', "Matériels les plus sauvegardés", dataProductsSavedName, dataNbProductsSavedName);
