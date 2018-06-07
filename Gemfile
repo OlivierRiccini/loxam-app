@@ -19,7 +19,7 @@ gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
 gem 'faker'
 gem 'gibbon'
-
+gem 'chart-js-rails'
 
 gem "roo", "~> 2.7.0"
 
