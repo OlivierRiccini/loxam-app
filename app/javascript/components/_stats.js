@@ -8,7 +8,11 @@ function chartFunction(ctx, type, label, labels, datas) {
           labels: labels,
           datasets: [{
               label: label,
-              backgroundColor: 'rgb(225, 12, 34)',
+              backgroundColor: ['rgb(225, 12, 34)',
+                                'rgba(225, 12, 34, 0.8)',
+                                'rgba(225, 12, 34, 0.6)',
+                                'rgba(225, 12, 34, 0.4)',
+                                'rgba(225, 12, 34, 0.2)'],
               borderColor: 'rgb(255, 255, 255)',
               data: datas,
           }]
@@ -32,5 +36,5 @@ var dataProductsSavedName = $('#myChartSavedProducts').data('product-name');
 var dataNbProductsSavedName = $('#myChartSavedProducts').data('nb-saved');
 
 chartFunction(ctxCategories, 'doughnut', "Catégories les plus consultées", dataCategoriesName, dataNbSearchCategories);
-chartFunction(ctxProducts, 'bar',"Matériels les plus consultées", dataProductsName, dataNbSearches);
-chartFunction(ctxProductsSaved, 'bar', "Matériels les plus sauvegardés", dataProductsSavedName, dataNbProductsSavedName);
+chartFunction(ctxProducts, 'horizontalBar',"Matériels les plus consultées", dataProductsName, dataNbSearches);
+chartFunction(ctxProductsSaved, 'horizontalBar', "Matériels les plus sauvegardés", dataProductsSavedName, dataNbProductsSavedName);
