@@ -32,7 +32,7 @@ class PagesController < ApplicationController
 
     if !@new_product_choice.nil? && @new_product_choice.size < 4
       @new_product_choice.each do |product|
-        @@new_products << product
+        @new_products << product
       end
       Product.order("created_at DESC").first(4 - @new_product_choice.size).each do |product|
         @new_products << product
@@ -96,6 +96,37 @@ class PagesController < ApplicationController
 
     # Promo new
     @promo = Promo.new
+
+    # Fetching
+    @products_most_searched = []
+    @products_nb_searches = []
+    @products_raking = Product.order("nb_of_searches DESC").all
+
+    Product.order("nb_of_searches DESC").first(10).each do |product|
+      @products_most_searched << product.name
+      @products_nb_searches << product.nb_of_searches
+    end
+
+    @categories_hashes = []
+
+    Category.all.each do |category|
+      @categories_hashes << {
+        name: category.name,
+        nb_of_searches: Product.where(category_id: category.id)
+                               .pluck(:nb_of_searches)
+                               .reduce(:+)
+      }
+    end
+
+    @categories_names = []
+    @categories_nb_of_searches = []
+
+    @categories_hashes.each do |category|
+      @categories_names << category[:name]
+      @categories_nb_of_searches << category[:nb_of_searches]
+    end
+
+    @categories_hashes.sort_by! { |element| -element[:nb_of_searches] }
   end
 
   def location

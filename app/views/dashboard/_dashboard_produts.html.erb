@@ -80,6 +80,10 @@
             <%= f.input :price %>
             <span class="error" id="price-error"></span>
             <%= f.input :deposit %>
+            <%= f.label :best_searches_choice, 'Afficher dans les plus recherchés' %>
+            <%= f.check_box :best_searches_choice, as: :boolean %>
+            <%= f.label :new_product_choice, 'Afficher dans les nouveautés' %>
+            <%= f.check_box :new_product_choice, as: :boolean %>
           </div>
           <div class="col-xs-12 col-sm-6">
             <%= f.input :features %>

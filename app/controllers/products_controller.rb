@@ -52,8 +52,8 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :reference, :category_id, :price, :characteristics,
-                                    :description, :deposit, :technical_sheet,
-                                    :photo, :video, :loxam_link)
+                                    :description, :deposit, :technical_sheet, :photo, :video,
+                                    :loxam_link, :best_searches_choice, :new_product_choice)
   end
 
   def find_product

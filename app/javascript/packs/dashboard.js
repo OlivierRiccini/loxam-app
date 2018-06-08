@@ -1,3 +1,5 @@
+import 'components/_stats';
+
 const dashboardSections = document.querySelectorAll('.dashboard-section');
 const tabs = document.querySelectorAll('.tab');
 
