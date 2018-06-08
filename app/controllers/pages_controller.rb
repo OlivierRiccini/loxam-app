@@ -32,7 +32,7 @@ class PagesController < ApplicationController
 
     if !@new_product_choice.nil? && @new_product_choice.size < 4
       @new_product_choice.each do |product|
-        @@new_products << product
+        @new_products << product
       end
       Product.order("created_at DESC").first(4 - @new_product_choice.size).each do |product|
         @new_products << product
