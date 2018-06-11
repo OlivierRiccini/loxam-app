@@ -1,7 +1,12 @@
 categories = [].sort_by { |category| category[:index] }
-products = [].sort_by { |category| category[:index] }
-expendables = [].sort_by { |category| category[:index] }
-
+products = [].sort_by { |product| product[:index] }
+expendables = [ {
+      index: 90,
+      name: "FORFAIT D'USURE PONCEUSE SURFACEUSE DE SOLS (GLTREX)",
+      reference: "USURESEGLTREX",
+      price: 185.0,
+      description: "1 FORFAIT = 2 JOURS DE LOCATION"
+    }]
 
 require 'roo'
 
@@ -57,6 +62,10 @@ xlsx.sheet('Liste tarifs').each do |row|
 
 end
 
+# sorting expandable now because I had to add manually an item at the begining
+expendables.sort_by! { |expendable| expendable[:index] }
+
+
 categories.each do |category|
   Category.create(name: category[:name])
   puts "Category #{category[:name]} created!"
@@ -88,25 +97,42 @@ categories.each do |category|
       new_product[:category_id] = Category.where(name: category[:name]).take.id
     elsif product[:index] > category[:index] &&
       product[:index] < categories[categories.index(category) + 1 ][:index]
-      new_product[:category_id] = Category.where(na  me: category[:name]).take.id
+      new_product[:category_id] = Category.where(name: category[:name]).take.id
     end
     new_product.save
+    puts "#{new_product.name} created!"
+
+    expendables.size
+    expendables.each do |expendable|
+      if product[:index] + 1 == expendable[:index]
+        Expendable.create( name: expendable[:name],
+                           reference: expendable[:reference],
+                           price: expendable[:price],
+                           description: expendable[:description],
+                           product_id: new_product.id )
+        puts "#{expendable[:name]} created!"
+      end
+
+      # if expendables[expendables.index(expendable) + 1][:index] == expendable[:index] + 1
+      #   unless expendables[expendables.index(expendable) + 1].nil?
+      #     second_expendable = expendables[expendables.index(expendable) + 1]
+      #   end
+      #   Expendable.create( name: second_expendable[:name],
+      #                      reference: second_expendable[:reference],
+      #                      price: second_expendable[:price],
+      #                      description: second_expendable[:description],
+      #                      product_id: new_product.id )
+      #   puts "#{second_expendable[:name]} created!"
+      # end
+    end
+
   end
 end
-# categories.each do |category|
-#   products.select do |product|
-#     if categories.index(category) == categories.size - 1 && product[:index] > category[:index]
-#       Product.where(name: product[:name]).update(category_id: Category.where(name: category[:name]).take.id)
-#     elsif product[:index] > category[:index] &&
-#        product[:index] < categories[categories.index(category) + 1 ][:index]
-#       Product.where(name: product[:name]).update(category_id: Category.where(name: category[:name]).take.id)
-#     end
-#   end
-# end
 
 puts "Products created!"
+puts "Expendables created!"
 
-promo = Promo.new(title: "Betonnière")
+promo = Promo.new(title: "Betonnière", description: "Hola, bétonnière au top!")
 promo[:display] = true
 promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"
 promo.save

@@ -1,15 +1,37 @@
-<h1><%= @product.name %></h1>
-<p>Réf: <%= @product.reference %></p>
-<p><strong>Category: <%= @product.category %></strong></p>
-<% if @product.photo? %>
-  <%= cl_image_tag @product.photo %>
-<% else %>
-  <img src="https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg" alt="default_photo">
-<% end %>
-<p>Caractéristiques: - <%= @product.features %></p>
-<p>Déscription <%= @product.description %></p>
-<p><strong>Prix <%= @product.price %> € / jour</strong>, Déposit <%= @product.deposit %> €</p></li>
-
-<%= link_to "Supprimer ce poduit", product_path(@product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %>
-<br>
-<%= link_to "Retour au dashboard", admin_dashboard_path %>
+<div class="container container-product">
+  <h2><%= @product.name %></h2>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <% if @product.photo? %>
+        <%= cl_image_tag @product.photo %>
+      <% else %>
+        <img src="https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg" alt="default_photo">
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <p><strong><%= @product.price %> € HT/ jour</strong></p>
+      <p>Réf: <%= @product.reference %></p>
+      <br>
+      <p>Caractéristiques:</p>
+      <%= @product.features %>
+      <br>
+      <p>Déscription <%= @product.description %></p>
+      <p><strong>Déposit <%= @product.deposit %> €</p></li>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <ul>
+        <% @product.expendables.each do |expendable| %>
+        <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="contact-container form-container">
+        <h2>DEMANDE DE LOCATION?</h2>
+        <%= render 'messages/form' %>
+      </div>
+    </div>
+  </div>
+</div>

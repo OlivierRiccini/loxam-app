@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
     @product.update(nb_of_searches: i)
     @categories = Category.all
     @products = Product.all
+
+    @message = Message.new
   end
 
   def create
