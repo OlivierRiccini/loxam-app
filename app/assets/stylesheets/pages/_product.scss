@@ -10,5 +10,42 @@
     margin: 10px 0 60px 0;
     background-color: $loxam-color;
     border-radius: 3px;
+  };
+  .row-presentation-product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .image-col {
+      text-align: center;
+    }
+  };
+}
+
+.message-form-product-page {
+  margin: 60px auto;
+  h3 {
+    margin-top: 0;
+    font-size: 22px;
+    background-color: $loxam-color;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px;
+  };
+  #message_content {
+    height: 200px;
+  }
+}
+
+.container-expendables {
+  margin: 60px auto;
+  h3 {
+    margin-top: 0;
+    font-size: 22px;
+    background-color: #c2c4c6;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px;
   }
 }

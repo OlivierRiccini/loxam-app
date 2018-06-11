@@ -1,7 +1,7 @@
 <div class="container container-product">
   <h2><%= @product.name %></h2>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
+  <div class="row row-presentation-product">
+    <div class="col-xs-12 col-sm-6 image-col">
       <% if @product.photo? %>
         <%= cl_image_tag @product.photo %>
       <% else %>
@@ -16,22 +16,48 @@
       <%= @product.features %>
       <br>
       <p>Déscription <%= @product.description %></p>
-      <p><strong>Déposit <%= @product.deposit %> €</p></li>
+      <p>Déposit <%= @product.deposit %> €</p></li>
     </div>
   </div>
-    <div class="row">
+
+  <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <ul>
-        <% @product.expendables.each do |expendable| %>
-        <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+      <div class="container-expendables">
+        <h3>Accessoires disponibles à la location de: <%= @product.name %></h3>
+        <% if @product.expendables.any? %>
+          <ul>
+            <% @product.expendables.each do |expendable| %>
+            <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucun consommable disponible pour ce matériel</p>
         <% end %>
-      </ul>
+      </div>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <div class="contact-container form-container">
-        <h2>DEMANDE DE LOCATION?</h2>
-        <%= render 'messages/form' %>
+      <div class="message-form-product-page">
+        <h3><%= @product.name %> vous intéresse?</h3>
+        <%= simple_form_for @message, remote: true  do |f| %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :name %>
+            <span class="error" id="name-errro"></span>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :email %>
+            <span class="error" id="email-errro"></span>
+          </div>
+        </div>
+        <%= f.input :content %>
+        <span class="error" id="content-errro"></span>
+        <%= f.button :submit, value: 'Demande informations', class: 'loxam-btn btn-send' %>
+      <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.getElementById('message_content').value = `   Bonjour, je suis intéressé par <%= @product.name %> référence <%= @product.reference %> et aurais aimé pré-reserver ce matériel`;
+</script>
