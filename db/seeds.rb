@@ -73,16 +73,6 @@ end
 
 puts "Categories created!"
 
-# products.each do |product|
-#   new_product = Product.new( name: product[:name],
-#                              reference: product[:reference],
-#                              price: product[:price],
-#                              features: Faker::Lorem.sentences(2),
-#                              description: Faker::Lorem.paragraph,
-#                              deposit: product[:deposit])
-#   new_product.remote_photo_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526474527/loxam-machine.png"
-#   new_product.save
-# end
 categories.each do |category|
   products.each do |product|
     new_product = Product.new( name: product[:name],
@@ -112,20 +102,7 @@ categories.each do |category|
                            product_id: new_product.id )
         puts "#{expendable[:name]} created!"
       end
-
-      # if expendables[expendables.index(expendable) + 1][:index] == expendable[:index] + 1
-      #   unless expendables[expendables.index(expendable) + 1].nil?
-      #     second_expendable = expendables[expendables.index(expendable) + 1]
-      #   end
-      #   Expendable.create( name: second_expendable[:name],
-      #                      reference: second_expendable[:reference],
-      #                      price: second_expendable[:price],
-      #                      description: second_expendable[:description],
-      #                      product_id: new_product.id )
-      #   puts "#{second_expendable[:name]} created!"
-      # end
     end
-
   end
 end
 
