@@ -17,3 +17,4 @@
 import 'components/_search';
 import 'components/_dropdown-menu';
 import 'components/_dropdown-categories';
+import 'components/_scroll_to_top';

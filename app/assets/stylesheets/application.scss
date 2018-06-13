@@ -17,3 +17,27 @@
 html, body {
   height: 100%;
 }
+
+.container {
+  padding: 0;
+}
+
+
+#scrollToTop {
+  z-index: 99;
+  color: $loxam-color;
+  text-decoration: none;
+  position: fixed;
+  bottom: 50px;
+  left: 15px;
+  display: none;
+  font-size: 50px;
+  opacity: 0.8;
+  transition: all 0.3s;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 1;
+    bottom: 55px;
+  }
+}
