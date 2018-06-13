@@ -1,7 +1,12 @@
 categories = [].sort_by { |category| category[:index] }
-products = [].sort_by { |category| category[:index] }
-expendables = [].sort_by { |category| category[:index] }
-
+products = [].sort_by { |product| product[:index] }
+expendables = [ {
+      index: 90,
+      name: "FORFAIT D'USURE PONCEUSE SURFACEUSE DE SOLS (GLTREX)",
+      reference: "USURESEGLTREX",
+      price: 185.0,
+      description: "1 FORFAIT = 2 JOURS DE LOCATION"
+    }]
 
 require 'roo'
 
@@ -57,6 +62,10 @@ xlsx.sheet('Liste tarifs').each do |row|
 
 end
 
+# sorting expandable now because I had to add manually an item at the begining
+expendables.sort_by! { |expendable| expendable[:index] }
+
+
 categories.each do |category|
   Category.create(name: category[:name])
   puts "Category #{category[:name]} created!"
@@ -64,16 +73,6 @@ end
 
 puts "Categories created!"
 
-# products.each do |product|
-#   new_product = Product.new( name: product[:name],
-#                              reference: product[:reference],
-#                              price: product[:price],
-#                              features: Faker::Lorem.sentences(2),
-#                              description: Faker::Lorem.paragraph,
-#                              deposit: product[:deposit])
-#   new_product.remote_photo_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526474527/loxam-machine.png"
-#   new_product.save
-# end
 categories.each do |category|
   products.each do |product|
     new_product = Product.new( name: product[:name],
@@ -88,25 +87,55 @@ categories.each do |category|
       new_product[:category_id] = Category.where(name: category[:name]).take.id
     elsif product[:index] > category[:index] &&
       product[:index] < categories[categories.index(category) + 1 ][:index]
-      new_product[:category_id] = Category.where(na  me: category[:name]).take.id
+      new_product[:category_id] = Category.where(name: category[:name]).take.id
     end
     new_product.save
+    puts "#{new_product.name} created!"
+
+    expendables.size
+    expendables.each do |expendable|
+      if product[:index] + 1 == expendable[:index]
+        Expendable.create( name: expendable[:name],
+                           reference: expendable[:reference],
+                           price: expendable[:price],
+                           description: expendable[:description],
+                           product_id: new_product.id )
+        puts "#{expendable[:name]} created!"
+      end
+    end
   end
 end
-# categories.each do |category|
-#   products.select do |product|
-#     if categories.index(category) == categories.size - 1 && product[:index] > category[:index]
-#       Product.where(name: product[:name]).update(category_id: Category.where(name: category[:name]).take.id)
-#     elsif product[:index] > category[:index] &&
-#        product[:index] < categories[categories.index(category) + 1 ][:index]
-#       Product.where(name: product[:name]).update(category_id: Category.where(name: category[:name]).take.id)
-#     end
-#   end
-# end
 
 puts "Products created!"
+puts "Expendables created!"
 
-promo = Promo.new(title: "Betonnière")
+# scraping
+# require 'open-uri'
+# require 'nokogiri'
+
+# urls = []
+
+# Product.all.each do |product|
+#   url_category_part = "#{product.category.name.gsub(" ", "-").capitalize}-#{product.category.id}"
+#   url_product_part = product.name.gsub(" ", "-").upcase
+#   url_reference_part = "LOX#{product.reference}"
+# end
+
+# url = "http://www.loxam-bastia.fr/louer/#{Instruments-de-mesure-10}/#{NIVEAU-LASER-CROIX}/#{LOXNIV-1}"
+
+# html_content = open('https://www.etsy.com/search?q=wallet').read
+# doc = Nokogiri::HTML(html_content)
+
+# doc.search('.block-grid-xs-2 .v2-listing-card__info .text-body').each_with_index do |element, index|
+#   puts "#{index + 1}. #{element.text.strip}"
+# end
+
+
+
+
+
+
+promo = Promo.new(title: "Betonnière", description: "Hola, bétonnière au top!")
 promo[:display] = true
 promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"
 promo.save

@@ -1,15 +1,62 @@
-<h1><%= @product.name %></h1>
-<p>Réf: <%= @product.reference %></p>
-<p><strong>Category: <%= @product.category %></strong></p>
-<% if @product.photo? %>
-  <%= cl_image_tag @product.photo %>
-<% else %>
-  <img src="https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg" alt="default_photo">
-<% end %>
-<p>Caractéristiques: - <%= @product.features %></p>
-<p>Déscription <%= @product.description %></p>
-<p><strong>Prix <%= @product.price %> € / jour</strong>, Déposit <%= @product.deposit %> €</p></li>
+<div class="container container-product">
+  <h2><%= @product.name %></h2>
+  <div class="row row-presentation-product">
+    <div class="col-xs-12 col-sm-6 image-col">
+      <% if @product.photo? %>
+        <%= cl_image_tag @product.photo %>
+      <% else %>
+        <img src="https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg" alt="default_photo">
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <p><strong><%= @product.price %> € HT/ jour</strong></p>
+      <p>Réf: <%= @product.reference %></p>
+      <br>
+      <p>Caractéristiques:</p>
+      <p><%= @product.features %></p>
+      <p>Déscription <%= @product.description %></p>
+      <p>Déposit <%= @product.deposit %> €</p>
+    </div>
+  </div>
 
-<%= link_to "Supprimer ce poduit", product_path(@product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce produit Jano?"}, class: 'action-btn red-btn' %>
-<br>
-<%= link_to "Retour au dashboard", admin_dashboard_path %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="container-expendables">
+        <h3>Accessoires disponibles à la location de: <%= @product.name %></h3>
+        <% if @product.expendables.any? %>
+          <ul>
+            <% @product.expendables.each do |expendable| %>
+            <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucun consommable disponible pour ce matériel</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="message-form-product-page">
+        <h3><%= @product.name %> vous intéresse?</h3>
+        <%= simple_form_for @message, remote: true  do |f| %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :name, label: 'Nom/Société' %>
+            <span class="error" id="name-errro"></span>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :email %>
+            <span class="error" id="email-errro"></span>
+          </div>
+        </div>
+        <%= f.input :content, label: 'Message' %>
+        <span class="error" id="content-errro"></span>
+        <%= f.button :submit, value: 'Demande informations', class: 'loxam-btn btn-send' %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('message_content').value = `   Bonjour, je suis intéressé par <%= @product.name %> référence <%= @product.reference %> et aurais aimé pré-reserver ce matériel`;
+</script>

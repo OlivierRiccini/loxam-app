@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   has_many :transactions
+  has_many :expendables
   belongs_to :category
 
   validates :name, presence: true
