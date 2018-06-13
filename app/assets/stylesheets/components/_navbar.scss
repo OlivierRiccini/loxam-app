@@ -17,10 +17,18 @@
   flex-direction: column;
   align-items: center;
   a:nth-child(2) {
-    border: 1px solid $loxam-color;
-    padding: 5px 10px;
-    border-radius: 3px;
     color: $font-color;
+    font-size: bolder;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s;
+    &:hover {
+      opacity: 0.8;
+      .fa-phone {
+      transition: all 0.3s;
+      font-size: 20px;
+      }
+    }
   }
 }
 

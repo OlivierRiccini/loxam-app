@@ -1,9 +1,9 @@
 <%= simple_form_for @message, remote: true  do |f| %>
-  <%= f.input :name %>
+  <%= f.input :name, label: 'Nom/Société'%>
   <span class="error" id="name-errro"></span>
   <%= f.input :email %>
   <span class="error" id="email-errro"></span>
-  <%= f.input :content %>
+  <%= f.input :content, label: 'Message' %>
   <span class="error" id="content-errro"></span>
   <%= f.button :submit, value: 'Envoyer', class: 'loxam-btn btn-send' %>
 <% end %>

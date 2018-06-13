@@ -1,9 +1,19 @@
 .loxam-types-container {
-  margin-bottom: 50px;
-  background-color: #fff;
-  padding: 25px 0;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  border-radius: 2px;
+  margin: 0 -15px 50px -15px;
+  // background-color: #fff;
+  // padding: 25px 0;
+  // box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  // border-radius: 2px;
+  h2 {
+    text-align: center;
+    margin: 0 0 35px 0;
+    font-size: 28px;
+    padding: 10px;
+    color: $loxam-color;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  };
   .col-xs-12 {
     display: flex;
     justify-content: center;
