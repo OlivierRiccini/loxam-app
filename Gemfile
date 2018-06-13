@@ -21,6 +21,9 @@ gem 'faker'
 gem 'gibbon'
 gem 'chart-js-rails'
 
+# For scraping DB
+gem 'nokogiri'
+
 gem "roo", "~> 2.7.0"
 
 gem "letter_opener", group: :development

@@ -1,9 +1,11 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag 'logo' %>
-    <a href="tel:+33495602364">04 95 60 23 64</a>
-  <% end %>
+  <div class="navbar-left-section">
+    <%= link_to root_path, class: "navbar-wagon-brand" do %>
+      <%= image_tag 'logo' %>
+      <a href="tel:+33495602364"><i class="fa fa-phone"></i> 04 95 60 23 64</a>
+    <% end %>
+  </div>
 
   <!-- Search bar centered -->
   <div class="group search hidden-xs hidden-sm">

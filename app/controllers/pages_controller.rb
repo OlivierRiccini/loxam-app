@@ -126,7 +126,9 @@ class PagesController < ApplicationController
       @categories_nb_of_searches << category[:nb_of_searches]
     end
 
-    @categories_hashes.sort_by! { |element| -element[:nb_of_searches] }
+    # if !@categories_hashes.nil?
+    #   @categories_hashes.sort_by! { |element| element[:nb_of_searches] }
+    # end
   end
 
   def location

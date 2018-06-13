@@ -109,6 +109,32 @@ end
 puts "Products created!"
 puts "Expendables created!"
 
+# scraping
+# require 'open-uri'
+# require 'nokogiri'
+
+# urls = []
+
+# Product.all.each do |product|
+#   url_category_part = "#{product.category.name.gsub(" ", "-").capitalize}-#{product.category.id}"
+#   url_product_part = product.name.gsub(" ", "-").upcase
+#   url_reference_part = "LOX#{product.reference}"
+# end
+
+# url = "http://www.loxam-bastia.fr/louer/#{Instruments-de-mesure-10}/#{NIVEAU-LASER-CROIX}/#{LOXNIV-1}"
+
+# html_content = open('https://www.etsy.com/search?q=wallet').read
+# doc = Nokogiri::HTML(html_content)
+
+# doc.search('.block-grid-xs-2 .v2-listing-card__info .text-body').each_with_index do |element, index|
+#   puts "#{index + 1}. #{element.text.strip}"
+# end
+
+
+
+
+
+
 promo = Promo.new(title: "Betonnière", description: "Hola, bétonnière au top!")
 promo[:display] = true
 promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"

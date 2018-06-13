@@ -3,7 +3,7 @@
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   background: white;
   transition: all 0.3s ease;
-  height: 90px;
+  height: 100px;
   width: 100vw;
   padding: 0px 30px;
   display: flex;
@@ -12,6 +12,17 @@
   z-index: 10;
 }
 
+.navbar-left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  a:nth-child(2) {
+    border: 1px solid $loxam-color;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: $font-color;
+  }
+}
 
 @media screen and (max-width: 991px) {
   .navbar-wagon {
@@ -22,7 +33,7 @@
 
 /* Logo */
 .navbar-wagon-brand img {
-  height: 50px;
+  height: 55px;
 }
 
 /* User Avatar */
@@ -48,7 +59,7 @@
 /* Navbar link */
 .navbar-wagon-link {
   color: $font-color;
-  font-size: 14px;
+  font-size: 16px;
 }
 .navbar-wagon-link:hover {
   color: $loxam-color;
