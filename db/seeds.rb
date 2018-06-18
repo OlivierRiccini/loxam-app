@@ -121,10 +121,17 @@ html_content_home_page = open("http://www.loxam-bastia.fr/").read
 doc_home_page = Nokogiri::HTML(html_content_home_page)
 doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
   url_category = "http://www.loxam-bastia.fr/#{a_home_page.text.strip}"
+  name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
+                                                .gsub(/\d/, "")
+                                                .gsub("-", " ")
+  new_category = Category.create(name: name_category)
+  puts "Category #{name_category} created!"
   # parsing each category page
   html_content_category_page = open(url_category).read
   doc_category_page = Nokogiri::HTML(html_content_category_page)
   doc_category_page.search('.produits .pdtslayer/@onclick').each do |a_category_page|
+
+
     url_product = "http://www.loxam-bastia.fr/#{a_category_page.text.strip.gsub('location.href=', '').gsub('\'', '')}"
     # parsing each product page
     html_content_product_page = open(url_product).read
@@ -142,48 +149,56 @@ doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
         image_scraped = "http://www.loxam-bastia.fr/#{img.text.strip}"
       end
     end
-      name_scraped = doc_product_page.search('#article h3').text.strip
+      name_scraped = doc_product_page.search('#arthead h3').text.strip
+      price_scraped = doc_product_page.search('#arthead span strong:first-child').text.strip.to_f
       description_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
-      # features_scraped = doc_product_page.search('#artcontain p').text.strip
+                                                                               .split("ACCESSOIRES")[0]
+      expendables_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
+                                                                               .split("ACCESSOIRES / CONSOMMABLES")[1]
+
       ref_scraped = doc_product_page.search('fieldset input/@value').text.strip
-      products_scraped << { name: name_scraped,
-                            image: image_scraped,
-                            description: description_scraped,
-                            reference: ref_scraped }
-                            # features: features_scraped }
+      new_product = Product.new( name: name_scraped,
+                                 price: price_scraped,
+                                 description: description_scraped,
+                                 reference: ref_scraped,
+                                 category_id: new_category.id )
+
+      new_product.remote_photo_url = image_scraped
+      new_product.save
+      puts "#{new_product.name} created!"
   end
 end
 
-# puts products_scraped[0][:reference]
+puts "T'as presque fini!"
 
-ii = 0
-Product.all.each do |product_from_db|
-  # ii += 1 if product_from_db.name.include? product_from_scraping[:name]
-  products_scraped.each do |product_from_scraping|
-    unless product_from_scraping.nil?
-      if product_from_scraping[:reference].include? product_from_db.reference ||
-        product_from_db.reference.name.include? product_from_scraping[:name]
-        then ii += 1
-        puts "#{product_from_scraping[:name]}"
-      end
-      # if product_from_db.name.include? product_from_scraping[:name]
-      #   ii += 1
-      # end
-    end
-  end
-end
+# ii = 0
+# Product.all.each do |product_from_db|
+#   products_scraped.each do |product_from_scraping|
+#     unless product_from_scraping.nil?
+#       if (product_from_scraping[:name].include? product_from_db.name) ||
+#         (product_from_scraping[:reference].include? product_from_db.reference)
+#         puts "#{product_from_scraping[:name]} - #{product_from_scraping[:reference]} ===== #{product_from_db.name} - #{product_from_db.reference}"
+#         ii += 1
+#       end
+#     end
+#   end
+# end
+# products_scraped.each do |product|
+#   puts "#{product[:reference]} - #{product[:name]} - #{product[:description]}"
+#   ii += 1
+# end
 # # //////////////////////////////////////////////
-puts "ii = #{ii}"
+# puts "ii = #{ii}"
 
-# promo = Promo.new(title: "Betonnière", description: "Hola, bétonnière au top!")
-# promo[:display] = true
-# promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"
-# promo.save
+promo = Promo.new(title: "Betonnière", description: "Hola, bétonnière au top!")
+promo[:display] = true
+promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1526483071/promo-loxam.jpg"
+promo.save
 
-# puts "Promo!"
+puts "Promo!"
 
-# User.create(email: "info@olivierriccini.com", password: "Ronaldor99", admin: true)
+User.create(email: "info@olivierriccini.com", password: "Ronaldor99", admin: true)
 
-# puts "User created!"
+puts "User created!"
 
-# puts "DB CREATED!"
+puts "DB CREATED!"
