@@ -13,9 +13,14 @@
       <p>Réf: <%= @product.reference %></p>
       <br>
       <p>Caractéristiques:</p>
-      <p><%= @product.features %></p>
       <p>Déscription <%= @product.description %></p>
       <p>Déposit <%= @product.deposit %> €</p>
+      <% if @product.technical_sheet %>
+        <a href="<%= cl_image_path @product.technical_sheet %>" target="_blank" class="loxam-btn">Fiche technique</a>
+      <% end %>
+      <% unless @product.features.nil? %>
+        <a href="<%= cl_image_path @product.features %>" target="_blank" class="loxam-btn">Caractéristiques</a>
+      <% end %>
     </div>
   </div>
 
