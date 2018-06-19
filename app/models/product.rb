@@ -10,4 +10,6 @@ class Product < ApplicationRecord
   # validates :photo, presence: true
 
   mount_uploader :photo, PhotoUploader
+  mount_uploader :technical_sheet, TechnicalSheetUploader
+  mount_uploader :features, FeaturesUploader
 end

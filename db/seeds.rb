@@ -152,18 +152,45 @@ doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
       name_scraped = doc_product_page.search('#arthead h3').text.strip
       price_scraped = doc_product_page.search('#arthead span strong:first-child').text.strip.to_f
       description_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
-                                                                               .split("ACCESSOIRES")[0]
-      expendables_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
-                                                                               .split("ACCESSOIRES / CONSOMMABLES")[1]
+      pdf_scraped = "http://www.loxam-bastia.fr/#{doc_product_page.search('#artcontain button/@onclick').text.strip
+                                                                                  .gsub('window.open', '')
+                                                                                  .gsub('_blank', '')
+                                                                                  .gsub(/[\'\)\(\,]/, '')}"
+      # technical_sheet_scraped = nil
+      # features_scraped = nil
+      unless pdf_scraped == "http://www.loxam-bastia.fr/"
+        if pdf_scraped.split('/')[5] == "fiches"
+          technical_sheet_scraped = pdf_scraped.split('/')[5]
+          p pdf_scraped
+        else
+          features_scraped = pdf_scraped.split('/')[5]
+        end
+      end
+      # puts features_scraped
+      # expendables_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
+                                                                               # .split("ACCESSOIRES / CONSOMMABLES")[1]
+      # expendables_price_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
+                                                                               # .split("ACCESSOIRES / CONSOMMABLES")[1]
+
+      # unless expendables_price_scraped.nil? || expendables_price_scraped == ""
+      #   expendables_price_scraped = expendables_price_scraped.split(" €")[0].split(":")[1].to_f
+      # end
+      # puts expendables_scraped if expendables_scraped
+
+      deposit_scraped = doc_product_page.search('#artcontain p').text.strip.split("Montant dépôt de garantie :")[1]
+                                                                           .gsub(/\D/, "").to_f
 
       ref_scraped = doc_product_page.search('fieldset input/@value').text.strip
       new_product = Product.new( name: name_scraped,
                                  price: price_scraped,
                                  description: description_scraped,
                                  reference: ref_scraped,
+                                 deposit: deposit_scraped,
                                  category_id: new_category.id )
 
       new_product.remote_photo_url = image_scraped
+      new_product.remote_features_url = features_scraped
+      new_product.remote_technical_sheet_url = technical_sheet_scraped
       new_product.save
       puts "#{new_product.name} created!"
   end
@@ -197,7 +224,7 @@ promo.save
 
 puts "Promo!"
 
-User.create(email: "info@olivierriccini.com", password: "Ronaldor99", admin: true)
+User.create(email: "info@olivierriccini.com", password: "Ronaldor99", company: "loxam bastia", admin: true)
 
 puts "User created!"
 
