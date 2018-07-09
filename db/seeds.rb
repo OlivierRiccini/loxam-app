@@ -178,7 +178,7 @@ doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
                                                                            .split('€')[0]
                                                                            .gsub(' ', '').to_f
 
-      ref_scraped = doc_product_page.search('fieldset input/@value').text.strip
+      ref_scraped = doc_product_page.search('fieldset input/@value').text.strip.split("-")[0]
       new_product = Product.new( name: name_scraped,
                                  price: price_scraped,
                                  description: description_scraped,

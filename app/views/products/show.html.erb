@@ -1,6 +1,6 @@
 <div class="container container-product">
   <h2><%= @product.name %></h2>
-  <div class="row row-presentation-product">
+  <div class="row-presentation-product">
     <div class="col-xs-12 col-sm-6 image-col">
       <% if @product.photo? %>
         <%= cl_image_tag @product.photo %>
@@ -9,18 +9,31 @@
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <p><strong><%= @product.price %> € HT/ jour</strong></p>
+      <p><strong><%= number_to_currency(@product.price,:unit=>'€', delimiter: " ", precision: 0, format: "%n%u") %> HT/ jour</strong></p>
       <p>Réf: <%= @product.reference %></p>
       <br>
-      <p>Caractéristiques:</p>
       <p>Déscription <%= @product.description %></p>
-      <p>Déposit <%= @product.deposit %> €</p>
-      <% if @product.technical_sheet %>
+      <% if @product.technical_sheet? %>
         <a href="<%= cl_image_path @product.technical_sheet %>" target="_blank" class="loxam-btn">Fiche technique</a>
       <% end %>
-      <% unless @product.features.nil? %>
+      <% if @product.features? %>
         <a href="<%= cl_image_path @product.features %>" target="_blank" class="loxam-btn">Caractéristiques</a>
       <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p><strong>CALCUL DU TEMPS DE LOCATION* :
+      La location est facturée par tranche de 24h</strong>
+      <br>
+      Semaine : Du Lundi au Vendredi. Enlèvement entre 7h et 9h.
+      Forfait week-end : du vendredi 17h au lundi 9h.
+      <br>
+      Horaire de l'agence : ouvert du lundi au vendredi de 7h à 12h et de 13h à 18h.
+      <br>
+      Montant dépôt de garantie : <strong><%= number_to_currency(@product.deposit,:unit=>'€', delimiter: " ", precision: 0, format: "%n %u") %></strong>
+      Pour toute location, un dépôt de garantie (uniquement en carte bleue) est demandé en fonction de la classification des matériels.</p>
     </div>
   </div>
 

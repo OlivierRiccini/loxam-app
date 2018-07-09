@@ -11,15 +11,22 @@
     background-color: $loxam-color;
     border-radius: 3px;
   };
-  .row-presentation-product {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .image-col {
-      text-align: center;
-    }
-  };
+
 }
+
+.row-presentation-product {
+  .image-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  };
+  a {
+    display: inline-block;
+  };
+  img {
+    max-height: 250px;
+  }
+};
 
 .message-form-product-page {
   margin: 60px auto;
@@ -32,9 +39,10 @@
     border-radius: 3px;
     padding: 5px;
   };
-  #message_content {
-    height: 200px;
-  }
+}
+
+#message_content {
+  height: 200px;
 }
 
 .container-expendables {
@@ -47,5 +55,12 @@
     text-align: center;
     border-radius: 3px;
     padding: 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .row-presentation-product .col-xs-12:nth-child(2) {
+    text-align: center;
+    margin-top: 30px;
   }
 }
