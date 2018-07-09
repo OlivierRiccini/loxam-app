@@ -10,9 +10,10 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <p><strong><%= number_to_currency(@product.price,:unit=>'€', delimiter: " ", precision: 0, format: "%n%u") %> HT/ jour</strong></p>
-      <p>Réf: <%= @product.reference %></p>
-      <br>
-      <p>Déscription <%= @product.description %></p>
+      <p>Référence: <%= @product.reference %></p>
+      <% if @product.description? %>
+        <p><%= @product.description %></p>
+      <% end %>
       <% if @product.technical_sheet? %>
         <a href="<%= cl_image_path @product.technical_sheet %>" target="_blank" class="loxam-btn">Fiche technique</a>
       <% end %>
@@ -22,8 +23,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
+<!--   <div class="row"> -->
+    <div class="col-xs-12 product-conditions">
       <p><strong>CALCUL DU TEMPS DE LOCATION* :
       La location est facturée par tranche de 24h</strong>
       <br>
@@ -35,7 +36,7 @@
       Montant dépôt de garantie : <strong><%= number_to_currency(@product.deposit,:unit=>'€', delimiter: " ", precision: 0, format: "%n %u") %></strong>
       Pour toute location, un dépôt de garantie (uniquement en carte bleue) est demandé en fonction de la classification des matériels.</p>
     </div>
-  </div>
+  <!-- </div> -->
 
   <div class="row">
     <div class="col-xs-12 col-sm-6">

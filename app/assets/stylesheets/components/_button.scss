@@ -7,6 +7,11 @@
   &:hover {
     background-color: $loxam-color;
     color: #fff;
+    text-decoration: none;
+  };
+  &:focus {
+    color: $loxam-color;
+    text-decoration: none;
   }
 }
 
