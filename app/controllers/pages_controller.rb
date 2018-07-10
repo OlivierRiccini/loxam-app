@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   def home
-    @categories = Category.all
+    @categories = Category.order('name ASC')
 
     # Les plus recherchés
     @best_searches_choice = Product.where(best_searches_choice: true)
