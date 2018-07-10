@@ -29,7 +29,10 @@ import '_product_page';
 //                'left': left});
 // });
 
-$('.promo-card-image img').click(function() {
-  console.log('test');
-  $('.full-screen-promo').toggleClass('full-screen-promo-active');
+$('#expand-cross').click(function() {
+  $('.full-screen-promo').addClass('full-screen-promo-active');
+});
+
+$('#closing-cross').click(function() {
+  $('.full-screen-promo').removeClass('full-screen-promo-active');
 });
