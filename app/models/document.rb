@@ -5,4 +5,6 @@ class Document < ApplicationRecord
   has_many :products, through: :transactions
 
   validates :document_type, presence: true
+
+  mount_uploader :photo, DocumentUploader
 end
