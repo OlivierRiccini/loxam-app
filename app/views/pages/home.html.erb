@@ -73,9 +73,14 @@
             <p><%= @promo.description %></p>
           <% end %>
           <%= cl_image_tag @promo.media %>
+          <i class="fa fa-arrows-alt" id="expand-cross"></i>
         </div>
       </div>
     </div>
+  </div>
+  <div class="full-screen-promo">
+    <%= cl_image_tag @promo.media %>
+    <i class="fa fa-times-circle" id="closing-cross"></i>
   </div>
 </div>
 
