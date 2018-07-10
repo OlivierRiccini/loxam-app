@@ -9,6 +9,25 @@
   background-size: contain;
   background-repeat: no-repeat;
   img {
-    width: 100%;
+    max-width: 100%;
+    cursor: pointer;
   }
+}
+
+.full-screen-promo {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  img {
+    object-fit: scale-down;
+  }
+}
+
+.full-screen-promo-active {
+  display: flex;
+  justify-content: center;
+  align-item: center;
 }

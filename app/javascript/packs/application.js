@@ -19,3 +19,17 @@ import 'components/_dropdown-menu';
 import 'components/_dropdown-categories';
 import 'components/_scroll_to_top';
 import '_product_page';
+
+// $('.promo-card-image img').click(function() {
+//   $(this).toggleClass('promo-card-image-img-active');
+//   var top = ($(window).height() / 2) - ($(this).height() / 2);
+//   var left = ($(window).width() / 2) - ($(this).width() / 2);
+//   console.log($(this).height());
+//   $(this).css({'top': top,
+//                'left': left});
+// });
+
+$('.promo-card-image img').click(function() {
+  console.log('test');
+  $('.full-screen-promo').toggleClass('full-screen-promo-active');
+});
