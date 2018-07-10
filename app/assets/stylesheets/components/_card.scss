@@ -25,7 +25,8 @@
 }
 
 .item-card-image,.item-card-image div {
-  background-size: cover;
+  background: no-repeat;
+  background-size: contain;
   background-position: center;
 }
 
@@ -69,7 +70,8 @@
   justify-content: space-between;
   .item-card-image {
     height: 70%;
-    background-size: cover;
+    background: no-repeat;
+    background-size: contain;
     background-position: center;
   };
   .card-infos {
