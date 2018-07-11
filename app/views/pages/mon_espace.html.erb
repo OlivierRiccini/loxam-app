@@ -2,12 +2,7 @@
 
 <ul>
   <% @documents.each do |document| %>
-    <li><strong><%= document.document_type %></strong>
-      <% @products.each do |product| %>
-        <%= link_to product_path(product) do %>
-          <%= product.name %> - <%= product.price %>€<% end %>
-        <br>
-      <% end %>
+    <li><a href="<%= cl_image_path document.pdf %>" target="_blank" class="loxam-btn">Facture</a>
     </li>
   <% end %>
 </ul>
