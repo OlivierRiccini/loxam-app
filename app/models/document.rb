@@ -6,5 +6,5 @@ class Document < ApplicationRecord
 
   validates :document_type, presence: true
 
-  mount_uploader :photo, DocumentUploader
+  mount_uploader :pdf, DocumentUploader
 end

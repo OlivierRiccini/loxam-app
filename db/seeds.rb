@@ -111,36 +111,87 @@
 # /////////////////////////////////////////////////////////////
 
 
-
-
-
+require 'faker'
 require 'net/ftp'
-ftp = Net::FTP.new
-ftp.connect("ftp.cluster021.hosting.ovh.net",21)
-ftp.login("loxambasii", "gaUhVmu4qXth")
-ftp.chdir("/gcom_tmp")
-ftp.passive = true
-# ftp.getbinaryfile(ftp.list[3], nil)
-files = ftp.list('*.pdf')
-# files = ftp.list
-puts files
-files.each do |f|
-  file = File.open(f, "rb")
-  # file = ftp.getbinaryfile(f, nil)
-  puts file
-  # new_doc = Document.new(user_id: 2, document_type: "facture")
-  # new_doc.remote_pdf_url = file
-  # new_doc.save
-end
-ftp.close
+
+# ftp = Net::FTP.new
+# ftp.connect("ftp.cluster021.hosting.ovh.net",21)
+# ftp.login("loxambasii", "gaUhVmu4qXth")
+# ftp.chdir("/gcom_tmp")
+# ftp.passive = true
+# files = ftp.list('*.pdf')
+
+# i = 0
+# files.each do |f|
+#   i += 1
+#   ftp.getbinaryfile(f, f)
+# end
+# ftp.close
 
 
+ftp = Net::FTP.new("ftp.cluster021.hosting.ovh.net")
+# run the script like
+# ruby ftp.rb username password
+  ftp.login("loxambasii", "gaUhVmu4qXth")
+  ftp.chdir("/gcom_tmp")
 
+  files_ord = ftp.nlst('*.ord')
+  files_pdf = ftp.nlst('*.pdf')
 
+  puts "File list obtained... #{files_ord}"
+  puts "File list obtained... #{files_pdf}"
 
+  files_ord.each do |fname|
+    puts "Downloading file #{fname}"
+    ftp.getbinaryfile(fname, fname)
 
+    # line_num=0
+    text = File.open(fname).read
+    text.each_line do |line|
+      array = line.strip.split(/\;/)
 
+      unless User.where(loxam_id: array[2]).exists?
+        User.create(company: array[3], email: Faker::Internet.email,
+                  password: Faker::IDNumber.valid, loxam_id: array[2])
+      end
 
+      files_pdf.each do |pdf_doc|
+        if pdf_doc == array[6]
+        p "#{pdf_doc} == #{array[6]}"
+          ftp.getbinaryfile(pdf_doc, pdf_doc)
+          # puts User.where(loxam_id: array[2]).take.id
+          new_doc = Document.new(document_type: "fac", user_id: User.where(loxam_id: array[2]).take.id)
+          new_doc.remote_pdf_url = pdf_doc
+          new_doc.save
+        end
+      end
+
+      # puts "PDF #{array[6]} pour #{User.where(loxam_id: array[2]).take.company}"
+
+      # print "#{line_num += 1} #{line}"
+    end
+
+    # uncomment the next two lines if you want to delete the files after download
+    # puts "Deleting file #{fname}"
+    # ftp.delete(fname)
+    File.delete(fname)
+    File.delete(pdf_doc)
+  end
+
+  # files_pdf = ftp.nlst('*.ord')
+  # puts "File list obtained... #{files}"
+  # files_pdf.each do |fname|
+  #   puts "Downloading file #{fname}"
+  #   ftp.getbinaryfile(fname, fname)
+
+  #   user = User.where()
+
+  #   # uncomment the next two lines if you want to delete the files after download
+  #   # puts "Deleting file #{fname}"
+  #   # ftp.delete(fname)
+  #   File.delete(fname)
+  # end
+  ftp.close
 
 
 
