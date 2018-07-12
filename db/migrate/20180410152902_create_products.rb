@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.string :reference
       t.string :category
       t.integer :price
-      t.text :characteristics
+      t.string :characteristics
       t.text :description
       t.integer :deposit
       t.string :technical_sheet

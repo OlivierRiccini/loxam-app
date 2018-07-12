@@ -111,211 +111,133 @@
 # /////////////////////////////////////////////////////////////
 
 
-require 'faker'
-require 'net/ftp'
+#scraping
+require 'open-uri'
+require 'nokogiri'
 
-# ftp = Net::FTP.new
-# ftp.connect("ftp.cluster021.hosting.ovh.net",21)
-# ftp.login("loxambasii", "gaUhVmu4qXth")
-# ftp.chdir("/gcom_tmp")
-# ftp.passive = true
-# files = ftp.list('*.pdf')
+products_scraped = []
 
-# i = 0
-# files.each do |f|
-#   i += 1
-#   ftp.getbinaryfile(f, f)
-# end
-# ftp.close
+index_product = 0
+
+html_content_home_page = open("http://www.loxam-bastia.fr/").read
+doc_home_page = Nokogiri::HTML(html_content_home_page)
+doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
+  url_category = "http://www.loxam-bastia.fr/#{a_home_page.text}"
+  name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
+                                                .gsub(/\d/, "")
+                                                .gsub("-", " ")
 
 
-ftp = Net::FTP.new("ftp.cluster021.hosting.ovh.net")
-# run the script like
-# ruby ftp.rb username password
-  ftp.login("loxambasii", "gaUhVmu4qXth")
-  ftp.chdir("/gcom_tmp")
+  new_category = Category.create(name: name_category)
+  puts "Category #{name_category} created!"
 
-  files_ord = ftp.nlst('*.ord')
-  files_pdf = ftp.nlst('*.pdf')
+  # parsing each category page
+  html_content_category_page = open(url_category).read
 
-  puts "File list obtained... #{files_ord}"
-  puts "File list obtained... #{files_pdf}"
+  doc_category_page = Nokogiri::HTML(html_content_category_page)
 
-  files_ord.each do |fname|
-    puts "Downloading file #{fname}"
-    ftp.getbinaryfile(fname, fname)
+  # all_category_pages_content = "http://www.loxam-bastia.fr/#{doc_category_page.search('.pagination a/@href')}"
 
-    # line_num=0
-    text = File.open(fname).read
-    text.each_line do |line|
-      array = line.strip.split(/\;/)
+  # doc_all_category_pages = Nokogiri::HTML(all_category_pages_content)
 
-      unless User.where(loxam_id: array[2]).exists?
-        User.create(company: array[3], email: Faker::Internet.email,
-                  password: Faker::IDNumber.valid, loxam_id: array[2])
-      end
-
-      files_pdf.each do |pdf_doc|
-        if pdf_doc == array[6]
-        p "#{pdf_doc} == #{array[6]}"
-          ftp.getbinaryfile(pdf_doc, pdf_doc)
-          # puts User.where(loxam_id: array[2]).take.id
-          new_doc = Document.new(document_type: "fac", user_id: User.where(loxam_id: array[2]).take.id)
-          new_doc.remote_pdf_url = pdf_doc
-          new_doc.save
-        end
-      end
-
-      # puts "PDF #{array[6]} pour #{User.where(loxam_id: array[2]).take.company}"
-
-      # print "#{line_num += 1} #{line}"
-    end
-
-    # uncomment the next two lines if you want to delete the files after download
-    # puts "Deleting file #{fname}"
-    # ftp.delete(fname)
-    File.delete(fname)
-    File.delete(pdf_doc)
-  end
-
-  # files_pdf = ftp.nlst('*.ord')
-  # puts "File list obtained... #{files}"
-  # files_pdf.each do |fname|
-  #   puts "Downloading file #{fname}"
-  #   ftp.getbinaryfile(fname, fname)
-
-  #   user = User.where()
-
-  #   # uncomment the next two lines if you want to delete the files after download
-  #   # puts "Deleting file #{fname}"
-  #   # ftp.delete(fname)
-  #   File.delete(fname)
+  # puts all_category_pages_content
+  # nb_pages = doc_category_page.search('.pagination a/@href')
+  # all_category_pages_content = open(nb_pages).read
+  # doc_all_category_pages = Nokogiri::HTML(all_category_pages_content)
+  # puts nb_pages
+  # nb_pages =
+  # 3.times do
+  # nb_pages += 1
+  #   puts "url_category => #{url_category}-#{nb_pages}"
   # end
-  ftp.close
+
+
+  doc_category_page.search('.pagination a/@href').each do |a_category_page|
+    url_each_category_page = "http://www.loxam-bastia.fr/#{a_category_page.text.strip.gsub('location.href=', '').gsub('\'', '')}"
+
+    html_each_category_page_content = open(url_each_category_page).read
+    doc_each_category_page = Nokogiri::HTML(html_each_category_page_content)
+    # p doc_each_category_page.search('.produits h3').size
+    # gg = 0
+      doc_each_category_page.search('.produits button/@onclick').each do |each_category_page|
+      # gg += 1
+        url_product_page = "http://www.loxam-bastia.fr/#{each_category_page.text.strip.gsub('location.href=', '').gsub(/\'/, '')}"
+      # end
+      # parsing each product page
+        html_content_product_page = open(url_product_page).read
+        doc_product_page = Nokogiri::HTML(html_content_product_page)
+        image_scraped = nil
+        doc_product_page.search('.wrapper img/@src').each do |img|
+          unless "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
+            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
+            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new-grey.png" ||
+            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/isula-informatique-2016.png" ||
+            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new.png" ||
+            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/fb_grey.png" ||
+            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/inst_grey.png"
+
+            image_scraped = "http://www.loxam-bastia.fr/#{img.text.strip}"
+          end
+        end
+          name_scraped = doc_product_page.search('#arthead h3').text.strip
+          price_scraped = doc_product_page.search('#arthead span strong:first-child').text.strip.to_f
+          description_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
+          pdf_scraped = "http://www.loxam-bastia.fr/#{doc_product_page.search('#artcontain button/@onclick').text.strip
+                                                                                                                 .gsub('window.open', '')
+                                                                                                                 .gsub('_blank', '')
+                                                                                                                 .gsub(/[\'\)\(\,]/, '')
+                                                                                                                 .split('http')[0]}"
 
 
 
+        unless pdf_scraped == "http://www.loxam-bastia.fr/"
+          if pdf_scraped.split('/')[5] == "fiches"
+            technical_sheet_scraped = pdf_scraped
+            if pdf_scraped.include? "pdfresources"
+              technical_sheet_scraped = "#{pdf_scraped.split("resources")[0]}resources#{pdf_scraped.split("resources")[1]}"
+              features_scraped = "http://www.loxam-bastia.fr/resources#{pdf_scraped.split("resources")[2]}"
+            end
+          else
+            features_scraped = pdf_scraped
+          end
+        end
 
+        deposit_scraped = doc_product_page.search('#artcontain p').text.strip.split("Montant dépôt de garantie :")[1]
+                                                                             .split('€')[0]
+                                                                             .gsub(' ', '').to_f
 
+        ref_scraped = doc_product_page.search('fieldset input/@value').text.strip.split("-")[0]
+        new_product = Product.new( name: name_scraped,
+                                   price: price_scraped,
+                                   description: description_scraped,
+                                   reference: ref_scraped,
+                                   deposit: deposit_scraped,
+                                   category_id: new_category.id )
 
+        new_product.remote_photo_url = image_scraped
 
+        unless features_scraped.nil?
+          new_product.remote_features_url = features_scraped
+        end
+        new_product.remote_technical_sheet_url = technical_sheet_scraped
+        new_product.save
+        index_product += 1
+        puts "#{index_product} - #{new_product.name} created!"
+    end
+  end
+end
 
+puts "T'as presque fini!"
 
+promo = Promo.new(title: "Perseuse", description: "Hola, perseuse au top!")
+promo[:display] = true
+promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1529432304/promo.jpg"
+promo.save
 
+puts "Promo!"
 
+User.create(email: "info@olivierriccini.com", password: "Ronaldor99", company: "loxam bastia", admin: true)
 
+puts "User created!"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# #scraping
-# require 'open-uri'
-# require 'nokogiri'
-
-# products_scraped = []
-
-# index_product = 0
-
-# html_content_home_page = open("http://www.loxam-bastia.fr/").read
-# doc_home_page = Nokogiri::HTML(html_content_home_page)
-# doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
-#   url_category = "http://www.loxam-bastia.fr/#{a_home_page.text.strip}"
-#   name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
-#                                                 .gsub(/\d/, "")
-#                                                 .gsub("-", " ")
-#   new_category = Category.create(name: name_category)
-#   puts "Category #{name_category} created!"
-#   # parsing each category page
-#   html_content_category_page = open(url_category).read
-#   doc_category_page = Nokogiri::HTML(html_content_category_page)
-#   doc_category_page.search('.produits .pdtslayer/@onclick').each do |a_category_page|
-
-
-#     url_product = "http://www.loxam-bastia.fr/#{a_category_page.text.strip.gsub('location.href=', '').gsub('\'', '')}"
-#     # parsing each product page
-#     html_content_product_page = open(url_product).read
-#     doc_product_page = Nokogiri::HTML(html_content_product_page)
-#     image_scraped = nil
-#     doc_product_page.search('.wrapper img/@src').each do |img|
-#       unless "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
-#         "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
-#         "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new-grey.png" ||
-#         "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/isula-informatique-2016.png" ||
-#         "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new.png" ||
-#         "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/fb_grey.png" ||
-#         "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/inst_grey.png"
-
-#         image_scraped = "http://www.loxam-bastia.fr/#{img.text.strip}"
-#       end
-#     end
-#       name_scraped = doc_product_page.search('#arthead h3').text.strip
-#       price_scraped = doc_product_page.search('#arthead span strong:first-child').text.strip.to_f
-#       description_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
-#       pdf_scraped = "http://www.loxam-bastia.fr/#{doc_product_page.search('#artcontain button/@onclick').text.strip
-#                                                                                   .gsub('window.open', '')
-#                                                                                   .gsub('_blank', '')
-#                                                                                   .gsub(/[\'\)\(\,]/, '')
-#                                                                                   .split('http')[0]}"
-
-
-
-#       unless pdf_scraped == "http://www.loxam-bastia.fr/"
-#         if pdf_scraped.split('/')[5] == "fiches"
-#           technical_sheet_scraped = pdf_scraped
-#           if pdf_scraped.include? "pdfresources"
-#             technical_sheet_scraped = "#{pdf_scraped.split("resources")[0]}resources#{pdf_scraped.split("resources")[1]}"
-#             features_scraped = "http://www.loxam-bastia.fr/resources#{pdf_scraped.split("resources")[2]}"
-#           end
-#         else
-#           features_scraped = pdf_scraped
-#         end
-#       end
-
-#       deposit_scraped = doc_product_page.search('#artcontain p').text.strip.split("Montant dépôt de garantie :")[1]
-#                                                                            .split('€')[0]
-#                                                                            .gsub(' ', '').to_f
-
-#       ref_scraped = doc_product_page.search('fieldset input/@value').text.strip.split("-")[0]
-#       new_product = Product.new( name: name_scraped,
-#                                  price: price_scraped,
-#                                  description: description_scraped,
-#                                  reference: ref_scraped,
-#                                  deposit: deposit_scraped,
-#                                  category_id: new_category.id )
-
-#       new_product.remote_photo_url = image_scraped
-
-#       unless features_scraped.nil?
-#         new_product.remote_features_url = features_scraped
-#       end
-#       new_product.remote_technical_sheet_url = technical_sheet_scraped
-#       new_product.save
-#       index_product += 1
-#       puts "#{index_product} - #{new_product.name} created!"
-#   end
-# end
-
-# puts "T'as presque fini!"
-
-# promo = Promo.new(title: "Perseuse", description: "Hola, perseuse au top!")
-# promo[:display] = true
-# promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1529432304/promo.jpg"
-# promo.save
-
-# puts "Promo!"
-
-# User.create(email: "info@olivierriccini.com", password: "Ronaldor99", company: "loxam bastia", admin: true)
-
-# puts "User created!"
-
-# puts "DB CREATED!"
+puts "DB CREATED!"

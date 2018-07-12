@@ -1,20 +1,22 @@
 <%= simple_form_for @product, remote: true do |f| %>
   <%= f.error_notification %>
   <div class="col-xs-12 col-sm-6">
-    <%= f.input :name %>
+    <%= f.input :name, label: 'Nom' %>
     <span class="error" id="name-error"></span>
     <%= f.input :reference %>
     <span class="error" id="reference-error"></span>
-    <%= f.association :category %>
+    <%= f.association :category, label: 'Category' %>
     <span class="error" id="category_id-error"></span>
-    <%= f.input :price %>
+    <%= f.input :price, label: 'Tarif' %>
     <span class="error" id="price-error"></span>
     <%= f.input :deposit %>
   </div>
   <div class="col-xs-12 col-sm-6">
-    <%= f.input :features %>
-    <%= f.input :description %>
-    <%= f.input :technical_sheet %>
+    <%= f.input :features, label: 'Caractéristiques' %>
+    <%= f.input :features_cache, as: :hidden %>
+    <%= f.input :technical_sheet, label: 'Fiche technique' %>
+    <%= f.input :technical_sheet_cache, as: :hidden %>
+    <%= f.input :description, label: 'Description' %>
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <%= f.input :photo %>

@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20180710155844) do
     t.string "name"
     t.string "reference"
     t.integer "price"
-    t.text "features"
+    t.string "features"
     t.text "description"
     t.integer "deposit"
     t.string "technical_sheet"
