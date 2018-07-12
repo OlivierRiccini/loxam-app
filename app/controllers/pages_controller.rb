@@ -52,20 +52,20 @@ class PagesController < ApplicationController
 
   def mon_espace
     @user = current_user
-    @documents = Document.where(user_id: @user.id)
+    @invoices = Invoice.where(user_id: @user.id)
 
-    @products = []
+    # @products = []
 
-    @documents.each do |document|
-      document.transactions.each do |transaction|
-        @products << Product.find(transaction.product_id)
-      end
-    end
+    # @invoices.each do |invoice|
+    #   invoice.transactions.each do |transaction|
+    #     @products << Product.find(transaction.product_id)
+    #   end
+    # end
 
-    popular_products = @products.each_with_object(Hash.new(0)) do
-      |m,h| h[m] += 1
-    end
-    @popular_products = popular_products.sort_by{ |k,v| v }.last(5).reverse
+    # popular_products = @products.each_with_object(Hash.new(0)) do
+    #   |m,h| h[m] += 1
+    # end
+    # @popular_products = popular_products.sort_by{ |k,v| v }.last(5).reverse
   end
 
   def admin_dashboard
@@ -163,7 +163,7 @@ class PagesController < ApplicationController
         array = line.strip.split(/\;/)
 
         unless User.where(loxam_id: array[2]).exists?
-          User.create(company: array[3], email: Faker::Internet.email,
+          User.create(name: array[3], email: Faker::Internet.email,
                     password: Faker::IDNumber.valid, loxam_id: array[2])
         end
 
@@ -171,14 +171,14 @@ class PagesController < ApplicationController
           if pdf_doc == array[6]
           p "#{pdf_doc} == #{array[6]}"
             ftp.getbinaryfile(pdf_doc, pdf_doc)
-            new_doc = Document.new(document_type: "fac", user_id: User.where(loxam_id: array[2]).take.id)
+            new_doc = Invoice.new(id_invoice_loxam: array[0], user_id: User.where(loxam_id: array[2]).take.id)
             new_doc.remote_pdf_url = pdf_doc
             new_doc.save
+            File.delete(pdf_doc)
           end
         end
       end
       File.delete(fname)
-      File.delete(pdf_doc)
     end
   end
 

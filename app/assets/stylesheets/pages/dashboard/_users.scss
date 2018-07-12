@@ -1,0 +1,12 @@
+.dashboard-users-section .container-users {
+  .row {
+    background-color: $light-gray;
+    margin-bottom: 5px;
+    width: 100%;
+    margin: 5px auto;
+  };
+  .row:first-child {
+    background-color: #fff;
+    font-weight: bolder;
+  }
+}

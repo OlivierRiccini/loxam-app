@@ -123,10 +123,10 @@ html_content_home_page = open("http://www.loxam-bastia.fr/").read
 doc_home_page = Nokogiri::HTML(html_content_home_page)
 doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
   url_category = "http://www.loxam-bastia.fr/#{a_home_page.text}"
-  name_category =  a_home_page.text.strip.downcase.gsub("MATERIEL/", "")
+  name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
                                                   .gsub(/\d/, "")
                                                   .gsub("-", " ")
-                                                  .strip
+                                                  .strip.downcase
 
 
   new_category = Category.create(name: name_category)
@@ -219,7 +219,7 @@ promo.save
 
 puts "Promo!"
 
-User.create(email: "info@olivierriccini.com", password: "Ronaldor99", company: "loxam bastia", admin: true)
+User.create(email: "info@olivierriccini.com", password: "Ronaldor99", name: "loxam bastia", admin: true)
 
 puts "User created!"
 

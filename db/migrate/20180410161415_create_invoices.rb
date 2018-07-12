@@ -1,7 +1,8 @@
-class CreateDocuments < ActiveRecord::Migration[5.1]
+class CreateInvoices < ActiveRecord::Migration[5.1]
   def change
     create_table :documents do |t|
-      t.string :type
+      t.integer :id_invoice_loxam
+      t.string :pdf
       t.references :user, foreign_key: true
 
       t.timestamps

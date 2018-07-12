@@ -32,6 +32,6 @@ Rails.application.routes.draw do
     post '/uncheck', to: 'messages#uncheck!'
   end
 
-  resources :documents
+  resources :invoices
   post 'synchronization', to: "pages#synchronization"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180710155844) do
+ActiveRecord::Schema.define(version: 20180611130022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 20180710155844) do
   end
 
   create_table "documents", force: :cascade do |t|
+    t.integer "id_invoice_loxam"
+    t.string "pdf"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "document_type"
-    t.string "pdf"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
@@ -45,14 +45,15 @@ ActiveRecord::Schema.define(version: 20180710155844) do
     t.string "name"
     t.string "email"
     t.text "content"
+    t.boolean "checked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "checked", default: false
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "reference"
+    t.bigint "category_id"
     t.integer "price"
     t.string "features"
     t.text "description"
@@ -61,33 +62,22 @@ ActiveRecord::Schema.define(version: 20180710155844) do
     t.string "photo"
     t.string "video"
     t.string "loxam_link"
+    t.boolean "new_product_choice", default: false
+    t.boolean "best_searches_choice", default: false
+    t.integer "nb_of_searches", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "category_id"
-    t.integer "nb_of_searches", default: 0
-    t.boolean "best_searches_choice", default: false
-    t.boolean "new_product_choice", default: false
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "promos", force: :cascade do |t|
-    t.string "catalogue"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "media"
     t.string "title"
+    t.string "media"
     t.boolean "display", default: false
-    t.text "description"
     t.boolean "display_description", default: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.bigint "product_id"
-    t.bigint "document_id"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["document_id"], name: "index_transactions_on_document_id"
-    t.index ["product_id"], name: "index_transactions_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,12 +91,12 @@ ActiveRecord::Schema.define(version: 20180710155844) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.string "name"
     t.integer "loxam_id"
     t.string "avatar"
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "company"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -114,6 +104,4 @@ ActiveRecord::Schema.define(version: 20180710155844) do
   add_foreign_key "documents", "users"
   add_foreign_key "expendables", "products"
   add_foreign_key "products", "categories"
-  add_foreign_key "transactions", "documents"
-  add_foreign_key "transactions", "products"
 end
