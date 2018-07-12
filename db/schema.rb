@@ -21,15 +21,6 @@ ActiveRecord::Schema.define(version: 20180611130022) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "documents", force: :cascade do |t|
-    t.integer "id_invoice_loxam"
-    t.string "pdf"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_documents_on_user_id"
-  end
-
   create_table "expendables", force: :cascade do |t|
     t.string "name"
     t.string "reference"
@@ -39,6 +30,15 @@ ActiveRecord::Schema.define(version: 20180611130022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_expendables_on_product_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer "id_invoice_loxam"
+    t.string "pdf"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20180611130022) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "documents", "users"
   add_foreign_key "expendables", "products"
+  add_foreign_key "invoices", "users"
   add_foreign_key "products", "categories"
 end
