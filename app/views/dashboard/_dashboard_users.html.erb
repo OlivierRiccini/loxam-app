@@ -1,5 +1,6 @@
 <div class="dashboard-section dashboard-users-section" data-section="users">
   <h3>Clients</h3>
+  <%= link_to 'Synchroniser', synchronization_path, method: :post %>
   <ul>
     <% @users.each do |user| %>
       <li><%= link_to user.company %></li>

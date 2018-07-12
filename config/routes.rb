@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :documents
   get 'mon_espace', to: "pages#mon_espace"
   get 'admin_dashboard', to: "pages#admin_dashboard"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -32,4 +31,7 @@ Rails.application.routes.draw do
     post '/check', to: 'messages#check!'
     post '/uncheck', to: 'messages#uncheck!'
   end
+
+  resources :documents
+  post 'synchronization', to: "pages#synchronization"
 end

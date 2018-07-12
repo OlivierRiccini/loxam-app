@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   after_create :send_welcome_email
   after_create :subscribe_to_newsletter
-
+  has_many :documents, dependent: :destroy
 
   validates :company, presence: true
   # Include default devise modules. Others available are:
