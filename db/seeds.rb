@@ -123,9 +123,10 @@ html_content_home_page = open("http://www.loxam-bastia.fr/").read
 doc_home_page = Nokogiri::HTML(html_content_home_page)
 doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
   url_category = "http://www.loxam-bastia.fr/#{a_home_page.text}"
-  name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
-                                                .gsub(/\d/, "")
-                                                .gsub("-", " ")
+  name_category =  a_home_page.text.strip.downcase.gsub("MATERIEL/", "")
+                                                  .gsub(/\d/, "")
+                                                  .gsub("-", " ")
+                                                  .strip
 
 
   new_category = Category.create(name: name_category)
@@ -136,33 +137,15 @@ doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
 
   doc_category_page = Nokogiri::HTML(html_content_category_page)
 
-  # all_category_pages_content = "http://www.loxam-bastia.fr/#{doc_category_page.search('.pagination a/@href')}"
-
-  # doc_all_category_pages = Nokogiri::HTML(all_category_pages_content)
-
-  # puts all_category_pages_content
-  # nb_pages = doc_category_page.search('.pagination a/@href')
-  # all_category_pages_content = open(nb_pages).read
-  # doc_all_category_pages = Nokogiri::HTML(all_category_pages_content)
-  # puts nb_pages
-  # nb_pages =
-  # 3.times do
-  # nb_pages += 1
-  #   puts "url_category => #{url_category}-#{nb_pages}"
-  # end
-
-
   doc_category_page.search('.pagination a/@href').each do |a_category_page|
     url_each_category_page = "http://www.loxam-bastia.fr/#{a_category_page.text.strip.gsub('location.href=', '').gsub('\'', '')}"
 
     html_each_category_page_content = open(url_each_category_page).read
     doc_each_category_page = Nokogiri::HTML(html_each_category_page_content)
-    # p doc_each_category_page.search('.produits h3').size
-    # gg = 0
+
       doc_each_category_page.search('.produits button/@onclick').each do |each_category_page|
-      # gg += 1
         url_product_page = "http://www.loxam-bastia.fr/#{each_category_page.text.strip.gsub('location.href=', '').gsub(/\'/, '')}"
-      # end
+
       # parsing each product page
         html_content_product_page = open(url_product_page).read
         doc_product_page = Nokogiri::HTML(html_content_product_page)

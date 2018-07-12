@@ -85,8 +85,16 @@ class PagesController < ApplicationController
     # end
 
     @messages = Message.order("created_at DESC").all
-    @categories = Category.order("created_at DESC").all
-    @products = Product.order("created_at DESC").all
+    @categories = Category.order('name ASC').all
+
+    if params[:category].present?
+      @current_category = Category.where(id: params[:category][:id]).take.name
+      @products = Category.where(id: params[:category][:id]).take.products
+    else
+      @current_category = "TOUTES CATEGORIES"
+      @products = Product.order("created_at DESC").all
+    end
+
     @promos = Promo.all.order("created_at DESC").all
     # Category new
     @category = Category.new
