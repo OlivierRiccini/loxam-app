@@ -43,7 +43,7 @@ class PagesController < ApplicationController
       end
     end
 
-    # Used in new message form on home page
+    # contatc form home page
     @message = Message.new
 
     # Displaying promo
@@ -192,6 +192,7 @@ class PagesController < ApplicationController
   end
 
   def contact
+    @message = Message.new
   end
 
   def minilease

@@ -29,7 +29,7 @@
     <h3><%= @current_category %></h3>
     <% @products.each do |product| %>
       <div class="col-xs-12 col-sm-6 col-md-3 col-item-card" id="col-product-card-<%= product.id %>">
-        <div class="item-card item-card-dashboard product-card-dashboard">
+        <div class="item-card white-box item-card-dashboard product-card-dashboard">
           <div class="item-card-image">
             <% if product.photo? %>
               <div style="background-image: url('<%= cl_image_path product.photo %>'); ">

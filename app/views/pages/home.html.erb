@@ -18,7 +18,7 @@
         <h2 class="title-les-plus-recherchés">LES PLUS RECHERCHÉS</h2>
         <% @best_searches.each do |product| %>
           <div class="col-xs-12 col-sm-6 col-item-card">
-            <div class="item-card">
+            <div class="item-card white-box">
               <% if product.photo? %>
                 <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
               <% else %>
@@ -40,7 +40,7 @@
         <h2 class="title-les-plus-recherchés">LES NOUVEAUTÉS</h2>
         <% @new_products.each do |product| %>
           <div class="col-xs-12 col-sm-6 col-item-card">
-            <div class="item-card">
+            <div class="item-card white-box">
               <% if product.photo? %>
                 <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
               <% else %>

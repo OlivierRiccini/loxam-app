@@ -3,7 +3,7 @@
   <div class="row">
     <% @products.each do |product| %>
       <div class="col-xs-12 col-sm-6 col-md-3 col-item-card">
-        <div class="item-card">
+        <div class="item-card white-box">
           <% if product.photo? %>
             <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
           <% else %>
