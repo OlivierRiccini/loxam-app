@@ -1,13 +1,9 @@
-<h1><%= @user.company %></h1>
+<h1><%= @user.name %></h1>
 
 <ul>
-  <% @documents.each do |document| %>
-    <li><a href="<%= cl_image_path document.pdf %>" target="_blank" class="loxam-btn">Facture</a>
+  <% @invoices.each do |invoice| %>
+    <li><a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Facture</a>
     </li>
   <% end %>
 </ul>
 
-<h3>Top 5 products you rent!</h3>
-<% @popular_products.each do |product| %>
-  <p><strong><%= product[0].name %></strong> loué <%= product[1]%> fois!</p>
-<% end %>

@@ -23,7 +23,7 @@
           <div class="message" style="background-color: #F4F4F4" data-message-id="<%= message.id %>">
         <% end %>
           <div class="message-display-part">
-            <span><%= message.created_at.strftime("%^b %d %Y at %I:%M%p") %></span>
+            <span><%= message.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></span>
             <span><%= message.name %></span>
 
           <div class="message-actions">

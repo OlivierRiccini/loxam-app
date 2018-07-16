@@ -1,0 +1,17 @@
+.catalogs-dashboard h3 {
+  background-color: $light-gray;
+  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.edit_catalog {
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  img {
+    max-height: 200px;
+    object-fit: contain;
+  }
+}

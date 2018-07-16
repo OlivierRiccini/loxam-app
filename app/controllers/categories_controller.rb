@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
     @products = Product.where(category_id: @category.id)
     authorize @products
     @categories = Category.all
+    @all_products = Product.all
   end
 
   def create
