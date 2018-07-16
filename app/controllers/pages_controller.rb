@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard ]
+  before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   def home

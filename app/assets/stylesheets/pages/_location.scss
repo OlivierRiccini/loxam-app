@@ -1,12 +1,23 @@
 .container-location {
   padding: 15px;
-  ul {
-    margin-top: 40px;
+  p:first-child {
+    text-indent: 15px;
   };
-  h4, .red-font {
+  .red-font {
     color: $loxam-color;
   };
   h5 {
     margin-bottom: 0;
+  };
+  h4 {
+    background-color: $light-gray;
+    padding: 10px 0;
+    text-align: center;
+    margin: 35px auto 15px auto;
   }
+  .img-catalog {
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+  };
 }
