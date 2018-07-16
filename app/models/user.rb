@@ -2,6 +2,8 @@ class User < ApplicationRecord
   after_create :send_welcome_email
   after_create :subscribe_to_newsletter
   has_many :invoices, dependent: :destroy
+  has_many :favorits
+  has_many :products, :through => :favorits
 
   validates :name, presence: true
   # Include default devise modules. Others available are:

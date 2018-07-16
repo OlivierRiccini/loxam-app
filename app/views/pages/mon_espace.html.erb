@@ -1,5 +1,5 @@
 <h1><%= @user.name %></h1>
-
+<%= @user.products.first.name %>
 <ul>
   <% @invoices.each do |invoice| %>
     <li><a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Facture</a>

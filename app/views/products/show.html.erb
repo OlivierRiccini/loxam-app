@@ -1,5 +1,9 @@
 <div class="container container-product white-box">
-  <h2><%= @product.name %></h2>
+  <h2><%= @product.name %>
+    <%= simple_form_for [ @product, @new_favorit ] do |f| %>
+      <%= f.button :submit %>
+    <% end %>
+  </h2>
   <div class="row-presentation-product">
     <div class="col-xs-12 col-sm-6 image-col">
       <% if @product.photo? %>
