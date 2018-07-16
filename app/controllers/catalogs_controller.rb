@@ -1,22 +1,23 @@
 class CatalogsController < ApplicationController
-  def create
-    @catalog = Catalog.new(catalog_params)
+  # def create
+  #   @catalog = Catalog.new(catalog_params)
 
-    catalog_type = catalog_params[:type]
+  #   catalog_type = catalog_params[:catalog_type]
 
-    if @catalog.save
-      redirect_to "#{catalog_type}"_path
-    else
-      render admin_dashboard_path
-    end
-  end
+  #   if @catalog.save
+  #     redirect_to "#{@catalog.catalog_type}"_path
+  #   else
+  #     render admin_dashboard_path
+  #   end
+  # end
 
   def update
     @catalog = Catalog.find(params[:id])
-    catalog_type = catalog_params[:type]
+    catalog_type = params[:catalog][:catalog_type]
+    authorize @catalog
 
     if @catalog.update(catalog_params)
-      redirect_to "#{catalog_type}"_path
+      redirect_to "/#{catalog_type}"
     else
       render admin_dashboard_path
     end

@@ -9,7 +9,7 @@
   </div>
   <div class="row" id="row-promos-dashboard">
     <% @promos.each do |promo| %>
-      <div class="col-xs-12 col-sm-6 col-md-4 col-item-card" id="col-promo-card-<%= promo.id %>">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-item-card white-box" id="col-promo-card-<%= promo.id %>">
         <div class="item-card item-card-dashboard promo-card-dashboard">
           <div class="item-card-image">
             <% if promo.media? %>
@@ -53,13 +53,13 @@
   <div class="row catalogs-dashboard">
     <h3>Catalogues</h3>
     <% @catalogs.each do |catalog| %>
-      <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="col-xs-12 col-sm-6 white-box">
         <%= simple_form_for catalog do |f| %>
-          <%= f.input :catalog_type, collection: [ "location", "vente"] %>
-          <%= cl_image_tag catalog.image, height: '200' %>
+          <%= f.input :catalog_type, collection: [ "location", "vente"], label: 'Location ou Vente' %>
+          <%= cl_image_tag catalog.image %>
           <%= f.input :image %>
           <%= f.input :image_cache, as: :hidden %>
-          <%= f.input :link %>
+          <%= f.input :link, label: 'Lien Loxam' %>
           <%= f.button :submit, value: 'Sauvegarder', class: 'loxam-btn' %>
         <% end %>
       </div>

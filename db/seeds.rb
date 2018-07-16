@@ -220,7 +220,12 @@ promo.save
 rental_catalog = Catalog.new(catalog_type: "location", link: "http://www.loxam.fr/location/catalogue/index.html")
 rental_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
 rental_catalog.save
-puts "Catalog created!"
+
+sales_catalog = Catalog.new(catalog_type: "vente", link: "http://www.loxam.fr/location/catalogue/index.html")
+sales_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531744211/catalogue-vente.png"
+sales_catalog.save
+
+puts "Catalogs created!"
 puts "Promo!"
 
 User.create(email: "loxam@loxam.fr", password: "loxambastia", name: "loxam bastia", admin: true)
