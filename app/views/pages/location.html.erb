@@ -1,1 +1,43 @@
-<h1>Loaction</h1>
+<div class="container container-location white-box">
+  <p>La location permet de bénéficier d&#39;outils professionnels modernes, sûrs et entretenus, et de gagner en flexibilité, le tout à un coût abordable pour une maîtrise parfaite du budget de vos chantiers. LOXAM est le numéro 1 de la location en Europe, cette enseigne vous permet de bénéficier de l’expérience d’un réseau dont la location est l’activit é principale depuis plus de 40ans.</p>
+
+  <ul>
+    <h4>Les services</h4>
+    <li>
+      <h5>Conseil</h5>
+      <p>Choix du matériel, conseils d&#39;application et d&#39;utilisation</p>
+    </li>
+    <li>
+      <h5>Assistance technique</h5>
+      <p>Intervention sur site de nos mécaniciens agréés.</p>
+    </li>
+    <li>
+      <h5>Transport et Manutention</h5>
+      <p>Sur simple demande, livraison et reprise des matériels sur votre chantier.</p>
+    </li>
+    <li>
+      <h5>Assurance</h5>
+      <p>Formule d&#39;assurance «Bris de machine-vol» (<%= link_to 'voir conditions en cliquant ici', conditions_generales_de_location_path, target: '_blank'%>).</p>
+    </li>
+  </ul>
+
+  <ul>
+    <h4>Pourquoi louer un matériel LOXAM ?</h4>
+    <li>
+      <h5>La proximité</h5>
+      <p>Gain de temps, qualité de services, réactivité... avec 750 agences, le Groupe LOXAM affirme sa volonté <span class="red-font">d&#39;être partout toujours plus proche de vous</span></p>
+    </li>
+    <li>
+      <h5>Une équipe</h5>
+      <p>Hommes et femmes, ils sont <span class="red-font">professionnels confirmés</span> à votre service et votre écoute pour vous conseiller, guider votre choix et vous proposer la solution matériel la plus pertinente.</p>
+    </li>
+    <li>
+      <h5>Un parc de plus de matériels</h5>
+      <p>Matériels récents conformes à la réglementation en vigueur en répondant aux dernières innovations. <span class="red-font">Entretien et contrôles périodiques réguliers et systématiques</span> avant chaque location. Fiabilité, performance et sécurité assurées.</p>
+    </li>
+  </ul>
+
+  <h4>ACCEDER AU CATALOGUE DE LOCATION LOXAM</h4>
+  <a href="<%= @rental_catalog.link %>" target="_blank">
+    <%= cl_image_tag @rental_catalog.image, height: '300' %></a>
+</div>

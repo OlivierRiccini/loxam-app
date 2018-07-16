@@ -214,12 +214,16 @@ puts "T'as presque fini!"
 
 promo = Promo.new(title: "Perseuse", description: "Hola, perseuse au top!")
 promo[:display] = true
-promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1529432304/promo.jpg"
+promo.remote_media_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
 promo.save
 
+rental_catalog = Catalog.new(catalog_type: "location", link: "http://www.loxam.fr/location/catalogue/index.html")
+rental_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
+rental_catalog.save
+puts "Catalog created!"
 puts "Promo!"
 
-User.create(email: "info@olivierriccini.com", password: "Ronaldor99", name: "loxam bastia", admin: true)
+User.create(email: "loxam@loxam.fr", password: "loxambastia", name: "loxam bastia", admin: true)
 
 puts "User created!"
 

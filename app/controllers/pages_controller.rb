@@ -46,8 +46,10 @@ class PagesController < ApplicationController
     # contatc form home page
     @message = Message.new
 
-    # Displaying promo
+    # Displaying promo and catalogs
     @promo = Promo.where(display: true).last
+    @catalogs = Catalog.all
+
   end
 
   def mon_espace
@@ -104,6 +106,9 @@ class PagesController < ApplicationController
 
     # Promo new
     @promo = Promo.new
+
+    # In pormos section
+    @catalogs = Catalog.all
 
     # Fetching
     @products_most_searched = []
@@ -183,6 +188,7 @@ class PagesController < ApplicationController
   end
 
   def location
+    @rental_catalog = Catalog.where(catalog_type: "location").take
   end
 
   def vente

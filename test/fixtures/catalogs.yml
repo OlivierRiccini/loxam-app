@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  catalog_type: MyString
+  image: MyString
+  link: MyString
+
+two:
+  catalog_type: MyString
+  image: MyString
+  link: MyString

@@ -50,4 +50,19 @@
 
     <% end %>
   </div>
+  <div class="row catalogs-dashboard">
+    <h3>Catalogues</h3>
+    <% @catalogs.each do |catalog| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <%= simple_form_for catalog do |f| %>
+          <%= f.input :catalog_type, collection: [ "location", "vente"] %>
+          <%= cl_image_tag catalog.image, height: '200' %>
+          <%= f.input :image %>
+          <%= f.input :image_cache, as: :hidden %>
+          <%= f.input :link %>
+          <%= f.button :submit, value: 'Sauvegarder', class: 'loxam-btn' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
