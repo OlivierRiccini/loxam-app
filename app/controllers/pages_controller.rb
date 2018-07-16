@@ -192,6 +192,7 @@ class PagesController < ApplicationController
   end
 
   def vente
+    @sales_catalog = Catalog.where(catalog_type: "vente").take
   end
 
   def reparation

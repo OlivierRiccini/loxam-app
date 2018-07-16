@@ -1,0 +1,22 @@
+.container-vente .row {
+  h5 {
+    color: $loxam-color;
+  };
+  ul {
+    list-style: none;
+    padding-left: 0;
+  };
+  li {
+    font-size: 0.8em;
+    font-weight: lighter;
+  }
+}
+
+.vente-page-flex-box {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  img {
+    object-fit: contain;
+  }
+}
