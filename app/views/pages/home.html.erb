@@ -73,7 +73,10 @@
             <p><%= @promo.description %></p>
           <% end %>
           <%= cl_image_tag @promo.media %>
-          <i class="fa fa-arrows-alt" id="expand-cross"></i>
+          <div class="promo-card-hover">
+            <strong>Agrandir l'image</strong>
+            <i class="fa fa-arrows-alt" id="expand-cross"></i>
+          </div>
         </div>
       </div>
     </div>
