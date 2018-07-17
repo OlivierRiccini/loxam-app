@@ -17,7 +17,7 @@
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <p><strong><%= number_to_currency(@product.price,:unit=>'€', delimiter: " ", precision: 0, format: "%n%u") %> HT/ jour</strong></p>
+      <p><strong><%= number_to_currency(@product.price,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> HT / jour</strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / jour</p>
       <p>Référence: <%= @product.reference %></p>
       <% if @product.description? %>
         <p><%= @product.description %></p>

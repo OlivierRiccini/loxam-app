@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+  include ActionView::Helpers::UrlHelper
+
   def create
     @new_favorite = Favorite.new(favorite_params)
     @new_favorite.user_id = current_user.id
@@ -11,9 +13,17 @@ class FavoritesController < ApplicationController
         product = Product.where(id: @new_favorite.product_id).take
         i = product.present_in_favorites + 1
         product.update(present_in_favorites: i)
-        format.js
+        if current_page?(controller: 'products', action: 'show')
+          format.js { render :template => 'products/create_favorite_product' }
+        elsif current_page?(root_path)
+          format.js { render :template => 'pages/create_favorite_home' }
+        end
       else
-        format.js
+        if current_page?(controller: 'products', action: 'show')
+          format.js { render :template => 'products/create_favorite_product' }
+        elsif current_page?(root_path)
+          format.js { render :template => 'pages/create_favorite_home' }
+        end
       end
     end
   end
