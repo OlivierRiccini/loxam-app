@@ -34,14 +34,14 @@
     <div class="col-xs-12 col-sm-5">
       <ul class="ranking-list">
         <% j = 0 %>
-        <% @products_raking.each do |product| %>
+        <% @favorites_ranking.each do |product| %>
           <span><% j += 1 %>
-          <li><span><strong><%= j %></strong>&nbsp;&nbsp;<%= product.name %></span> <span><strong><%= product.nb_of_searches %></strong></span></li>
+          <li><span><strong><%= j %></strong>&nbsp;&nbsp;<%= product.name %></span> <span><strong><%= product.present_in_favorites %></strong></span></li>
         <% end %>
       </ul>
     </div>
     <div class="col-xs-12 col-sm-7">
-      <canvas id="myChartSavedProducts" data-product-name="<%= @products_most_searched %>" data-nb-saved="<%= @products_nb_searches %>"></canvas>
+      <canvas id="myChartSavedProducts" data-product-name="<%= @products_most_saved %>" data-nb-saved="<%= @products_nb_times_currently_saved %>"></canvas>
     </div>
   </div>
 </div>

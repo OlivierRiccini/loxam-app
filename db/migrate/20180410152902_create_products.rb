@@ -15,6 +15,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.boolean :new_product_choice, default: false
       t.boolean :best_searches_choice, default: false
       t.integer :nb_of_searches, default: 0
+      t.integer :present_in_favorites, default: 0
 
       t.timestamps
     end

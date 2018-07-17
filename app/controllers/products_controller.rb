@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     @products = Product.all
 
     @message = Message.new
-    @new_favorit = Favorit.new
+    @new_favorite = Favorite.new
   end
 
   def create

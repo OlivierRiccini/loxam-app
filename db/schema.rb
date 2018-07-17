@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20180716155208) do
     t.index ["product_id"], name: "index_expendables_on_product_id"
   end
 
-  create_table "favorits", force: :cascade do |t|
+  create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_favorits_on_product_id"
-    t.index ["user_id"], name: "index_favorits_on_user_id"
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20180716155208) do
     t.boolean "new_product_choice", default: false
     t.boolean "best_searches_choice", default: false
     t.integer "nb_of_searches", default: 0
+    t.integer "present_in_favorites", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"

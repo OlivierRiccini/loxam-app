@@ -1,9 +1,29 @@
-<h1><%= @user.name %></h1>
-<%= @user.products.first.name %>
-<ul>
-  <% @invoices.each do |invoice| %>
-    <li><a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Facture</a>
-    </li>
-  <% end %>
-</ul>
-
+<div class="container">
+  <h1><%= @user.name %></h1>
+  <div class="row">
+    <% @user.products.each do |product| %>
+      <div class="col-xs-12 col-sm-6 col-md-3 col-item-card">
+        <div class="item-card white-box">
+          <% if product.photo? %>
+            <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
+          <% else %>
+            <div class="item-card-image" style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); "></div>
+          <% end %>
+          <div class="card-infos">
+          <h3><%= product.name %></h3>
+            <div class="card-price-and-btn">
+              <p>à partir de <span class="price"><%= product.price %>€</span>/jour H.T</p>
+              <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <ul>
+    <% @invoices.each do |invoice| %>
+      <li><a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Facture</a>
+      </li>
+    <% end %>
+  </ul>
+</div>

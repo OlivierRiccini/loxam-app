@@ -107,7 +107,7 @@ class PagesController < ApplicationController
     # Promo new
     @promo = Promo.new
 
-    # In pormos section
+    # In promos section
     @catalogs = Catalog.all
 
     # Fetching
@@ -139,6 +139,20 @@ class PagesController < ApplicationController
       @categories_nb_of_searches << category[:nb_of_searches]
     end
 
+    # Fetching
+    @products_most_saved = []
+    @products_nb_times_currently_saved = []
+    @favorites_ranking = Product.order('present_in_favorites DESC').all
+
+    Product.order("present_in_favorites DESC").first(10).each do |product|
+      @products_most_saved << product.name
+      @products_nb_times_currently_saved << product.present_in_favorites
+    end
+    # Favorite.all.each do |favorite|
+    #   @favorites_ranking << Product.where(id: favorite.product_id).take
+    # end
+
+    # @favorites_ranking.sort_by! { |product| product[:present_in_favorites] }
     # if !@categories_hashes.nil?
     #   @categories_hashes.sort_by! { |element| element[:nb_of_searches] }
     # end
