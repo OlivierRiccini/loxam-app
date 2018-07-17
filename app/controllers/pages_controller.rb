@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
+  include ActionView::Helpers::UrlHelper
+
   def home
     @categories = Category.order('name ASC')
 
@@ -148,14 +150,6 @@ class PagesController < ApplicationController
       @products_most_saved << product.name
       @products_nb_times_currently_saved << product.present_in_favorites
     end
-    # Favorite.all.each do |favorite|
-    #   @favorites_ranking << Product.where(id: favorite.product_id).take
-    # end
-
-    # @favorites_ranking.sort_by! { |product| product[:present_in_favorites] }
-    # if !@categories_hashes.nil?
-    #   @categories_hashes.sort_by! { |element| element[:nb_of_searches] }
-    # end
   end
 
   def synchronization

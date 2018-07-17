@@ -3,15 +3,18 @@ class FavoritesController < ApplicationController
     @new_favorite = Favorite.new(favorite_params)
     @new_favorite.user_id = current_user.id
     authorize @new_favorite
-
-    if @new_favorite.save
-      product = Product.where(id: @new_favorite.product_id).take
-      i = product.present_in_favorites + 1
-      product.update(present_in_favorites: i)
-      redirect_to mon_espace_path
-    else
-      product = Product.where(id: params[:product_id])
-      render product_path(product)
+    # if current_page?(admin_dashboard_path)
+    #  raise
+    # end
+    respond_to do |format|
+      if @new_favorite.save
+        product = Product.where(id: @new_favorite.product_id).take
+        i = product.present_in_favorites + 1
+        product.update(present_in_favorites: i)
+        format.js
+      else
+        format.js
+      end
     end
   end
 

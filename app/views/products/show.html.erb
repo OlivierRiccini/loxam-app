@@ -1,9 +1,9 @@
 <div class="container container-product white-box">
   <h2><%= @product.name %>
     <% if current_user.products.include? @product %>
-      <%= link_to 'Supprimer des favoris', product_favorit_path(@product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel des favoris #{current_user.name.capitalize}?"} %>
+      <%= link_to 'Supprimer des favoris', product_favorite_path(@product), :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel des favoris #{current_user.name.capitalize}?"} %>
     <% else %>
-      <%= simple_form_for [ @product, @new_favorite ] do |f| %>
+      <%= simple_form_for [ @product, @new_favorite ], remote: true do |f| %>
         <%= f.button :submit, value: 'Mettre en favoris' %>
       <% end %>
     <% end %>
