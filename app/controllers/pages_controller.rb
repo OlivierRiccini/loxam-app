@@ -203,9 +203,6 @@ class PagesController < ApplicationController
     @sales_catalog = Catalog.where(catalog_type: "vente").take
   end
 
-  def reparation
-  end
-
   def contact
     @message = Message.new
   end
