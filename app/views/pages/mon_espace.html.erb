@@ -1,9 +1,12 @@
-<div class="container">
+<div class="container container-mon-espace">
   <h1><%= @user.name %></h1>
   <div class="row">
     <% @user.products.each do |product| %>
       <div class="col-xs-12 col-sm-6 col-md-3 col-item-card">
         <div class="item-card white-box">
+          <%= link_to product_favorite_path(@user, product), :method => :delete, :data => {:confirm => "Veux-tu vraiment enlever #{product.name} des favoris #{current_user.name.capitalize}?"} do %>
+            <i class="fa fa-times"></i>
+          <% end %>
           <% if product.photo? %>
             <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
           <% else %>
@@ -12,7 +15,7 @@
           <div class="card-infos">
           <h3><%= product.name %></h3>
             <div class="card-price-and-btn">
-              <p>à partir de <span class="price"><%= product.price %>€</span>/jour H.T</p>
+              <p><span class="price"><%= product.price %>€</span> / jour H.T</p>
               <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
             </div>
           </div>
