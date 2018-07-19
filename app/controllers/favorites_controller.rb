@@ -1,34 +1,21 @@
 class FavoritesController < ApplicationController
-  include ActionView::Helpers::UrlHelper
+  # include ActionView::Helpers::UrlHelper
 
   def create
     @new_favorite = Favorite.new(favorite_params)
     @new_favorite.user_id = current_user.id
     authorize @new_favorite
-    # if current_page?(admin_dashboard_path)
-    #  raise
-    # end
 
-    # respond_to do |format|
+    respond_to do |format|
       if @new_favorite.save
         product = Product.where(id: @new_favorite.product_id).take
         i = product.present_in_favorites + 1
         product.update(present_in_favorites: i)
-        if current_page?(product_path(product))
-          redirect_to product_path(product)
-          # format.js { render :template => 'products/create_favorite_product' }
-        elsif current_page?(root_path)
-          redirect_to root_path
-          # format.js { render :template => 'pages/create_favorite_home' }
-        end
+        format.js
       else
-        if current_page?(controller: 'products', action: 'show')
-          format.js { render :template => 'products/create_favorite_product' }
-        elsif current_page?(root_path)
-          format.js { render :template => 'pages/create_favorite_home' }
-        end
+        format.js
       end
-    # end
+    end
   end
 
   def destroy
@@ -38,7 +25,7 @@ class FavoritesController < ApplicationController
     i = product.present_in_favorites - 1
     product.update(present_in_favorites: i)
     @favorite.destroy
-    redirect_to mon_espace_path
+    respond_to { |format| format.js }
   end
 
   private

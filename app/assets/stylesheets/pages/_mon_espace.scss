@@ -1,11 +1,3 @@
-.container-mon-espace .fa {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  font-size: 30px;
-  color: $loxam-color;
-  opacity: 1;
-  &:hover {
-    opacity: 0.7;
-  }
+.container-mon-espace .item-card {
+  position: relative;
 }

@@ -1,0 +1,22 @@
+<% product = Product.where(id: @favorite.product_id).take %>
+console.log('<%= product.id %>');
+var productId = '<%= product.id =%>';
+var favoriteStarsContainer = document.querySelector(`.favorite-star-container-product-${productId}`);
+
+favoriteStarsContainer.innerHTML = `
+<%= simple_form_for [ product, @favorite ], remote: true do |f| %>
+  <%= button_tag(type: 'submit', class: 'btn-favorite', data: { toggle: 'popover', trigger: 'hover', content: 'Mettre en favoris', placement: 'left' }) do %>
+    <i class="fa fa-star"></i>
+    <script>
+      $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+          html : true,
+        });
+      });
+    </script>
+  <% end %>
+<% end %>`;
+
+var cardMonEspace = document.getElementById(`mon-espace-card-${productId}`);
+
+cardMonEspace.parentNode.removeChild(cardMonEspace);
