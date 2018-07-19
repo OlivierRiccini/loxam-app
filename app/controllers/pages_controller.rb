@@ -52,6 +52,8 @@ class PagesController < ApplicationController
     @promo = Promo.where(display: true).last
     @catalogs = Catalog.all
 
+    @new_favorite = Favorite.new
+
   end
 
   def mon_espace

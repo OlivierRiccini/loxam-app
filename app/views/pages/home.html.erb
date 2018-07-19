@@ -1,5 +1,5 @@
 <div class="container main-container">
-  <!-- Voir aussi autres loxam -->
+
   <div class="loxam-types-container">
     <div class="row">
       <h2>DÉCOUVREZ NOS SPECIALITÉS</h2>
@@ -19,6 +19,31 @@
         <% @best_searches.each do |product| %>
           <div class="col-xs-12 col-sm-6 col-item-card">
             <div class="item-card white-box">
+              <% if current_user.products.include? product %>
+                <%= link_to product_favorite_path(current_user, product), class: 'btn-favorite-active', :method => :delete, :data => { toggle: 'popover', trigger: 'hover', content: 'Retirer des favoris', placement: 'left' } do %>
+                  <i class="fa fa-star"></i>
+                  <script>
+                    $(document).ready(function(){
+                      $('[data-toggle="popover"]').popover({
+                        html : true,
+                        });
+                    });
+                  </script>
+                <% end %>
+              <% else %>
+                <%= simple_form_for [ product, @new_favorite ], remote: true do |f| %>
+                  <%= button_tag(type: 'submit', class: 'btn-favorite', data: { toggle: 'popover', trigger: 'hover', content: 'Mettre en favoris', placement: 'left' }) do %>
+                    <i class="fa fa-star"></i>
+                    <script>
+                      $(document).ready(function(){
+                        $('[data-toggle="popover"]').popover({
+                          html : true,
+                          });
+                      });
+                    </script>
+                  <% end %>
+                <% end %>
+              <% end %>
               <% if product.photo? %>
                 <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
               <% else %>
@@ -41,6 +66,31 @@
         <% @new_products.each do |product| %>
           <div class="col-xs-12 col-sm-6 col-item-card">
             <div class="item-card white-box">
+              <% if current_user.products.include? product %>
+                <%= link_to product_favorite_path(current_user, product), class: 'btn-favorite-active', :method => :delete, :data => { toggle: 'popover', trigger: 'hover', content: 'Retirer des favoris', placement: 'left' } do %>
+                  <i class="fa fa-star"></i>
+                  <script>
+                    $(document).ready(function(){
+                      $('[data-toggle="popover"]').popover({
+                        html : true,
+                        });
+                    });
+                  </script>
+                <% end %>
+              <% else %>
+                <%= simple_form_for [ product, @new_favorite ], remote: true do |f| %>
+                  <%= button_tag(type: 'submit', class: 'btn-favorite', data: { toggle: 'popover', trigger: 'hover', content: 'Mettre en favoris', placement: 'left' }) do %>
+                    <i class="fa fa-star"></i>
+                    <script>
+                      $(document).ready(function(){
+                        $('[data-toggle="popover"]').popover({
+                          html : true,
+                          });
+                      });
+                    </script>
+                  <% end %>
+                <% end %>
+              <% end %>
               <% if product.photo? %>
                 <div class="item-card-image" style="background-image: url('<%= cl_image_path product.photo %>'); "></div>
               <% else %>

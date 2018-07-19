@@ -35,4 +35,35 @@
   background-color: transparent;
   border: none;
   font-size: 28px;
+  height: fit-content;
+  color: #ccc;
+  &:hover {
+    color: #fad726;
+  };
 }
+
+.btn-favorite-active {
+  color: #fad726;
+  font-size: 28px;
+  &:hover {
+    color: #ccc;
+  }
+}
+
+// Home page btn favorites and categories shwo
+.row-les-plus-recherches,
+.row-les-nouveautes,
+.categories-page-container, {
+  .btn-favorite, .btn-favorite-active {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+}
+
+// Product page
+.product-title-container .popover {
+  color: $gray;
+}
+
+

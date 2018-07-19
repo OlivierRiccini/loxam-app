@@ -4,10 +4,11 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show ]
 
   def show
-    @products = Product.where(category_id: @category.id)
+    @products = Product.where(category_id: @category.id).order('name ASC')
     authorize @products
-    @categories = Category.all
-    @all_products = Product.all
+    @categories = Category.order('name ASC').all
+    # @all_products = Product.order('name ASC').all
+    @new_favorite = Favorite.new
   end
 
   def create

@@ -8,15 +8,18 @@ class FavoritesController < ApplicationController
     # if current_page?(admin_dashboard_path)
     #  raise
     # end
-    respond_to do |format|
+
+    # respond_to do |format|
       if @new_favorite.save
         product = Product.where(id: @new_favorite.product_id).take
         i = product.present_in_favorites + 1
         product.update(present_in_favorites: i)
-        if current_page?(controller: 'products', action: 'show')
-          format.js { render :template => 'products/create_favorite_product' }
+        if current_page?(product_path(product))
+          redirect_to product_path(product)
+          # format.js { render :template => 'products/create_favorite_product' }
         elsif current_page?(root_path)
-          format.js { render :template => 'pages/create_favorite_home' }
+          redirect_to root_path
+          # format.js { render :template => 'pages/create_favorite_home' }
         end
       else
         if current_page?(controller: 'products', action: 'show')
@@ -25,7 +28,7 @@ class FavoritesController < ApplicationController
           format.js { render :template => 'pages/create_favorite_home' }
         end
       end
-    end
+    # end
   end
 
   def destroy
