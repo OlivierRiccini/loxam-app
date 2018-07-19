@@ -1,13 +1,4 @@
 .container-product {
-  h2 {
-    text-align: center;
-    color: #fff;
-    font-size: 28px;
-    padding: 10px;
-    margin: 10px 0 60px 0;
-    background-color: $loxam-color;
-    border-radius: 3px;
-  };
   h3 {
     font-size: 1em;
     margin-top: 0;
@@ -20,6 +11,27 @@
     font-size: 0.9em;
     font-weight: lighter;
   };
+}
+
+.product-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding: 10px;
+  margin: 10px 0 60px 0;
+  background-color: $loxam-color;
+  border-radius: 3px;
+  form {
+    height: fit-content;
+  }
+  h2 {
+    font-size: 28px;
+    margin: 0;
+  };
+  .btn-favorite {
+    color: #fff;
+  }
 }
 
 .row-presentation-product {
