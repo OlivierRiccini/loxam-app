@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
   has_many :transactions
   has_many :expendables
+  has_many :favorites
+  has_many :users, :through => :favorites
   belongs_to :category
 
   validates :name, presence: true

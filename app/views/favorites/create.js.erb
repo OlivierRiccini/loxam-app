@@ -1,0 +1,16 @@
+<% product = Product.where(id: @new_favorite.product_id).take %>
+
+var productId = '<%= product.id =%>';
+var favoriteStarsContainer = document.querySelector(`.favorite-star-container-product-${productId}`);
+
+favoriteStarsContainer.innerHTML = `
+<%= link_to product_favorite_path(current_user, product), class: 'btn-favorite-active', remote: true, :method => :delete, :data => { toggle: 'popover', trigger: 'hover', content: 'Retirer des favoris', placement: 'left' } do %>
+  <i class="fa fa-star"></i>
+  <script>
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover({
+        html : true,
+        });
+    });
+  </script>
+<% end %>`;

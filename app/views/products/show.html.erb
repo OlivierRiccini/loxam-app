@@ -1,5 +1,34 @@
 <div class="container container-product white-box">
-  <h2><%= @product.name %></h2>
+  <div class="product-title-container">
+    <h2><%= @product.name %></h2>
+    <div class="favorite-star-container-product-<%= @product.id %>">
+      <% if current_user.products.include? @product %>
+        <%= link_to product_favorite_path(current_user, @product), class: 'btn-favorite-active', remote: true, :method => :delete, :data => { toggle: 'popover', trigger: 'hover', content: 'Retirer des favoris', placement: 'left' } do %>
+          <i class="fa fa-star"></i>
+          <script>
+            $(document).ready(function(){
+              $('[data-toggle="popover"]').popover({
+                html : true,
+              });
+            });
+          </script>
+        <% end %>
+      <% else %>
+        <%= simple_form_for [ @product, Favorite.new ], remote:true do %>
+          <%= button_tag(type: 'submit', class: 'btn-favorite', data: { toggle: 'popover', trigger: 'hover', content: 'Mettre en favoris', placement: 'left' }) do %>
+            <i class="fa fa-star"></i>
+            <script>
+              $(document).ready(function(){
+                $('[data-toggle="popover"]').popover({
+                  html : true,
+                });
+              });
+            </script>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
   <div class="row-presentation-product">
     <div class="col-xs-12 col-sm-6 image-col">
       <% if @product.photo? %>
@@ -9,7 +38,7 @@
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <p><strong><%= number_to_currency(@product.price,:unit=>'€', delimiter: " ", precision: 0, format: "%n%u") %> HT/ jour</strong></p>
+      <p><strong><%= number_to_currency(@product.price,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> HT / jour</strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / jour</p>
       <p>Référence: <%= @product.reference %></p>
       <% if @product.description? %>
         <p><%= @product.description %></p>

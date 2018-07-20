@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
+  include ActionView::Helpers::UrlHelper
+
   def home
     @categories = Category.order('name ASC')
 
@@ -49,6 +51,8 @@ class PagesController < ApplicationController
     # Displaying promo and catalogs
     @promo = Promo.where(display: true).last
     @catalogs = Catalog.all
+
+    # @new_favorite = Favorite.new
 
   end
 
@@ -107,7 +111,7 @@ class PagesController < ApplicationController
     # Promo new
     @promo = Promo.new
 
-    # In pormos section
+    # In promos section
     @catalogs = Catalog.all
 
     # Fetching
@@ -139,9 +143,19 @@ class PagesController < ApplicationController
       @categories_nb_of_searches << category[:nb_of_searches]
     end
 
-    # if !@categories_hashes.nil?
-    #   @categories_hashes.sort_by! { |element| element[:nb_of_searches] }
-    # end
+    # Fetching
+    Product.all.each do |product|
+      product.update(present_in_favorites: product.favorites.count)
+    end
+
+    @products_most_saved = []
+    @products_nb_times_currently_saved = []
+    @favorites_ranking = Product.order('present_in_favorites DESC').all
+
+    Product.order("present_in_favorites DESC").first(10).each do |product|
+      @products_most_saved << product.name
+      @products_nb_times_currently_saved << product.present_in_favorites
+    end
   end
 
   def synchronization
@@ -193,9 +207,6 @@ class PagesController < ApplicationController
 
   def vente
     @sales_catalog = Catalog.where(catalog_type: "vente").take
-  end
-
-  def reparation
   end
 
   def contact

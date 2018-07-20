@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   get 'location', to: "pages#location"
   get 'vente', to: "pages#vente"
-  get 'reparation', to: "pages#reparation"
   get 'contact', to: "pages#contact"
   get 'minilease', to: "pages#minilease"
   get 'garantie_dommages', to: "pages#garantie_dommages"
@@ -26,7 +25,9 @@ Rails.application.routes.draw do
   resources :categories, only: [ :create, :update, :destroy ]
   resources :products, only: [ :show, :create, :update, :destroy ] do
     resources :expendables, only: [ :create, :update, :destroy ]
+    resources :favorites, only: [ :create, :destroy ]
   end
+  # resources :favorites, only: [ :create, :destroy ]
   resources :promos
   resources :messages, only: [ :show, :create, :destroy ] do
     post '/check', to: 'messages#check!'
