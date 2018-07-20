@@ -52,7 +52,7 @@ class PagesController < ApplicationController
     @promo = Promo.where(display: true).last
     @catalogs = Catalog.all
 
-    @new_favorite = Favorite.new
+    # @new_favorite = Favorite.new
 
   end
 
@@ -144,6 +144,10 @@ class PagesController < ApplicationController
     end
 
     # Fetching
+    Product.all.each do |product|
+      product.update(present_in_favorites: product.favorites.count)
+    end
+
     @products_most_saved = []
     @products_nb_times_currently_saved = []
     @favorites_ranking = Product.order('present_in_favorites DESC').all

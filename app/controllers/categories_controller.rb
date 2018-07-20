@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
     authorize @products
     @categories = Category.order('name ASC').all
     # @all_products = Product.order('name ASC').all
-    @new_favorite = Favorite.new
+    # @new_favorite = Favorite.new
   end
 
   def create

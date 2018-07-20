@@ -5,7 +5,6 @@ class FavoritesController < ApplicationController
     @new_favorite = Favorite.new(favorite_params)
     @new_favorite.user_id = current_user.id
     authorize @new_favorite
-
     respond_to do |format|
       if @new_favorite.save
         product = Product.where(id: @new_favorite.product_id).take
