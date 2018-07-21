@@ -31,13 +31,13 @@ class ProductsController < ApplicationController
 
   def update
     authorize @product
-    respond_to do |format|
+    # respond_to do |format|
       if @product.update(product_params)
-        format.js
+        redirect_to product_path(@product)
       else
-        format.js
+        render edit_product_path(@product)
       end
-    end
+    # end
   end
 
   def destroy

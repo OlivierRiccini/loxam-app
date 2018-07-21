@@ -1,2 +1,88 @@
-<h1>Products#edit</h1>
-<%= render 'form' %>
+<%= simple_form_for @product do |f| %>
+  <div class="container container-product white-box">
+    <div class="product-title-container">
+      <h2><%= f.input :name, label: 'Nom' %></h2>
+      <div>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="row-presentation-product">
+      <div class="col-xs-12 col-sm-6 image-col">
+        <% if @product.photo? %>
+          <%= cl_image_tag @product.photo %>
+        <% else %>
+          <img src="https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg" alt="default_photo">
+        <% end %>
+        <%= f.input :photo %>
+        <%= f.input :photo_cache, as: :hidden %>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <p><strong><%= f.input :price, label: 'Tarif' %> HT / jour</strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / jour</p>
+        <p>Référence: <%= f.input :reference, label: 'Référence' %></p>
+        <%= f.input :description, label: 'Description' %>
+        <%= f.input :technical_sheet, label: 'Fiche technique' %>
+        <%= f.input :technical_sheet_cache, as: :hidden %>
+        <%= f.input :features, label: 'Caractéristiques' %>
+        <%= f.input :features_cache, as: :hidden %>
+      </div>
+    </div>
+
+
+    <div class="col-xs-12 product-conditions">
+      <p><strong>CALCUL DU TEMPS DE LOCATION* :
+      La location est facturée par tranche de 24h</strong>
+      <br>
+      Semaine : Du Lundi au Vendredi. Enlèvement entre 7h et 9h.
+      Forfait week-end : du vendredi 17h au lundi 9h.
+      <br>
+      Horaire de l'agence : ouvert du lundi au vendredi de 7h à 12h et de 13h à 18h.
+      <br>
+      Montant dépôt de garantie : <strong><%= f.input :deposit %></strong>
+      Pour toute location, un dépôt de garantie (uniquement en carte bleue) est demandé en fonction de la classification des matériels.</p>
+    </div>
+
+    <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="container-expendables">
+          <h3>Accessoires disponibles à la location de: <%= @product.name %></h3>
+          <% if @product.expendables.any? %>
+            <ul>
+              <% @product.expendables.each do |expendable| %>
+              <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>Aucun consommable disponible pour ce matériel</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="message-form-product-page">
+          <h3><%= @product.name %> vous intéresse?</h3>
+          <%= simple_form_for Message.new, remote: true  do |f| %>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <%= f.input :name, label: 'Nom/Société' %>
+              <span class="error" id="name-errro"></span>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <%= f.input :email %>
+              <span class="error" id="email-errro"></span>
+            </div>
+          </div>
+          <%= f.input :content, label: 'Message' %>
+          <span class="error" id="content-errro"></span>
+          <%= f.button :submit, value: 'Demande informations', class: 'loxam-btn btn-send' %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  document.getElementById('message_content').value = `   Bonjour, je suis intéressé par <%= @product.name %> référence <%= @product.reference %> et aurais aimé pré-reserver ce matériel`;
+</script>
