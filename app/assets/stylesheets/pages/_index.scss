@@ -1,7 +1,8 @@
 // Import page-specific CSS files here.
 @import "home";
-@import "product";
 @import "admin_dashboard";
 @import "location";
 @import "vente";
 @import "mon_espace";
+@import "product/product_show";
+@import "product/product_edit";

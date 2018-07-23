@@ -1,7 +1,7 @@
 <%= simple_form_for @product do |f| %>
-  <div class="container container-product white-box">
+  <div class="container container-product edit-product-page white-box">
     <div class="product-title-container">
-      <h2><%= f.input :name, label: 'Nom' %></h2>
+      <%= f.input :name, label: 'Nom' %>
       <div>
         <i class="fa fa-star"></i>
       </div>
@@ -39,7 +39,7 @@
       <br>
       Horaire de l'agence : ouvert du lundi au vendredi de 7h à 12h et de 13h à 18h.
       <br>
-      Montant dépôt de garantie : <strong><%= f.input :deposit %></strong>
+      Montant dépôt de garantie : <strong><%= f.input :deposit, label: false %></strong>
       Pour toute location, un dépôt de garantie (uniquement en carte bleue) est demandé en fonction de la classification des matériels.</p>
     </div>
 
