@@ -50,6 +50,18 @@
   }
 }
 
+.edit-btn {
+  background-color: rgb(255, 177, 59);
+  border-color: #fff;
+  color: #fff;
+  &:hover {
+    background-color: rgba(255, 177, 59, 0.7);
+  };
+  &:focus {
+    color: #fff;
+  }
+}
+
 // Home page btn favorites and categories shwo
 .row-les-plus-recherches,
 .row-les-nouveautes,
@@ -65,5 +77,4 @@
 .product-title-container .popover {
   color: $gray;
 }
-
 

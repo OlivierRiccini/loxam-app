@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get ':name/products', to: "categories#show", as: "category_products"
 
   resources :categories, only: [ :create, :update, :destroy ]
-  resources :products, only: [ :show, :create, :update, :destroy ] do
+  resources :products, only: [ :show, :create, :edit, :update, :destroy ] do
     resources :expendables, only: [ :create, :update, :destroy ]
     resources :favorites, only: [ :create, :destroy ]
   end
