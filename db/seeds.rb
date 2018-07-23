@@ -258,4 +258,70 @@ images_from_vente_page_loxam.each do |image|
   puts image
 end
 
+# LOXAM ACCESS
+loxam_access = Affiliate.new(name: "loxam-access",
+                             tagline: "L'élevation en toute confiance")
+loxam_access.remote_logo_url = 'app/assets/images/loxam-access.png'
+loxam_access.save
+
+html_home_page = open("http://www.loxam-access.com/").read
+find_categories = Nokogiri::HTML(html_home_page)
+
+# Loxam access / Category
+find_categories.search('#sidebar ul li').each do |category|
+
+  # Category name
+  category_name = category.search('a/@title').text
+
+  # Category image and description
+  category_link = category.search('a/@href').text
+  unless category_link.include? "http://www.loxam-access.com/gamme"
+    category_page = open("http://www.loxam-access.com#{category_link}").read
+    find_elements = Nokogiri::HTML(category_page)
+    page = find_elements.search('#content h1').text
+    if page == "Loxam ACCESS, l’élévation grande hauteur avec opérateur"
+      image_link = "http://www.loxam-access.com/img/img-loxam-lev.jpg"
+      spec = "Nacelles sur porteur PL de – 12 à 84 m et de nacelles araignées de 16 à 50 m de hauteur de travail."
+      description = "Nacelles sur porteur PL de 25 à 40 m, Nacelles sur porteur PL de 62 à 70 m,
+                     Nacelles sur porteur PL de 41 à 61 m, Nacelles araignées"
+    else
+      image_link = "http://www.loxam-access.com/images/uploads/casque_chantier.gif"
+      description = "Equipements antichute, Rubans - Grillages avertisseurs, Signaux de danger type AK,
+                     Panneaux - Cônes - Séparateurs de voie, Triangle lumineux,
+                     Vêtements haute visibilité, Casques, Gants, Chaussures de sécurité"
+    end
+  else
+    category_page = open(category_link).read
+    find_elements = Nokogiri::HTML(category_page)
+    image = "find_elements.search('#content .two-col div:first-child img/@src').text"
+
+    # Category image
+    image_link = "http://www.loxam-access.com#{image}"
+
+    spec_first = find_elements.search('.table-tabs li:first-child').text
+    spec_last = find_elements.search('.table-tabs li:last-child').text
+    splited_spec = "#{spec_first} #{spec_last}".split("à")
+    spec = "Hauteurs de travail de #{splited_spec[0]} à #{splited_spec[2]}"
+
+    # Category description
+    description_ul = find_elements.search('.list1').text.strip
+    description_text = find_elements.search('.two-col .last p:not(:last-child)').text.strip
+    description = "#{description_ul}//#{description_text}"
+  end
+
+  new_category = AffiliateCategory.new(name: category_name, spec: spec,
+                                       description: description,
+                                       affiliate_id: loxam_access.id)
+  new_category.remote_image_url = image_link
+  new_category.save
+
+end
+# Images for LOXAM ACCESS
+find_categories.search('.images li img/@src').each do |img|
+  loxam_access_images = "http://www.loxam-access.com/#{img.text}"
+  new_image = AffiliateImage.new(affiliate_id: loxam_access.id)
+  new_image.remote_url_url = loxam_access_images
+  new_image.save
+end
+
 puts "DB CREATED!"
