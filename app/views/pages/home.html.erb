@@ -5,10 +5,12 @@
       <h2>DÉCOUVREZ NOS SPECIALITÉS</h2>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-3"><a href="#"><%= image_tag 'loxam-module' %></a></div>
-      <div class="col-xs-12 col-sm-6 col-md-3"><a href="#"><%= image_tag 'loxam-power' %></a></div>
-      <div class="col-xs-12 col-sm-6 col-md-3"><a href="#"><%= image_tag 'loxam-tp' %></a></div>
-      <div class="col-xs-12 col-sm-6 col-md-3"><a href="#"><%= image_tag 'loxam-access' %></a></div>
+      <% @affiliates.each do |affiliate| %>
+        <div class="col-xs-12 col-sm-6 col-md-3"><%= link_to affiliate_path(affiliate.name) do %>
+            <%= image_tag(affiliate.logo) %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="row main-row">

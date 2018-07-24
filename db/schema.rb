@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180716155208) do
+ActiveRecord::Schema.define(version: 20180723131108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "affiliate_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "spec"
+    t.text "description"
+    t.string "image"
+    t.bigint "affiliate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["affiliate_id"], name: "index_affiliate_categories_on_affiliate_id"
+  end
+
+  create_table "affiliate_images", force: :cascade do |t|
+    t.string "url"
+    t.bigint "affiliate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["affiliate_id"], name: "index_affiliate_images_on_affiliate_id"
+  end
+
+  create_table "affiliates", force: :cascade do |t|
+    t.string "name"
+    t.text "tagline"
+    t.string "logo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "catalogs", force: :cascade do |t|
     t.string "catalog_type"
@@ -119,6 +146,8 @@ ActiveRecord::Schema.define(version: 20180716155208) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "affiliate_categories", "affiliates"
+  add_foreign_key "affiliate_images", "affiliates"
   add_foreign_key "expendables", "products"
   add_foreign_key "invoices", "users"
   add_foreign_key "products", "categories"

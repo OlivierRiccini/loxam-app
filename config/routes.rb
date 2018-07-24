@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
 
   devise_scope :user do
@@ -38,4 +39,6 @@ Rails.application.routes.draw do
   post 'synchronization', to: "pages#synchronization"
 
   resources :catalogs, only: [ :create, :update ]
+
+  get 'affiliates/:name', to: "affiliates#show", as: "affiliate"
 end

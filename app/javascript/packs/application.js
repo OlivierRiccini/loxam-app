@@ -18,6 +18,7 @@ import 'components/_search';
 import 'components/_dropdown-menu';
 import 'components/_dropdown-categories';
 import 'components/_scroll_to_top';
+import 'components/_slider_affiliate';
 import '_product_page';
 
 // $('.promo-card-image img').click(function() {
