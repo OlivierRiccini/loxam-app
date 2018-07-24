@@ -330,110 +330,340 @@ require 'nokogiri'
 #############################################
 
 # LOXAM MODULE
-loxam_module = Affiliate.new(name: "loxam-module",
-                             tagline: "Location et vente de constructions modulaires")
-loxam_module.remote_logo_url = 'app/assets/images/loxam-module.jpg'
-loxam_module.save
+# loxam_module = Affiliate.new(name: "loxam-module",
+#                              tagline: "Location et vente de constructions modulaires")
+# loxam_module.remote_logo_url = 'app/assets/images/loxam-module.jpg'
+# loxam_module.save
 
-module_categories = [
-                      {
-                        name: "industrie",
-                        spec: "Adapter l'espace de travail en toute sécurité",
-                        description: "Pour étendre votre activité, aménager de
-                                      nouveaux locaux ou accueillir les prestataires
-                                      en période d'arrêt technique d'usine,
-                                      LOXAM MODULE propose des constructions
-                                      modulaires adaptées à vos besoins et aux
-                                      contraintes de site industriel. Rapides à
-                                      mettre en place et fonctionnelles, nos
-                                      constructions modulaires vous offrent tout
-                                      le confort indispensable dans le respect des
-                                      normes techniques en vigueur (code du travail,
-                                      réglementations hygiène-sécurité).
-                                      Bureaux, laboratoire, local technique, poste de garde,
-                                      réfectoire, vestiaires, sanitaires, espace de stockage...",
-                        image: "http://www.loxam-module.com/img/slideshow/realisations_industrie1.jpg"
-                      },
-                      {
-                        name: "commerces & services",
-                        spec: "Offrir la proximité et la convivialité",
-                        description: "Pour renforcer votre présence commerciale et
-                                      accroître votre activité, LOXAM MODULE conçoit
-                                      des espaces modulaires sur mesure répondant à
-                                      l'ensemble des normes ERP en vigueur.
-                                      Point d'accueil, bulle de vente, hall d'exposition,
-                                      centre d'information, agence commerciale, magasin,
-                                      restaurant, espace détente...",
-                        image: "http://www.loxam-module.com/img/slideshow/tb_cs1.jpg"
-                      },
-                      {
-                        name: "collectivités",
-                        spec: "Recevoir tous les publics",
-                        description: "En collaboration avec les Collectivités,
-                                      LOXAM MODULE a développé des bâtiments et
-                                      des infrastructures adaptés au milieu scolaire
-                                      et associatif ainsi qu'aux services administratifs.
-                                      Crèche, garderie, écoles, cantine scolaire
-                                      locaux associatifs, club sportif, centre de loisirs
-                                      office de tourisme, bureaux administratifs...",
-                        image: "http://www.loxam-module.com/img/slideshow/realisations_collectivites5.jpg"
-                      },
-                      {
-                        name: "événementiel",
-                        spec: "Participer à la réussite de vos manifestations",
-                        description: "Pour toutes vos manifestations culturelles,
-                                      sportives et touristiques, LOXAM MODULE
-                                      propose des espaces modulables et confortables
-                                      pour recevoir tous les publics en garantissant
-                                      le respect des normes ERP et les réglementations
-                                      hygiène-sécurité en vigueur. Choisir LOXAM MODULE,
-                                      c'est choisir des espaces modulaires au design
-                                      étudié et personnalisé pour répondre à toutes vos
-                                      thématiques évènementielles.
-                                      Stand d'exposition, salle de conférence, espace de réception,
-                                      point d'accueil, centre de presse, régie télévisuelle
-                                      commissariat général, billetterie...",
-                        image: "http://www.loxam-module.com/img/slideshow/realisations_events2.jpg"
-                      },
-                      {
-                        name: "batiment - travaux publics",
-                        spec: "Accompagner les bâtisseurs sur tous les chantiers",
-                        description: "Besoin d'une base vie pour un nouveau chantier ?
-                                      Pour quelques mois ou plusieurs années, LOXAM MODULE
-                                      met en place rapidement des espaces modulaires
-                                      fonctionnels offrant tout le confort indispensable
-                                      dans le respect des normes techniques en vigueur
-                                      (code du travail, réglementations hygiène-sécurité).
-                                      Profitez de constructions modulaires 'clé en main'
-                                      avec tous les aménagements et équipements adaptés
-                                      à vos besoins (climatisation, câblages bureautique,
-                                      mobilier...).
-                                      Base vie, vestiaires, sanitaires, réfectoire, salle de réunion,
-                                      espace de travail, cantonnement, bungalow de chantier
-                                      espaces de stockage, locaux de gardiennage...",
-                        image: "http://www.loxam-module.com/img/slideshow/realisations_btp2.jpg"
-                      }
-                    ]
+# module_categories = [
+#                       {
+#                         name: "industrie",
+#                         spec: "Adapter l'espace de travail en toute sécurité",
+#                         description: "Pour étendre votre activité, aménager de
+#                                       nouveaux locaux ou accueillir les prestataires
+#                                       en période d'arrêt technique d'usine,
+#                                       LOXAM MODULE propose des constructions
+#                                       modulaires adaptées à vos besoins et aux
+#                                       contraintes de site industriel. Rapides à
+#                                       mettre en place et fonctionnelles, nos
+#                                       constructions modulaires vous offrent tout
+#                                       le confort indispensable dans le respect des
+#                                       normes techniques en vigueur (code du travail,
+#                                       réglementations hygiène-sécurité).
+#                                       Bureaux, laboratoire, local technique, poste de garde,
+#                                       réfectoire, vestiaires, sanitaires, espace de stockage...",
+#                         image: "http://www.loxam-module.com/img/slideshow/realisations_industrie1.jpg"
+#                       },
+#                       {
+#                         name: "commerces & services",
+#                         spec: "Offrir la proximité et la convivialité",
+#                         description: "Pour renforcer votre présence commerciale et
+#                                       accroître votre activité, LOXAM MODULE conçoit
+#                                       des espaces modulaires sur mesure répondant à
+#                                       l'ensemble des normes ERP en vigueur.
+#                                       Point d'accueil, bulle de vente, hall d'exposition,
+#                                       centre d'information, agence commerciale, magasin,
+#                                       restaurant, espace détente...",
+#                         image: "http://www.loxam-module.com/img/slideshow/tb_cs1.jpg"
+#                       },
+#                       {
+#                         name: "collectivités",
+#                         spec: "Recevoir tous les publics",
+#                         description: "En collaboration avec les Collectivités,
+#                                       LOXAM MODULE a développé des bâtiments et
+#                                       des infrastructures adaptés au milieu scolaire
+#                                       et associatif ainsi qu'aux services administratifs.
+#                                       Crèche, garderie, écoles, cantine scolaire
+#                                       locaux associatifs, club sportif, centre de loisirs
+#                                       office de tourisme, bureaux administratifs...",
+#                         image: "http://www.loxam-module.com/img/slideshow/realisations_collectivites5.jpg"
+#                       },
+#                       {
+#                         name: "événementiel",
+#                         spec: "Participer à la réussite de vos manifestations",
+#                         description: "Pour toutes vos manifestations culturelles,
+#                                       sportives et touristiques, LOXAM MODULE
+#                                       propose des espaces modulables et confortables
+#                                       pour recevoir tous les publics en garantissant
+#                                       le respect des normes ERP et les réglementations
+#                                       hygiène-sécurité en vigueur. Choisir LOXAM MODULE,
+#                                       c'est choisir des espaces modulaires au design
+#                                       étudié et personnalisé pour répondre à toutes vos
+#                                       thématiques évènementielles.
+#                                       Stand d'exposition, salle de conférence, espace de réception,
+#                                       point d'accueil, centre de presse, régie télévisuelle
+#                                       commissariat général, billetterie...",
+#                         image: "http://www.loxam-module.com/img/slideshow/realisations_events2.jpg"
+#                       },
+#                       {
+#                         name: "batiment - travaux publics",
+#                         spec: "Accompagner les bâtisseurs sur tous les chantiers",
+#                         description: "Besoin d'une base vie pour un nouveau chantier ?
+#                                       Pour quelques mois ou plusieurs années, LOXAM MODULE
+#                                       met en place rapidement des espaces modulaires
+#                                       fonctionnels offrant tout le confort indispensable
+#                                       dans le respect des normes techniques en vigueur
+#                                       (code du travail, réglementations hygiène-sécurité).
+#                                       Profitez de constructions modulaires 'clé en main'
+#                                       avec tous les aménagements et équipements adaptés
+#                                       à vos besoins (climatisation, câblages bureautique,
+#                                       mobilier...).
+#                                       Base vie, vestiaires, sanitaires, réfectoire, salle de réunion,
+#                                       espace de travail, cantonnement, bungalow de chantier
+#                                       espaces de stockage, locaux de gardiennage...",
+#                         image: "http://www.loxam-module.com/img/slideshow/realisations_btp2.jpg"
+#                       }
+#                     ]
 
-module_categories.each do |category|
+# module_categories.each do |category|
+#   new_category = AffiliateCategory.new(name: category[:name], spec: category[:spec],
+#                                        description: category[:description],
+#                                        affiliate_id: loxam_module.id)
+#   new_category.remote_image_url = category[:image]
+#   new_category.save
+# end
+
+# images_module = ["http://www.loxam-module.com/img/sct-industrie.jpg", "http://www.loxam-module.com/img/sct-commerce-services.jpg",
+#                  "http://www.loxam-module.com/img/sct-collectivites.jpg", "http://www.loxam-module.com/img/sct-evenementiel.jpg",
+#                  "http://www.loxam-module.com/img/sct-btp.jpg"]
+
+# # Images for LOXAM ACCESS
+# images_module.each do |image|
+#   new_image = AffiliateImage.new(affiliate_id: loxam_module.id)
+#   new_image.remote_url_url = image
+#   new_image.save
+# end
+
+##################################################
+###################################################
+
+# # LOXAM TP
+# loxam_tp = Affiliate.new(name: "loxam-tp",
+#                          tagline: "Loxam TP est le spécialiste de la location
+#                                    de matériels lourds pour le terrassement,
+#                                    le compactage et la démolition.")
+# loxam_tp.remote_logo_url = 'app/assets/images/loxam-tp.jpg'
+# loxam_tp.save
+
+# tp_categories = [
+#                   {
+#                     name: "pelles",
+#                     spec: "Pelles sur chenilles de ou sur pneus de 13 à 35T.",
+#                     description: "La pelle dur chenilles est très appréciée
+#                                   pour sa polyvalence sur chantier, elle permet
+#                                   en fonction de l’accessoire utilisé de creuser
+#                                   des fondations, remblayer, lever des charges,
+#                                   démolir, trier, raboter...celle sur pneus est
+#                                   indispensables sur un chantier urbain, elles
+#                                   permettent de réaliser des travaux de terrassement,
+#                                   d’espaces verts, de démolition, de VRD.
+#                                   Leur configuration les rend très mobiles sur
+#                                   terrain plat, stabilisé et sur route.",
+#                     image: "http://loxam-tp.com/IMG/arton6.gif"
+#                   },
+#                   {
+#                     name: "chargeuses",
+#                     spec: "chargeuses sur pneus de 1500 à 300L.",
+#                     description: "La chargeuse permet la manutention de matériaux en vrac.
+#                                   Elle peut aussi servir au déblayage après terrassement
+#                                   et au remblayage des tranchées.",
+#                     image: "http://loxam-tp.com/IMG/arton34.gif"
+#                   },
+#                   {
+#                     name: "tombereau",
+#                     spec: "Tombereau articulé 10 T",
+#                     description: "En collaboration avec les Collectivités,
+#                                   Spécialement conçu pour affronter les dénivelés
+#                                   et les irrégularités de passage, le tombereau
+#                                   articulé est le moyen le plus efficace pour
+#                                   transporter vos chargements de terre ou de
+#                                   matériaux à travers vos chantiers les plus
+#                                   difficiles d’accès. Charge utile maxiamle
+#                                   de 10t et motricité 4 RMmm.",
+#                     image: "http://loxam-tp.com/IMG/arton35.gif"
+#                   },
+#                   {
+#                     name: "compacteurs",
+#                     spec: "Du rouleau tandem au compacteur monobille en passant par
+#                            le compacteur à pneus. De 7 à 24 T.",
+#                     description: "Le rouleau tandem est parfait pour les
+#                                   chantiers de grande envergure (routiers,
+#                                   autoroutiers, aéroportaires). Compactage
+#                                   des couches de base et d’asphalte.
+#                                   Le compacteur à pneus est principalement destiné
+#                                   aux travaux de finition de surface des enrobés
+#                                   et des sols. Il est particulièrement efficace
+#                                   sur les revêtements minces qui ne supportent
+#                                   pas les vibrations. L’action des pneumatiques
+#                                   permet de réaliser un excellent scellement de
+#                                   surface des enrobés bitumeux grâce à l’effet
+#                                   de malaxage des pneus et améliore considérablement
+#                                   la rugosité du revêtement.
+#                                   Et enfin, le compacteur monobille est destiné
+#                                   aux travaux de construction routière et autoroutière
+#                                   et permet la réalisation de plateformes comme des
+#                                   parkings, des aéroports, des aménagements portuaires.",
+#                     image: "http://www.loxam-module.com/img/slideshow/realisations_events2.jpg"
+#                   },
+#                   {
+#                     name: "brumisateurs",
+#                     spec: "Brumisateur de chantier, rayon d’action de 40 / 50m et
+#                            consommation d’eau de 43l.",
+#                     description: "Le brumisateur de chantier permet d’améliorer
+#                                   grandement les conditions de travail dans
+#                                   les environnements poussiéreux en projetant
+#                                   des micros gouttelettes qui capturent les
+#                                   poussières pour les faire descendre au sol
+#                                   par gravité.",
+#                     image: "http://loxam-tp.com/IMG/arton10.gif"
+#                   },
+#                   {
+#                     name: "robots de démolition",
+#                     spec: "",
+#                     description: "Le robot de démolition est adapté aux travaux
+#                                   de démolition et de réhabilitation dans des
+#                                   environnements difficiles. Doté de toute la
+#                                   gamme d’accessoires de démolition, il répond
+#                                   à tous les exigences en matière de démolition
+#                                   et de déconstruction. Le robot de démolition
+#                                   assure confort et sécurité au travail :
+#                                   l’opérateur ne subit aucune vibration et
+#                                   n’est pas exposé en zone de risques.",
+#                     image: "http://loxam-tp.com/IMG/arton65.gif"
+#                   },
+#                   {
+#                     name: "accessoires",
+#                     spec: "",
+#                     description: "Benne preneuse, BRH, Broyeur à béton,
+#                                   Cisaille à béton, Dent de dérochage,
+#                                   Godet de curage, Godet rétro, Pince de tri,
+#                                   Cisaille à ferraille, Godet à griffes...",
+#                     image: "http://loxam-tp.com/IMG/arton42.gif"
+#                   }
+#                 ]
+
+# tp_categories.each do |category|
+#   new_category = AffiliateCategory.new(name: category[:name], spec: category[:spec],
+#                                        description: category[:description],
+#                                        affiliate_id: loxam_tp.id)
+#   new_category.remote_image_url = category[:image]
+#   new_category.save
+# end
+
+# images_tp = ["http://loxam-tp.com/IMG/arton66.gif", "http://loxam-tp.com/IMG/arton72.gif",
+#              "http://loxam-tp.com/IMG/arton72.gif", "http://loxam-tp.com/IMG/arton75.gif",
+#              "http://loxam-tp.com/IMG/arton76.jpg"]
+
+# # Images for LOXAM ACCESS
+# images_tp.each do |image|
+#   new_image = AffiliateImage.new(affiliate_id: loxam_tp.id)
+#   new_image.remote_url_url = image
+#   new_image.save
+# end
+
+############################################
+############################################
+
+
+# LOXAM POWER
+loxam_power = Affiliate.new(name: "loxam-power",
+                            tagline: "Location de matériel industriel.")
+loxam_power.remote_logo_url = 'app/assets/images/loxam-power.jpg'
+loxam_power.save
+
+power_categories = [
+                  {
+                    name: "air comprimé",
+                    spec: "Location de compresseurs.",
+                    description: "Qu’il s’agisse de pannes ou de pics de production
+                                  nécessitant un apport d’air supplémentaire, d’une
+                                  phase de maintenance ou de réparation de vos
+                                  installations, LOXAM POWER met à votre disposition
+                                  une large gamme de compresseurs jusqu'à 2700 m3/h
+                                  (thermiques ou électriques, lubrifiés ou air sans
+                                  huile, haute ou basse pression), ainsi que tous
+                                  les accessoires et services associés.",
+                    image: "http://loxam-power.fr/img/categories/Compresseurs-thermiques-air-lubrifie.jpg"
+                  },
+                  {
+                    name: "traitement d'air",
+                    spec: "Location de matériel de traitement d’air.",
+                    description: "Notre gamme de traitement d’air permet de répondre
+                                  aux critères requis : température, point de
+                                  rosée, air sans huile, air respirable…
+                                  Afin d’être en adéquation avec vos besoins,
+                                  LOXAM POWER met à votre disposition une large
+                                  gamme d’équipement (sécheurs, unités de
+                                  dessiccation, aéroréfrigérants, unités d’air
+                                  respirable…), permettant de garantir la continuité
+                                  de votre production dans les meilleurs conditions.",
+                    image: "http://loxam-power.fr/img/categories/Unite-de-sechage.jpg"
+                  },
+                  {
+                    name: "electricité",
+                    spec: "Location de groupes électrogènes",
+                    description: "Qu’il s’agisse d’une rupture du réseau électrique,
+                                  ou d’un besoin planifié (complément de puissance,
+                                  alimentation d’une installation temporaire…),
+                                  LOXAM POWER met à votre disposition sa large
+                                  gamme de groupes électrogènes jusqu’à 2 000 kVA
+                                  ainsi que tous les accessoires et services associés.",
+                    image: "http://loxam-power.fr/img/categories/Groupes-electrogenes-insonorises-de-12-a-500-kVA.jpg"
+                  },
+                  {
+                    name: "contrôle de température",
+                    spec: "Location de matériel de contrôle de température",
+                    description: "Afin de répondre à vos exigences très précises
+                                  en matière d’énergie frigorifique et climatique
+                                  et de faire face à toutes les situations,
+                                  LOXAM POWER vous propose ses gammes dédiées de
+                                  groupes de production d’eau glacée jusqu’à 650
+                                  kW et de climatiseurs jusqu’à 85 kW.",
+                    image: "http://loxam-power.fr/img/categories/Groupes-de-production-d-eau-glacee.jpg"
+                  },
+                  {
+                    name: "soudage",
+                    spec: "Location de matériel de soudage",
+                    description: "Pour tous vos travaux de chaudronnerie (soudage, découpage),
+                                  LOXAM POWER vous propose en location, une large
+                                  gamme de groupes de soudage autonomes ou électriques
+                                  permettant de nombreux types de procédés :
+                                  ARC, TIG, et ARC-AIR.",
+                    image: "http://loxam-power.fr/img/categories/Postes-electriques.jpg"
+                  },
+                  {
+                    name: "pompage",
+                    spec: "Location de pompes industrielles",
+                    description: "En cas de sinistre ou lors de phases de maintenance,
+                                  de travaux ou de réparation, il est nécessaire
+                                  de maîtriser et gérer les niveaux d’eau. Ainsi,
+                                  LOXAM POWER met à votre disposition une large
+                                  gamme de pompes pour des eaux claires à très
+                                  chargées, jusqu’à 1 200 m³/h, pompes de surface
+                                  ou immergées, pompes haute pression, pompes diesel,
+                                  pneumatiques ou électriques.",
+                    image: "http://loxam-power.fr/img/categories/Pompes-electriques.jpg"
+                  }
+                ]
+
+power_categories.each do |category|
   new_category = AffiliateCategory.new(name: category[:name], spec: category[:spec],
                                        description: category[:description],
-                                       affiliate_id: loxam_module.id)
+                                       affiliate_id: loxam_power.id)
   new_category.remote_image_url = category[:image]
   new_category.save
 end
 
-images_access = ["http://www.loxam-module.com/img/sct-industrie.jpg", "http://www.loxam-module.com/img/sct-commerce-services.jpg",
-                 "http://www.loxam-module.com/img/sct-collectivites.jpg", "http://www.loxam-module.com/img/sct-evenementiel.jpg",
-                 "http://www.loxam-module.com/img/sct-btp.jpg"]
+images_power = ["http://loxam-power.fr/img/homeBkg/img0.jpg", "http://loxam-power.fr/img/homeBkg/img1.jpg",
+             "http://loxam-power.fr/img/homeBkg/img2.jpg", "http://loxam-power.fr/img/homeBkg/img3.jpg",
+             "http://loxam-power.fr/img/homeBkg/img4.jpg"]
 
 # Images for LOXAM ACCESS
-images_access.each do |image|
-  new_image = AffiliateImage.new(affiliate_id: loxam_module.id)
+images_power.each do |image|
+  new_image = AffiliateImage.new(affiliate_id: loxam_power.id)
   new_image.remote_url_url = image
   new_image.save
 end
-
 puts "DB CREATED!"
 
 
