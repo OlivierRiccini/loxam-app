@@ -8,5 +8,10 @@
     position: absolute;
     // height: 100%;
     width: 100%;
+    display: none;
   };
+}
+
+#slider-affiliate-images img:first-child {
+  display: block;
 }
