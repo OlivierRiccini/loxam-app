@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-6" id="slider-affiliate-images">
+    <% @affiliate.affiliate_images.each do |image| %>
+      <%= cl_image_tag image.url %>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h1><%= @affiliate.name.upcase %></h1>
+    <h2><%= @affiliate.tagline.capitalize %></h2>
+  </div>
+</div>
+
+<% @affiliate.affiliate_categories.each do |category| %>
+  <div>
+    <h3><%= category.name.upcase %></h3>
+    <%= cl_image_tag category.image %>
+    <strong><%= category.spec %></strong>
+    <p><%= category.description %></p>
+  </div>
+<% end %>
+

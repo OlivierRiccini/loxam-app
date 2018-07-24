@@ -7,6 +7,8 @@ class PagesController < ApplicationController
   def home
     @categories = Category.order('name ASC')
 
+    @affiliates = Affiliate.all
+
     # Les plus recherchés
     @best_searches_choice = Product.where(best_searches_choice: true)
     @best_searches_auto = Product.order("nb_of_searches DESC").first(4)
