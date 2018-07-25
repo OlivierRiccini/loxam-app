@@ -4,5 +4,6 @@ class AffiliatesController < ApplicationController
 
   def show
     @affiliate = Affiliate.find_by_name(params[:name])
+    @affiliates = Affiliate.all
   end
 end

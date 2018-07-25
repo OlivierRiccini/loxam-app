@@ -1,13 +1,20 @@
-<div class="row">
-  <div class="col-xs-12" id="slider-affiliate-images">
+<div class="banner-affiliate row">
+  <div class="col-xs-12 col-sm-5">
+    <h1><%= @affiliate.name.upcase %></h1>
+    <%= cl_image_tag @affiliate.logo, height: '80' %>
+    <h2><%= @affiliate.tagline.capitalize %></h2>
+    <% @affiliates.each do |affiliate| %>
+      <% unless affiliate == @affiliate %>
+        <%= link_to affiliate_path(affiliate.name) do %>
+          <%= cl_image_tag affiliate.logo, height: '80' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-sm-7" id="slider-affiliate-images">
     <% @affiliate.affiliate_images.each do |image| %>
       <%= cl_image_tag image.url %>
     <% end %>
-  </div>
-  <div class="col-xs-12 white-box">
-    <h1><%= @affiliate.name.upcase %></h1>
-    <h2><%= @affiliate.tagline.capitalize %></h2>
-    <%= cl_image_tag @affiliate.logo, height: '200' %>
   </div>
 </div>
 
