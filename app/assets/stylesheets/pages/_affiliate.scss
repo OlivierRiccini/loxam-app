@@ -2,16 +2,52 @@
   position: relative;
   // display: flex;
   // justify-content: center;
-  height: 45vh;
+  height: 50vh;
   // margin: 0 auto;
   img {
     position: absolute;
     // height: 100%;
     width: 100%;
     display: none;
+    object-fit: cover;
   };
 }
 
 #slider-affiliate-images img:first-child {
   display: block;
+}
+
+.affiliate-category-card {
+  // padding: 10px;
+  display: flex;
+  // align-items: center;
+  font-size: 0.9em;
+  margin: 20px auto;
+  .loxam-btn {
+    display: block;
+    width: fit-content;
+    // float: right;
+    margin-bottom: 10px;
+  }
+}
+
+.affiliate-category-card-image {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // align-self: flex-start;
+  padding: 10px;
+  img {
+    max-width: 100%;
+  }
+}
+
+.affiliate-category-card-content {
+  width: 75%;
+  padding: 0 10px;
+  align-self: flex-start;
+  h3 {
+    margin-top: 10px;
+  }
 }
