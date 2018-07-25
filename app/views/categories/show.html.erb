@@ -5,7 +5,7 @@
       <div class="col-xs-12 col-sm-6 col-md-3 col-item-card">
         <div class="item-card white-box">
           <div class="favorite-star-container-product-<%= product.id %>">
-            <% if current_user.products.include? product %>
+            <% if (user_signed_in?) && (current_user.products.include? product) %>
               <%= link_to product_favorite_path(current_user, product), class: 'btn-favorite-active', remote: true, :method => :delete, :data => { toggle: 'popover', trigger: 'hover', content: 'Retirer des favoris', placement: 'left' } do %>
                 <i class="fa fa-star"></i>
                 <script>

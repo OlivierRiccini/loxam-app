@@ -1,0 +1,4 @@
+fr:
+  devise:
+    failure:
+      unauthenticated: "Vous devez être connecté pour pouvoir ajouter un favori."
