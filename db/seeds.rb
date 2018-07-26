@@ -228,7 +228,7 @@ require 'nokogiri'
 # puts "Catalogs created!"
 # puts "Promo!"
 
-# User.create(email: "loxam@loxam.fr", password: "loxambastia", name: "loxam bastia", admin: true)
+User.create(email: "loxam@loxam.fr", password: "loxambastia", name: "loxam bastia", admin: true)
 
 # puts "User created!"
 

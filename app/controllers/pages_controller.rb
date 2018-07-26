@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
+  # before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   include ActionView::Helpers::UrlHelper
@@ -228,11 +228,5 @@ class PagesController < ApplicationController
   end
 
   def documentations
-  end
-
-  private
-
-  def all_products
-    @products = Product.all
   end
 end
