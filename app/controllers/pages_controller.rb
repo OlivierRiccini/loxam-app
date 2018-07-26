@@ -135,6 +135,8 @@ class PagesController < ApplicationController
                                .pluck(:nb_of_searches)
                                .reduce(:+)
       }
+
+    @categories_hashes.sort_by! { |category| category[:nb_of_searches] }.reverse!
     end
 
     @categories_names = []
