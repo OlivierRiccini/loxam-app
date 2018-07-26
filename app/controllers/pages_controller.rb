@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   include ActionView::Helpers::UrlHelper
 
   def home
-    @categories = Category.order('name ASC')
+    # @categories = Category.order('name ASC')
 
     @affiliates = Affiliate.all
 

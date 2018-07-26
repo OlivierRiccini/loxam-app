@@ -1,24 +1,36 @@
 <div class="container container-vente white-box">
-  <p>Plus de <strong>1400 produits à la vente</strong>, sélectionnés auprès des meilleurs fabricants parmi les marques de référence utilisées régulièrement par vos équipes.</p>
-
+  <!-- <div class="col-xs-12 col-sm-8">
+    <p>Plus de <strong>1400 produits à la vente</strong>, sélectionnés auprès des meilleurs fabricants parmi les marques de référence utilisées régulièrement par vos équipes.</p>
+  </div>
+  <div class="vente-page-flex-box">
+    <h4>ACCEDER AU CATALOGUE DE VENTE LOXAM</h4>
+    <a class="img-catalog" href="<%= @sales_catalog.link %>" target="_blank">
+      <%= cl_image_tag @sales_catalog.image, height: '300' %>
+    </a>
+  </div>  -->
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <div>
-      <h5>Topographie - Communication</h5>
-      <div class="vente-page-flex-box">
-        <ul>
-          <li>Niveaux optiques</li>
-          <li>Lasers terrassement nivellement</li>
-          <li>Lasers gros œuvre</li>
-          <li>Lasers second œuvre</li>
-          <li>Instruments de mesure</li>
-          <li>Détection</li>
-          <li>Émetteur / Récepteur</li>
-          <li>Téléphonie</li>
-        </ul>
-        <%= cl_image_tag 'image-vente-page-1.jpg' %>
+
+      <div class="vente-page-intro">
+        <p>Plus de <strong>1400 produits à la vente</strong>, sélectionnés auprès des meilleurs fabricants parmi les marques de référence utilisées régulièrement par vos équipes.</p>
       </div>
-    </div>
+
+      <div>
+        <h5>Topographie - Communication</h5>
+        <div class="vente-page-flex-box">
+          <ul>
+            <li>Niveaux optiques</li>
+            <li>Lasers terrassement nivellement</li>
+            <li>Lasers gros œuvre</li>
+            <li>Lasers second œuvre</li>
+            <li>Instruments de mesure</li>
+            <li>Détection</li>
+            <li>Émetteur / Récepteur</li>
+            <li>Téléphonie</li>
+          </ul>
+          <%= cl_image_tag 'image-vente-page-1.jpg' %>
+        </div>
+      </div>
     <div>
       <h5>Équipement et protection de chantier</h5>
       <div class="vente-page-flex-box">
@@ -153,7 +165,12 @@
     </div>
     </div>
     <div class="col-xs-12 col-sm-6">
-
+      <div class="vente-page-catalog">
+        <h4>ACCEDER AU CATALOGUE DE VENTE LOXAM</h4>
+        <a class="img-catalog" href="<%= @sales_catalog.link %>" target="_blank">
+          <%= cl_image_tag @sales_catalog.image, height: '300' %>
+        </a>
+      </div>
       <div>
       <h5>Élévation des personnes / Charges</h5>
       <div class="vente-page-flex-box">
@@ -280,7 +297,4 @@
     </div>
 
   </div>
-  <h4>ACCEDER AU CATALOGUE DE VENTE LOXAM</h4>
-  <a class="img-catalog" href="<%= @sales_catalog.link %>" target="_blank">
-    <%= cl_image_tag @sales_catalog.image, height: '300' %></a>
 </div>

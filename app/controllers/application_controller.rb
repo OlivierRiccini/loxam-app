@@ -33,6 +33,6 @@ class ApplicationController < ActionController::Base
   end
 
   def all_categories
-    @categories = Category.all
+    @categories = Category.order('name ASC')
   end
 end

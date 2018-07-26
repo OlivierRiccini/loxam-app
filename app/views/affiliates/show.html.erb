@@ -1,6 +1,7 @@
 <div class="banner-affiliate row">
-  <div class="col-xs-12 col-sm-5">
-    <h1><%= @affiliate.name.upcase %></h1>
+  <div class="col-xs-12 col-sm-1">
+    <!-- <h1><%= @affiliate.name.upcase %></h1> -->
+    <!-- <div style="background-image: url('<%= cl_image_path @affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
     <%= cl_image_tag @affiliate.logo, height: '80' %>
     <h2><%= @affiliate.tagline.capitalize %></h2>
     <% @affiliates.each do |affiliate| %>
@@ -9,8 +10,24 @@
           <%= cl_image_tag affiliate.logo, height: '80' %>
         <% end %>
       <% end %>
+    <% end %> -->
+    <% @affiliates.each do |affiliate| %>
+      <% unless affiliate == @affiliate %>
+        <%= link_to affiliate_path(affiliate.name) do %>
+          <div style="background-image: linear-gradient(-225deg, rgba(100, 100, 100, 0.5), rgba(100, 100, 100, 0.3)), url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+        <% end %>
+      <% else %>
+        <%= link_to affiliate_path(affiliate.name) do %>
+          <div style="background-image: url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2><%= @affiliate.tagline.capitalize %></h2>
+    </div>
+
+
   <div class="col-xs-12 col-sm-7" id="slider-affiliate-images">
     <% @affiliate.affiliate_images.each do |image| %>
       <%= cl_image_tag image.url %>
