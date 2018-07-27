@@ -19,10 +19,10 @@ const slider = document.getElementById('slider-affiliate-images');
 // Get slider images
 const sliderImages = document.querySelectorAll('#slider-affiliate-images img');
 
-console.log(slider);
-
 // Set slider height
-slider.style.height = `${logoAffiliates.offsetHeight}px`;
+if (slider) {
+  slider.style.height = `${logoAffiliates.offsetHeight}px`;
+}
 
 
 let i = 0;
