@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
-  # include ActionView::Helpers::UrlHelper
 
   def create
     @new_favorite = Favorite.new(favorite_params)

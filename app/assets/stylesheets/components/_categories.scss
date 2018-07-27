@@ -10,7 +10,7 @@
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
-  &:hover {
+  &:hover, &:active {
     text-decoration: none;
     background-color: #fff;
     color: $loxam-color;
@@ -23,8 +23,14 @@
 }
 
 .catgories-container {
-  margin: 10px 0;
+  margin: 25px 0 45px 0;
   width: 100vw;
+}
+
+.tags-catgories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tags-catgories-container-small-screen {

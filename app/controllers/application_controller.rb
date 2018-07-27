@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :all_categories
+  before_action :all_categories, :all_products
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
   end
 
   def all_categories
-    @categories = Category.all
+    @categories = Category.order('name ASC')
+  end
+
+  def all_products
+    @products = Product.order('name ASC')
   end
 end

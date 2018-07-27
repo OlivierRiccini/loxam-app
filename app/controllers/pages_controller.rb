@@ -1,11 +1,11 @@
 class PagesController < ApplicationController
-  before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
+  # before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation, :contact ]
 
   include ActionView::Helpers::UrlHelper
 
   def home
-    @categories = Category.order('name ASC')
+    # @categories = Category.order('name ASC')
 
     @affiliates = Affiliate.all
 
@@ -135,6 +135,8 @@ class PagesController < ApplicationController
                                .pluck(:nb_of_searches)
                                .reduce(:+)
       }
+
+    @categories_hashes.sort_by! { |category| category[:nb_of_searches] }.reverse!
     end
 
     @categories_names = []
@@ -181,20 +183,27 @@ class PagesController < ApplicationController
 
       text = File.open(fname).read
       text.each_line do |line|
-        array = line.strip.split(/\;/)
+        file_order_columns = line.strip.split(/\;/)
 
-        unless User.where(loxam_id: array[2]).exists?
-          User.create(name: array[3], email: Faker::Internet.email,
-                    password: Faker::IDNumber.valid, loxam_id: array[2])
+
+        unless User.where(loxam_id: file_order_columns[2]).exists?
+          User.create(name: file_order_columns[3], email: file_order_columns[8],
+                      password: Faker::IDNumber.valid, loxam_id: file_order_columns[2])
         end
 
         files_pdf.each do |pdf_doc|
-          if pdf_doc == array[6]
-          p "#{pdf_doc} == #{array[6]}"
+          # file_order_columns[6] == pdf id
+          if pdf_doc == file_order_columns[6]
+          puts "#{pdf_doc} == #{file_order_columns[6]}"
             ftp.getbinaryfile(pdf_doc, pdf_doc)
-            new_doc = Invoice.new(id_invoice_loxam: array[0], user_id: User.where(loxam_id: array[2]).take.id)
-            new_doc.remote_pdf_url = pdf_doc
-            new_doc.save
+
+            user = User.where(loxam_id: file_order_columns[2]).take
+            # unless user.invoices.any? { |invoice| invoice[:id_invoice_loxam] == file_order_columns[0].to_i }
+              new_doc = Invoice.new(id_invoice_loxam: file_order_columns[0], user_id: user.id)
+              new_doc.remote_pdf_url = pdf_doc
+              new_doc.save
+            # end
+
             File.delete(pdf_doc)
           end
         end
@@ -228,11 +237,5 @@ class PagesController < ApplicationController
   end
 
   def documentations
-  end
-
-  private
-
-  def all_products
-    @products = Product.all
   end
 end
