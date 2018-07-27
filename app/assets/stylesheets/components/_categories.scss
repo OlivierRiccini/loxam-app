@@ -10,7 +10,7 @@
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
-  &:hover {
+  &:hover, &:active {
     text-decoration: none;
     background-color: #fff;
     color: $loxam-color;

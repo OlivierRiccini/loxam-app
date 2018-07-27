@@ -11,20 +11,24 @@
         <% end %>
       <% end %>
     <% end %> -->
-    <% @affiliates.each do |affiliate| %>
-      <% unless affiliate == @affiliate %>
-        <%= link_to affiliate_path(affiliate.name) do %>
-          <div style="background-image: linear-gradient(-225deg, rgba(100, 100, 100, 0.5), rgba(100, 100, 100, 0.3)), url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
-        <% end %>
-      <% else %>
-        <%= link_to affiliate_path(affiliate.name) do %>
-          <div style="background-image: url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+    <div id="affiliates-logo-navigation-container">
+      <% @affiliates.each do |affiliate| %>
+        <% unless affiliate == @affiliate %>
+          <%= link_to affiliate_path(affiliate.name) do %>
+            <div style="background-image: linear-gradient(-225deg, rgba(244, 244, 244, 0.6), rgba(244, 244, 244, 0.6)), url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+          <% end %>
+        <% else %>
+          <%= link_to affiliate_path(affiliate.name) do %>
+            <div style="background-image: url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
     <div class="col-xs-12 col-sm-4">
-      <h2><%= @affiliate.tagline.capitalize %></h2>
+      <p><%= @affiliate.tagline.capitalize %></p>
+      <p>Loxam Bastia toujours présent pour répondre à vos questions!</p>
+      <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
     </div>
 
 

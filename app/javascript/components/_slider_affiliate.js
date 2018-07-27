@@ -10,20 +10,33 @@
   // }, 4000);
 // }
 
-const images = document.querySelectorAll('#slider-affiliate-images img');
+// find affiliates container's height
+const logoAffiliates = document.getElementById('affiliates-logo-navigation-container');
+
+// Get slider
+const slider = document.getElementById('slider-affiliate-images');
+
+// Get slider images
+const sliderImages = document.querySelectorAll('#slider-affiliate-images img');
+
+console.log(slider);
+
+// Set slider height
+slider.style.height = `${logoAffiliates.offsetHeight}px`;
+
 
 let i = 0;
 let j = -1;
 
-function slider() {
-  jQuery(images[i++]).fadeIn(2000);
-  jQuery(images[j++]).fadeOut(3000);
-  if (i > images.length - 1) {
+function changeImage() {
+  jQuery(sliderImages[i++]).fadeIn(2000);
+  jQuery(sliderImages[j++]).fadeOut(3000);
+  if (i > sliderImages.length - 1) {
     i = 0;
   };
-  if (j > images.length - 1) {
+  if (j > sliderImages.length - 1) {
     j = 0;
   };
 }
 
-setInterval(slider, 3000);
+setInterval(changeImage, 3000);
