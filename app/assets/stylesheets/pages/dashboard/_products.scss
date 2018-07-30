@@ -20,11 +20,32 @@
   }
 }
 
-.item-card-dashboard-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .loxam-btn {
+.row-product-dashboard {
+  background-color: $light-gray;
+  margin: 5px 0;
+  padding: 5px;
+  .form-group {
+    margin-top: 0;
+  };
+  .form-control, .loxam-btn {
     font-size: 14px;
+    height: 28px;
   }
+  .fa-trash {
+    position: static;
+    font-size: 14px;
+  };
+  .simple_form {
+    font-size: 14px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  };
+}
+
+#notif {
+  background-color: darkseagreen;
+  border-radius: 2px;
 }

@@ -35,13 +35,13 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.update(product_params)
       if request.referrer.include? admin_dashboard_path
-        respond_to { |format| format.js }
+        respond_to { |format| format.js {flash[:success] = "#{@product.name} a été modifié"} }
       else
         redirect_to product_path(@product)
       end
     else
       if request.referrer.include? admin_dashboard_path
-        respond_to { |format| format.js }
+        respond_to { |format| format.js {flash[:success] = "#{@product.name} n'a pas pu être modifié"} }
       else
         render edit_product_path(@product)
       end

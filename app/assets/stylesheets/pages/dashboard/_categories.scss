@@ -7,9 +7,7 @@
   margin: 5px 0;
   padding: 5px;
   font-size: 16px;
-  &:nth-child(n+1) {
-    background: $light-gray;
-  };
+  background: $light-gray;
   p {
     margin-bottom: 0;
   };

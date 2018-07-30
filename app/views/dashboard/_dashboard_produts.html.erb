@@ -7,7 +7,7 @@
         <h4 class="nb-of-products">Il y a <strong><%= Product.count %></%></strong> matériels</h4>
       </div>
 
-      <!-- Filter by category-->
+      <!-- Filter by category -->
       <div class="col-xs-12 col-sm-6">
         <%= form_tag admin_dashboard_path, method: :get do %>
           <%= collection_select :category, :id,
@@ -26,15 +26,17 @@
     <%= render 'products/form' %>
   </div>
 
+  <div id="notif"></div>
   <% @products.each do |product| %>
-    <div class="row-product-dashboard-list">
+    <div class="row-product-dashboard">
       <%= simple_form_for product, html: {class: 'form-inline'}, remote: true do |f| %>
         <%= f.input :name, label: false %>
         <%= f.input :reference, label: false %>
-        <%= f.input :price, label: false %>
+        <%= f.input :price, label: false %>€ HT /
         <%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %>
+        <%= f.input :deposit, label: false %>€
         <%= f.button :submit, class: 'loxam-btn', value: 'Sauvegarder' %>
-        <%= link_to 'Détails/Modifier', product_path(product), class: 'loxam-btn' %>
+        <%= link_to 'Détails/Modifier', edit_product_path(product), class: 'loxam-btn' %>
         <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
           <i class="fa fa-trash"></i>
           <% end %>
