@@ -26,6 +26,17 @@ html, body {
 
 p {
   font-weight: lighter;
+  color: $font-color;
+}
+
+.loxam-name {
+  font-weight: bolder;
+  span:first-child {
+    color: $loxam-color;
+  };
+  span:last-child {
+    color: $font-color;
+  }
 }
 
 input:focus,
