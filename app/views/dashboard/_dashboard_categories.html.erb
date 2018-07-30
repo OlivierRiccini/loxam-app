@@ -7,15 +7,16 @@
   <div class="container-categories">
     <% @categories.each do |category| %>
     <div class="row row-category" id="row-category-<%= category.id %>">
-        <div class="col-sm-6 category-name">
+      <!--  <div class="col-sm-6 category-name">
           <p><%= category.name.capitalize %></p>
-        </div>
-        <div class="col-sm-6 category-actions">
+        </div> -->
+        <div class="category-actions">
           <%= simple_form_for category, remote: true  do |f| %>
             <%= f.input :name, label: false %>
-            <span class="error"></span>
+            <!-- <span class="error"></span> -->
             <%= f.button :submit, value: 'Modifier', class: 'loxam-btn btn-send' %>
           <% end %>
+          <span><%= category.products.count %> matériels</span>
           <%= link_to category_path(category), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer cette categorie Jano?"} do %>
             <i class="fa fa-trash"></i>
           <% end %>
