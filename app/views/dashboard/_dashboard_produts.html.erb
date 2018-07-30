@@ -43,44 +43,46 @@
           <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
           <i class="fa fa-trash"></i>
           <% end %>
-          <div class="card-infos">
-            <h3><%= product.name %></h3>
-          </div>
-          <ul class="card-infos-list">
-            <li><strong>Référence:</strong> <%= product.reference %></li>
-            <li><strong>Catégorie:</strong> <%= product.category.name %></li>
-            <li><strong>Prix:</strong> <%= product.price %>€/jour</li>
-            <% if product.technical_sheet? %>
-              <li><strong>Deposit:</strong> <%= product.deposit %></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">Deposit</strong></li>
-            <% end %>
-            <% if product.video? %>
-              <li><strong>Video</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">video</strong></li>
-            <% end %>
-            <% if product.loxam_link? %>
-              <li><strong>Loxam lien</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">loxam_link</strong></li>
-            <% end %>
-            <% if product.technical_sheet? %>
-              <li><strong>technical_sheet</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">Fiche technique</strong></li>
-            <% end %>
-            <% if product.features? %>
-              <li><strong>Caractéristiques</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">features</strong></li>
-            <% end %>
-            <% if product.description? %>
-              <li><strong>Description</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">Description</strong></li>
-            <% end %>
-          </ul>
+          <%= simple_form_for product, remote: true do |f| %>
+            <div class="card-infos">
+              <h3><%= f.input :name, label: false %></h3>
+            </div>
+            <ul class="card-infos-list">
+              <li><strong>Référence:</strong> <%= f.input :reference, label: false %></li>
+              <li><strong>Catégorie:</strong> <%= f.association :category, label: false %></li>
+              <li><strong>Prix:</strong> <%= f.input :price, label: false %>€/<%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %></li>
+              <% if product.technical_sheet? %>
+                <li><strong>Garantie:</strong> <%= f.input :deposit, label: false %></li>
+              <% else %>
+                <li><strong style=" text-decoration: line-through;">Deposit</strong></li>
+              <% end %>
+              <% if product.video? %>
+                <li><strong>Video</strong></li>
+              <% else %>
+                <li><strong style=" text-decoration: line-through;">video</strong></li>
+              <% end %>
+              <% if product.loxam_link? %>
+                <li><strong>Loxam lien</strong></li>
+              <% else %>
+                <li><strong style=" text-decoration: line-through;">loxam_link</strong></li>
+              <% end %>
+              <% if product.technical_sheet? %>
+                <li><strong>technical_sheet</strong></li>
+              <% else %>
+                <li><strong style=" text-decoration: line-through;">Fiche technique</strong></li>
+              <% end %>
+              <% if product.features? %>
+                <li><strong>Caractéristiques</strong></li>
+              <% else %>
+                <li><strong style=" text-decoration: line-through;">features</strong></li>
+              <% end %>
+              <% if product.description? %>
+                <li><strong>Description</strong></li>
+              <% else %>
+                <li><strong style=" text-decoration: line-through;">Description</strong></li>
+              <% end %>
+            </ul>
+          <% end %>
           <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
         </div>
       </div>

@@ -49,7 +49,7 @@
         <span><%= invoice.document_type %></span>
         <span><%= invoice.amount %>€ HT</span>
         <span><%= (invoice.amount * 1.2).round(2) %>€ TTC</span>
-        <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">pdf</a>
+        <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>
       </div>
     <% end %>
   </div>
