@@ -34,7 +34,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  #Sen email
+  #Send email
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.delivery_method = :letter_opener

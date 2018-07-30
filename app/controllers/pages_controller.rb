@@ -186,29 +186,34 @@ class PagesController < ApplicationController
         file_order_columns = line.strip.split(/\;/)
 
 
-        unless User.where(loxam_id: file_order_columns[2]).exists?
+        unless User.where(loxam_id: file_order_columns[2]).exists? && file_order_columns[2] == "inexistant@lng.fr"
           User.create(name: file_order_columns[3], email: file_order_columns[8],
                       password: Faker::IDNumber.valid, loxam_id: file_order_columns[2])
         end
 
         files_pdf.each do |pdf_doc|
           # file_order_columns[6] == pdf id
-          if pdf_doc == file_order_columns[6]
+          user = User.where(loxam_id: file_order_columns[2]).take
+          if pdf_doc == file_order_columns[6] && !user.nil?
+
           puts "#{pdf_doc} == #{file_order_columns[6]}"
             ftp.getbinaryfile(pdf_doc, pdf_doc)
 
-            user = User.where(loxam_id: file_order_columns[2]).take
-            # unless user.invoices.any? { |invoice| invoice[:id_invoice_loxam] == file_order_columns[0].to_i }
-              new_doc = Invoice.new(id_invoice_loxam: file_order_columns[0], user_id: user.id)
+            unless user.invoices.any? { |invoice| invoice[:id_invoice_loxam] == file_order_columns[0] }
+              file_order_columns[1] == "FCLI" ? document_type = "Facture" : document_type = "Avoir"
+              new_doc = Invoice.new(id_invoice_loxam: file_order_columns[0], document_type: document_type,
+                                    date: file_order_columns[7], amount: file_order_columns[4],
+                                    user_id: user.id)
               new_doc.remote_pdf_url = pdf_doc
               new_doc.save
-            # end
-
+            end
             File.delete(pdf_doc)
+            ftp.delete(pdf_doc)
           end
         end
       end
       File.delete(fname)
+      ftp.delete(fname)
     end
   end
 
