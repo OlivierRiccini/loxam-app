@@ -25,6 +25,23 @@
   <div class="row row-form" id="form-product">
     <%= render 'products/form' %>
   </div>
+
+  <% @products.each do |product| %>
+    <div class="row-product-dashboard-list">
+      <%= simple_form_for product, html: {class: 'form-inline'}, remote: true do |f| %>
+        <%= f.input :name, label: false %>
+        <%= f.input :reference, label: false %>
+        <%= f.input :price, label: false %>
+        <%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %>
+        <%= f.button :submit, class: 'loxam-btn', value: 'Sauvegarder' %>
+        <%= link_to 'Détails/Modifier', product_path(product), class: 'loxam-btn' %>
+        <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
+          <i class="fa fa-trash"></i>
+          <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <!--
   <div class="row row-products-dashboard">
     <h3><%= @current_category %></h3>
     <% @products.each do |product| %>
@@ -39,7 +56,6 @@
               </div>
             <% end %>
           </div>
-          <i class="fa fa-edit edit-product-icon" data-product-id="<%= product.id %>"></i>
           <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
           <i class="fa fa-trash"></i>
           <% end %>
@@ -82,50 +98,15 @@
                 <li><strong style=" text-decoration: line-through;">Description</strong></li>
               <% end %>
             </ul>
+            <div class="item-card-dashboard-btn">
+              <%= f.button :submit, class: 'loxam-btn', value: 'Sauvegarder' %>
+              <%= link_to 'Détails/Modifier', product_path(product), class: 'loxam-btn' %>
+            </div>
           <% end %>
-          <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
         </div>
       </div>
 
-      <div class="pop-up-product edit-item" id="pop-up-edit-product-<%= product.id %>">
-        <i class="fa fa-times-circle close-popup"></i>
-        <%= simple_form_for product, remote: true do |f| %>
-          <%= f.error_notification %>
-          <div class="col-xs-12 col-sm-6">
-            <%= f.input :name %>
-            <span class="error" id="name-error"></span>
-            <%= f.input :reference %>
-            <span class="error" id="reference-error"></span>
-            <%= f.association :category %>
-            <span class="error" id="category_id-error"></span>
-            <%= f.input :price %>
-            <span class="error" id="price-error"></span>
-            <%= f.input :deposit %>
-            <%= f.label :best_searches_choice, 'Afficher dans les plus recherchés' %>
-            <%= f.check_box :best_searches_choice, as: :boolean %>
-            <%= f.label :new_product_choice, 'Afficher dans les nouveautés' %>
-            <%= f.check_box :new_product_choice, as: :boolean %>
-          </div>
-          <div class="col-xs-12 col-sm-6">
-            <%= f.input :features %>
-            <%= f.input :description %>
-            <%= f.input :technical_sheet %>
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                <%= f.input :photo %>
-                <%= f.input :photo_cache, as: :hidden %>
-                <span class="error" id="photo-error"></span>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <%= f.input :video %>
-              </div>
-            </div>
-            <%= f.input :loxam_link %>
-            <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
-          </div>
-        <% end %>
-      </div>
-
     <% end %>
+  -->
   </div>
 </div>

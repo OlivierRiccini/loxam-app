@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show ]
   before_action :find_product, only: [ :show, :edit, :update, :destroy ]
 
+   # include ActionView::Helpers::UrlHelper
+
   def show
     authorize @product
     i = @product.nb_of_searches + 1
@@ -31,13 +33,19 @@ class ProductsController < ApplicationController
 
   def update
     authorize @product
-    # respond_to do |format|
-      if @product.update(product_params)
+    if @product.update(product_params)
+      if request.referrer.include? admin_dashboard_path
+        respond_to { |format| format.js }
+      else
         redirect_to product_path(@product)
+      end
+    else
+      if request.referrer.include? admin_dashboard_path
+        respond_to { |format| format.js }
       else
         render edit_product_path(@product)
       end
-    # end
+    end
   end
 
   def destroy

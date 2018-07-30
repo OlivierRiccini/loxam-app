@@ -1,6 +1,30 @@
-.row-products-dashboard h3:first-child {
-  background-color: $light-gray;
-  padding: 10px 0;
-  text-align: center;
-  margin-bottom: 35px;
+.row-products-dashboard {
+  h3:first-child {
+    background-color: $light-gray;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 35px;
+  };
+  .form-group {
+    margin-top: 0;
+  };
+}
+
+.card-infos-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .form-control {
+    height: 22px;
+    font-size: 12px;
+  }
+}
+
+.item-card-dashboard-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .loxam-btn {
+    font-size: 14px;
+  }
 }
