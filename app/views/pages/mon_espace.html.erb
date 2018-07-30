@@ -7,6 +7,7 @@
   </div>
   <h2>Mes favoris</h2>
   <div class="row">
+    <%= content_tag(:p, "Vous n'avez aucun favori") if @user.products.empty? %>
     <% @user.products.each do |product| %>
       <div class="col-xs-12 col-sm-6 col-md-3 col-item-card" id="mon-espace-card-<%= product.id %>">
         <div class="item-card white-box">
@@ -40,11 +41,15 @@
   </div>
 
   <h2>Mes factures</h2>
-  <div class="container-invoices white-box">
+  <div class="container-invoices">
     <%= content_tag(:p, "Vous n'avez aucune facture disponible") if @invoices.empty? %>
     <% @invoices.each do |invoice| %>
-      <div>
-        <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Facture</a>
+      <div class="row-invoice white-box">
+        <span><%= invoice.date.strftime('%m/%Y') %></span>
+        <span><%= invoice.document_type %></span>
+        <span><%= invoice.amount %>€ HT</span>
+        <span><%= (invoice.amount * 1.2).round(2) %>€ TTC</span>
+        <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">pdf</a>
       </div>
     <% end %>
   </div>
