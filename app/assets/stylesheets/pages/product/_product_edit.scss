@@ -1,3 +1,58 @@
 .edit-product-page .image-col {
   flex-direction: column;
 }
+
+.edit-product-page .product_name {
+  width: 100%;
+  text-align: center;
+  input {
+    text-align: center;
+  }
+}
+
+.edit-product-page .product_price,
+.edit-product-page .product_pricing,
+.edit-product-page .product_deposit {
+  display: inline-block;
+}
+
+.nested-fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: $light-gray;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+.nested-fields .form-group {
+  &:first-child {
+    flex: 0 35%;
+  };
+  &:nth-child(2) {
+    flex: 0 30%;
+  };
+  &:nth-child(3) {
+    flex: 0 20%;
+  };
+  &:nth-child(4) {
+    flex: 0 100%;
+  };
+  input {
+    height: 28px;
+  }
+}
+
+.edit-product-page {
+  .btn-save {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 32px;
+  };
+  .btn-delete {
+    margin: 10px 0 5px 0;
+  }
+}

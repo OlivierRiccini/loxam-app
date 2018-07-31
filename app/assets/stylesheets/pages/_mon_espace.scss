@@ -1,3 +1,18 @@
 .container-mon-espace .item-card {
   position: relative;
 }
+
+.container-intro-user {
+  padding: 15px;
+}
+
+.container-intro-user h2 {
+  margin-top: 0;
+}
+
+.container-invoices .row-invoice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}

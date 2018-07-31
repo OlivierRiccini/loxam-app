@@ -1,6 +1,57 @@
-.row-products-dashboard h3:first-child {
+// Create product form
+
+#form-product {
+  margin-bottom: 40px;
+  .btn-delete {
+    margin-top: 5px;
+  };
+  .btn-save {
+    margin: 15px;
+  }
+}
+
+.row-products-dashboard {
+  h3:first-child {
+    background-color: $light-gray;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 35px;
+  };
+  .form-group {
+    margin-top: 0;
+  };
+}
+
+.card-infos-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .form-control {
+    height: 22px;
+    font-size: 12px;
+  }
+}
+
+.row-product-dashboard {
   background-color: $light-gray;
-  padding: 10px 0;
-  text-align: center;
-  margin-bottom: 35px;
+  margin: 5px 0;
+  padding: 5px;
+  .form-group {
+    margin-top: 0;
+  };
+  .form-control, .loxam-btn {
+    font-size: 14px;
+    height: 28px;
+  }
+  .fa-trash {
+    font-size: 14px;
+  };
+  .simple_form {
+    font-size: 14px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  };
 }

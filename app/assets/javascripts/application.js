@@ -16,3 +16,7 @@
 //= require turbolinks
 //= require_tree .
 //= require Chart.min
+//= require cocoon
+
+//= require summernote/summernote-bs4.min
+//= require summernote-init

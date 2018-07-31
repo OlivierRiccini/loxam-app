@@ -7,7 +7,7 @@
         <h4 class="nb-of-products">Il y a <strong><%= Product.count %></%></strong> matériels</h4>
       </div>
 
-      <!-- Filter by category-->
+      <!-- Filter by category -->
       <div class="col-xs-12 col-sm-6">
         <%= form_tag admin_dashboard_path, method: :get do %>
           <%= collection_select :category, :id,
@@ -25,105 +25,22 @@
   <div class="row row-form" id="form-product">
     <%= render 'products/form' %>
   </div>
-  <div class="row row-products-dashboard">
-    <h3><%= @current_category %></h3>
-    <% @products.each do |product| %>
-      <div class="col-xs-12 col-sm-6 col-md-3 col-item-card" id="col-product-card-<%= product.id %>">
-        <div class="item-card white-box item-card-dashboard product-card-dashboard">
-          <div class="item-card-image">
-            <% if product.photo? %>
-              <div style="background-image: url('<%= cl_image_path product.photo %>'); ">
-              </div>
-            <% else %>
-              <div style="background-image: url('https://loremflickr.com/cache/resized/4493_37892718232_c54293c193_320_240_nofilter.jpg'); ">
-              </div>
-            <% end %>
-          </div>
-          <i class="fa fa-edit edit-product-icon" data-product-id="<%= product.id %>"></i>
-          <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
+
+  <div id="notif"></div>
+  <% @products.each do |product| %>
+    <div class="row-product-dashboard" id="col-product-row-<%= product.id %>">
+      <%= simple_form_for product, html: {class: 'form-inline'}, remote: true do |f| %>
+        <%= f.input :name, label: false %>
+        <%= f.input :reference, label: false %>
+        <%= f.input :price, label: false %>€ HT /
+        <%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %>
+        <%= f.input :deposit, label: false %>€
+        <%= f.button :submit, class: 'btn-save', value: 'Sauvegarder' %>
+        <%= link_to 'Détails/Modifier', edit_product_path(product), class: 'btn-edit' %>
+        <%= link_to product_path(product), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce matériel Jano?"} do %>
           <i class="fa fa-trash"></i>
           <% end %>
-          <div class="card-infos">
-            <h3><%= product.name %></h3>
-          </div>
-          <ul class="card-infos-list">
-            <li><strong>Référence:</strong> <%= product.reference %></li>
-            <li><strong>Catégorie:</strong> <%= product.category.name %></li>
-            <li><strong>Prix:</strong> <%= product.price %>€/jour</li>
-            <% if product.technical_sheet? %>
-              <li><strong>Deposit:</strong> <%= product.deposit %></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">Deposit</strong></li>
-            <% end %>
-            <% if product.video? %>
-              <li><strong>Video</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">video</strong></li>
-            <% end %>
-            <% if product.loxam_link? %>
-              <li><strong>Loxam lien</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">loxam_link</strong></li>
-            <% end %>
-            <% if product.technical_sheet? %>
-              <li><strong>technical_sheet</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">Fiche technique</strong></li>
-            <% end %>
-            <% if product.features? %>
-              <li><strong>Caractéristiques</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">features</strong></li>
-            <% end %>
-            <% if product.description? %>
-              <li><strong>Description</strong></li>
-            <% else %>
-              <li><strong style=" text-decoration: line-through;">Description</strong></li>
-            <% end %>
-          </ul>
-          <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
-        </div>
-      </div>
-
-      <div class="pop-up-product edit-item" id="pop-up-edit-product-<%= product.id %>">
-        <i class="fa fa-times-circle close-popup"></i>
-        <%= simple_form_for product, remote: true do |f| %>
-          <%= f.error_notification %>
-          <div class="col-xs-12 col-sm-6">
-            <%= f.input :name %>
-            <span class="error" id="name-error"></span>
-            <%= f.input :reference %>
-            <span class="error" id="reference-error"></span>
-            <%= f.association :category %>
-            <span class="error" id="category_id-error"></span>
-            <%= f.input :price %>
-            <span class="error" id="price-error"></span>
-            <%= f.input :deposit %>
-            <%= f.label :best_searches_choice, 'Afficher dans les plus recherchés' %>
-            <%= f.check_box :best_searches_choice, as: :boolean %>
-            <%= f.label :new_product_choice, 'Afficher dans les nouveautés' %>
-            <%= f.check_box :new_product_choice, as: :boolean %>
-          </div>
-          <div class="col-xs-12 col-sm-6">
-            <%= f.input :features %>
-            <%= f.input :description %>
-            <%= f.input :technical_sheet %>
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                <%= f.input :photo %>
-                <%= f.input :photo_cache, as: :hidden %>
-                <span class="error" id="photo-error"></span>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <%= f.input :video %>
-              </div>
-            </div>
-            <%= f.input :loxam_link %>
-            <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
-          </div>
-        <% end %>
-      </div>
-
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

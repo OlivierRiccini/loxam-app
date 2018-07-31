@@ -1,6 +1,13 @@
 <div class="container container-mon-espace">
-  <h1><%= @user.name %></h1>
+  <div class="container-intro-user white-box">
+    <h2>Bienvenue dans votre espace client <span class="loxam-name"><span>Loxam</span> <span>Bastia</span></span> <strong><%= @user.name.upcase %></strong>!</h2>
+    <p>Vous trouverez dans cet espace vos factures mises à votre disposition chaque mois, consultables et téléchargeables au format pdf. <br>
+    Vous avez aussi la possibilité d'ajouter des matériels en favoris à partir de n'importe quelle page du site, et les retrouverez ici même. <br>
+    Bonne navigation!</p>
+  </div>
+  <h2>Mes favoris</h2>
   <div class="row">
+    <%= content_tag(:p, "Vous n'avez aucun favori") if @user.products.empty? %>
     <% @user.products.each do |product| %>
       <div class="col-xs-12 col-sm-6 col-md-3 col-item-card" id="mon-espace-card-<%= product.id %>">
         <div class="item-card white-box">
@@ -32,10 +39,19 @@
       </div>
     <% end %>
   </div>
-  <ul>
+
+  <h2>Mes factures</h2>
+  <div class="container-invoices">
+    <%= content_tag(:p, "Vous n'avez aucune facture disponible") if @invoices.empty? %>
     <% @invoices.each do |invoice| %>
-      <li><a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Facture</a>
-      </li>
+      <div class="row-invoice white-box">
+        <span><%= invoice.date.strftime('%m/%Y') %></span>
+        <span><%= invoice.document_type %></span>
+        <span><%= invoice.amount %>€ HT</span>
+        <span><%= (invoice.amount * 1.2).round(2) %>€ TTC</span>
+        <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>
+      </div>
     <% end %>
-  </ul>
+  </div>
+
 </div>

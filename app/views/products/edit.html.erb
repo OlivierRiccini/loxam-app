@@ -2,9 +2,6 @@
   <div class="container container-product edit-product-page white-box">
     <div class="product-title-container">
       <%= f.input :name, label: 'Nom' %>
-      <div>
-        <i class="fa fa-star"></i>
-      </div>
     </div>
 
     <div class="row-presentation-product">
@@ -19,9 +16,9 @@
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <p><strong><%= f.input :price, label: 'Tarif' %> HT / jour</strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / jour</p>
-        <p>Référence: <%= f.input :reference, label: 'Référence' %></p>
-        <%= f.input :description, label: 'Description' %>
+        <p><strong><%= f.input :price, label: false %> HT / <%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %></strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / jour</p>
+        <p><%= f.input :reference, label: 'Référence' %></p>
+        <%= f.input :description, as: :summernote, label: 'Description' %>
         <%= f.input :technical_sheet, label: 'Fiche technique' %>
         <%= f.input :technical_sheet_cache, as: :hidden %>
         <%= f.input :features, label: 'Caractéristiques' %>
@@ -39,27 +36,27 @@
       <br>
       Horaire de l'agence : ouvert du lundi au vendredi de 7h à 12h et de 13h à 18h.
       <br>
-      Montant dépôt de garantie : <strong><%= f.input :deposit, label: false %></strong>
-      Pour toute location, un dépôt de garantie (uniquement en carte bleue) est demandé en fonction de la classification des matériels.</p>
+      Montant dépôt de garantie : <%= f.input :deposit, label: false %> € Pour toute location, un dépôt de garantie (uniquement en carte bleue) est demandé en fonction de la classification des matériels.</p>
     </div>
 
-    <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
 
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="container-expendables">
           <h3>Accessoires disponibles à la location de: <%= @product.name %></h3>
-          <% if @product.expendables.any? %>
-            <ul>
-              <% @product.expendables.each do |expendable| %>
-              <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+
+            <div id="expendables">
+              <%= f.simple_fields_for :expendables do |expendable| %>
+                <%= render 'expendable_fields', :f => expendable %>
               <% end %>
-            </ul>
-          <% else %>
-            <p>Aucun consommable disponible pour ce matériel</p>
-          <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Ajouter un autre consommable +', f, :expendables, class: 'btn-edit' %>
+              </div>
+            </div>
+
         </div>
       </div>
+
       <div class="col-xs-12 col-sm-6">
         <div class="message-form-product-page">
           <h3><%= @product.name %> vous intéresse?</h3>
@@ -81,5 +78,6 @@
         </div>
       </div>
     </div>
+    <%= f.button :submit, value: 'Sauvegarder les changements', class: 'btn-save' %>
   </div>
 <% end %>

@@ -1,9 +1,11 @@
 class Product < ApplicationRecord
-  has_many :transactions
-  has_many :expendables
+  # has_many :transactions
+  has_many :expendables, dependent: :destroy
+  accepts_nested_attributes_for :expendables, reject_if: :all_blank, allow_destroy: true
   has_many :favorites
   has_many :users, :through => :favorites
   belongs_to :category
+
 
   validates :name, presence: true
   validates :reference, uniqueness: true, presence: true
