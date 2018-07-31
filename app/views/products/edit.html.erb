@@ -49,13 +49,15 @@
         <div class="container-expendables">
           <h3>Accessoires disponibles à la location de: <%= @product.name %></h3>
 
-          <table>
-            <tbody class="fields">
-              <%= simple_fields_for :expendables do |builder| %>
-                <%= render 'expendables/form', f: builder %>
+            <div id="expendables">
+              <%= f.simple_fields_for :expendables do |expendable| %>
+                <%= render 'expendable_fields', :f => expendable %>
               <% end %>
-            </tbody>
-          </table>
+              <div class="links">
+                <%= link_to_add_association 'Ajouter un consommable', f, :expendables %>
+              </div>
+            </div>
+
         </div>
       </div>
 
