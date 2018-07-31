@@ -28,7 +28,7 @@
 
   <div id="notif"></div>
   <% @products.each do |product| %>
-    <div class="row-product-dashboard">
+    <div class="row-product-dashboard" id="col-product-row-<%= product.id %>">
       <%= simple_form_for product, html: {class: 'form-inline'}, remote: true do |f| %>
         <%= f.input :name, label: false %>
         <%= f.input :reference, label: false %>

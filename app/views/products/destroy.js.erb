@@ -1,5 +1,5 @@
-var productCard = document.getElementById('col-product-card-<%= @product.id %>');
-productCard.parentNode.removeChild(productCard);
+var productRow = document.getElementById('col-product-row-<%= @product.id %>');
+productRow.parentNode.removeChild(productRow);
 
 var nbOfProducts = document.querySelector('.nb-of-products');
 nbOfProducts.innerHTML = 'Il y a <strong><%= Product.count %></strong> categories'
