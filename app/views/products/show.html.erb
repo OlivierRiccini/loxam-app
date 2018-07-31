@@ -1,7 +1,7 @@
 <div class="container container-product white-box">
   <div class="product-title-container">
     <% if policy(@product).update? %>
-      <%= link_to 'Modifier matériel', edit_product_path(@product), class: "loxam-btn edit-btn" %>
+      <%= link_to 'Modifier matériel', edit_product_path(@product), class: "btn-edit" %>
     <% end %>
     <h2><%= @product.name %></h2>
     <div class="favorite-star-container-product-<%= @product.id %>">
@@ -44,7 +44,7 @@
       <p><strong><%= number_to_currency(@product.price,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> HT / <%= @product.pricing %></strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / <%= @product.pricing %></p>
       <p>Référence: <%= @product.reference %></p>
       <% if @product.description? %>
-        <p><%= @product.description %></p>
+        <p><%= @product.description.html_safe %></p>
       <% end %>
       <% if @product.technical_sheet? %>
         <a href="<%= cl_image_path @product.technical_sheet %>" target="_blank" class="loxam-btn">Fiche technique</a>

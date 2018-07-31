@@ -15,10 +15,10 @@
   }
 }
 
-.btn-create-product {
-  width: 100%;
-  margin: 20px 0;
-}
+// .btn-create-product {
+//   width: 100%;
+//   margin: 20px 0;
+// }
 
 .synchronization-btn {
   padding: 15px 20px;
@@ -50,17 +50,6 @@
   }
 }
 
-.edit-btn {
-  background-color: rgb(255, 177, 59);
-  border-color: #fff;
-  color: #fff;
-  &:hover {
-    background-color: rgba(255, 177, 59, 0.7);
-  };
-  &:focus {
-    color: #fff;
-  }
-}
 
 // Home page btn favorites and categories shwo
 .row-les-plus-recherches,
@@ -77,4 +66,58 @@
 // Product page
 .product-title-container .popover {
   color: $gray;
+}
+
+// Buttons admin action CRUD
+.btn-save {
+  background-color: $green;
+  color: #fff;
+  border: none;
+  opacity: 0.9;
+  padding: 5px 10px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: $green;
+    color: #fff;
+    opacity: 1;
+  };
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-edit {
+  background-color: rgb(255, 177, 59);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  opacity: 0.9;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    text-decoration: none;
+  };
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-delete {
+  background-color: $red;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  opacity: 0.9;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    text-decoration: none;
+  };
+  &:focus {
+    color: #fff;
+    text-decoration: none;
+  }
 }

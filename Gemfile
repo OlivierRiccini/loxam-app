@@ -29,6 +29,9 @@ gem 'nokogiri'
 # Nested forms
 gem "cocoon"
 
+# Text area
+gem 'summernote-rails', '~> 0.8.10.0'
+
 gem "roo", "~> 2.7.0"
 
 gem "letter_opener", group: :development

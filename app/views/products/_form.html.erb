@@ -16,7 +16,7 @@
     <%= f.input :features_cache, as: :hidden %>
     <%= f.input :technical_sheet, label: 'Fiche technique' %>
     <%= f.input :technical_sheet_cache, as: :hidden %>
-    <%= f.input :description, label: 'Description' %>
+    <%= f.input :description, as: :summernote, label: 'Description' %>
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <%= f.input :photo %>
@@ -29,6 +29,17 @@
     </div>
     <%= f.input :loxam_link %>
     <%= f.button :submit, class: 'loxam-btn btn-create-product' %>
+  </div>
+
+  <!-- Expendables -->
+  <div id="expendables">
+    <h4>Ajouter des consommables</h4>
+    <%= f.simple_fields_for :expendables do |expendable| %>
+      <%= render 'expendable_fields', :f => expendable %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Ajouter un consommable', f, :expendables %>
+    </div>
   </div>
 <% end %>
 

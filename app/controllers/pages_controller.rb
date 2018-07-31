@@ -110,6 +110,7 @@ class PagesController < ApplicationController
 
     # Product new
     @product = Product.new
+    @product.expendables.build
 
     # Promo new
     @promo = Promo.new
