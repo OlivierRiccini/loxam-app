@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: [ :show ]
   before_action :find_product, only: [ :show, :edit, :update, :destroy ]
 
@@ -18,13 +19,13 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     authorize @product
-    respond_to do |format|
-      if @product.save
-        format.js
-      else
-        format.js
-      end
+    # respond_to do |format|
+    if @product.save
+      redirect_to product_path(@product)
+    else
+      render admin_dashboard_path
     end
+    # end
   end
 
   def edit

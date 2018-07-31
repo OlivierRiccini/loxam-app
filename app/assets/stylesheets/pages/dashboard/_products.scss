@@ -1,3 +1,15 @@
+// Create product form
+
+#form-product {
+  margin-bottom: 40px;
+  .btn-delete {
+    margin-top: 5px;
+  };
+  .btn-save {
+    margin: 15px;
+  }
+}
+
 .row-products-dashboard {
   h3:first-child {
     background-color: $light-gray;
@@ -32,7 +44,6 @@
     height: 28px;
   }
   .fa-trash {
-    // position: static;
     font-size: 14px;
   };
   .simple_form {
