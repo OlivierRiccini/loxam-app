@@ -1,22 +1,24 @@
-<h2>Sign up</h2>
+<div class="container">
+  <h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name, required: true %>
-    <label>Ajoutez une image (optionnel)</label>
-    <%= f.file_field  :avatar %>
-      <%= f.input :avatar_cache, as: :hidden  %>
-      <br>
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :name, label: 'Nom', required: true %>
+      <!-- <label>Ajoutez une image (optionnel)</label>
+      <%= f.file_field  :avatar %> -->
+        <%= f.input :avatar_cache, as: :hidden  %>
+        <br>
+      <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :password, label: 'Créer un mot de pass', required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+      <%= f.input :password_confirmation, label: 'Confirmez votre nouveau mot de pass', required: true %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Valider", class: 'loxam-btn' %>
+    </div>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

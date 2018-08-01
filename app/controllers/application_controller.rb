@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    unless current_user || (params[:controller] == "devise/registrations" || params[:controller] == "devise/sessions")
+    unless current_user || params[:controller].split('/')[0] == "devise"
       render 'layouts/authenticate_error.js'
       flash[:error] = "Vous devez être connecté pour pouvoir effectuer cette action"
     end
