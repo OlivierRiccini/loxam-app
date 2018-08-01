@@ -77,7 +77,10 @@
         <% if @product.expendables.any? %>
           <ul>
             <% @product.expendables.each do |expendable| %>
-            <li><%= expendable.name %> - <%= expendable.price.round %>€</li>
+            <li>
+              <h4><%= expendable.name %> - <%= expendable.price.round %>€</h4>
+              <p><%= expendable.description %></p>
+            </li>
             <% end %>
           </ul>
         <% else %>
