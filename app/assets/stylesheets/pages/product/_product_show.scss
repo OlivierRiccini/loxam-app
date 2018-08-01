@@ -53,8 +53,20 @@
   background-color: $loxam-color;
 };
 
-.container-expendables h3 {
-  background-color: #c2c4c6;
+.container-expendables {
+  h3 {
+    background-color: #c2c4c6;
+  };
+  ul {
+    list-style: none;
+    padding-left: 0;
+  };
+  li {
+    padding: 5px;
+  };
+  // li:nth-child(2n) {
+  //   background-color: $light-gray;
+  // }
 }
 
 .message-form-product-page, .container-expendables {

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :all_categories, :all_products
   protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -41,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    unless current_user || (params[:controller] == "devise/registrations" || params[:controller] == "devise/sessions")
+    unless current_user || params[:controller].split('/')[0] == "devise"
       render 'layouts/authenticate_error.js'
       flash[:error] = "Vous devez être connecté pour pouvoir effectuer cette action"
     end
