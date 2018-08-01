@@ -39,4 +39,11 @@ class ApplicationController < ActionController::Base
   def all_products
     @products = Product.order('name ASC')
   end
+
+  def authenticate_user!
+    unless current_user || (params[:controller] == "devise/registrations" || params[:controller] == "devise/sessions")
+      render 'layouts/authenticate_error.js'
+      flash[:error] = "Vous devez être connecté pour pouvoir effectuer cette action"
+    end
+  end
 end
