@@ -7,3 +7,8 @@
   <span class="error" id="content-errro"></span>
   <%= f.button :submit, value: 'Envoyer', class: 'loxam-btn btn-send' %>
 <% end %>
+
+<script>
+  document.getElementById('message_name').value = `<%= current_user.name.capitalize if current_user %>`;
+  document.getElementById('message_email').value = `<%= current_user.email if current_user %>`;
+</script>
