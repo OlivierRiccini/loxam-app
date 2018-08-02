@@ -1,0 +1,18 @@
+.row-contact {
+  h1 {
+    text-align: center;
+    background-color: $light-gray;
+    color: $loxam-color;
+    margin: 15px 15px;
+    padding: 10px 0;
+  }
+  .col-xs-12:nth-child(3) {
+    text-align: center;
+    margin-top: 30px;
+  }
+}
+
+#map {
+  width: 100%;
+  margin-top: 50px;
+}

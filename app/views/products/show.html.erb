@@ -112,5 +112,7 @@
 </div>
 
 <script>
+  document.getElementById('message_name').value = `<%= current_user.name.capitalize if current_user %>`;
+  document.getElementById('message_email').value = `<%= current_user.email if current_user %>`;
   document.getElementById('message_content').value = `   Bonjour, je suis intéressé par <%= @product.name %> référence <%= @product.reference %> et aurais aimé pré-reserver ce matériel`;
 </script>

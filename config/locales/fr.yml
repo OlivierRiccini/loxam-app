@@ -1,0 +1,13 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        message:
+          attributes:
+            name:
+              blank: "Vous devez indiquez un nom"
+            email:
+              blank: "Vous devez indiquez une adresse email"
+              invalid: "Cette adresse email est invalide"
+            content:
+              too_short: "Le message est trop court"
