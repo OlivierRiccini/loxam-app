@@ -123,120 +123,120 @@
 require 'open-uri'
 require 'nokogiri'
 
-products_scraped = []
+# products_scraped = []
 
-index_product = 0
+# index_product = 0
 
-html_content_home_page = open("http://www.loxam-bastia.fr/").read
-doc_home_page = Nokogiri::HTML(html_content_home_page)
-doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
-  url_category = "http://www.loxam-bastia.fr/#{a_home_page.text}"
-  name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
-                                                  .gsub(/\d/, "")
-                                                  .gsub("-", " ")
-                                                  .strip.downcase
-
-
-  new_category = Category.create(name: name_category)
-  puts "Category #{name_category} created!"
-
-  # parsing each category page
-  html_content_category_page = open(url_category).read
-
-  doc_category_page = Nokogiri::HTML(html_content_category_page)
-
-  doc_category_page.search('.pagination a/@href').each do |a_category_page|
-    url_each_category_page = "http://www.loxam-bastia.fr/#{a_category_page.text.strip.gsub('location.href=', '').gsub('\'', '')}"
-
-    html_each_category_page_content = open(url_each_category_page).read
-    doc_each_category_page = Nokogiri::HTML(html_each_category_page_content)
-
-      doc_each_category_page.search('.produits button/@onclick').each do |each_category_page|
-        url_product_page = "http://www.loxam-bastia.fr/#{each_category_page.text.strip.gsub('location.href=', '').gsub(/\'/, '')}"
-
-      # parsing each product page
-        html_content_product_page = open(url_product_page).read
-        doc_product_page = Nokogiri::HTML(html_content_product_page)
-        image_scraped = nil
-        doc_product_page.search('.wrapper img/@src').each do |img|
-          unless "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
-            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
-            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new-grey.png" ||
-            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/isula-informatique-2016.png" ||
-            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new.png" ||
-            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/fb_grey.png" ||
-            "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/inst_grey.png"
-
-            image_scraped = "http://www.loxam-bastia.fr/#{img.text.strip}"
-          end
-        end
-          name_scraped = doc_product_page.search('#arthead h3').text.strip
-          price_scraped = doc_product_page.search('#arthead span strong:first-child').text.strip.to_f
-          description_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
-          pdf_scraped = "http://www.loxam-bastia.fr/#{doc_product_page.search('#artcontain button/@onclick').text.strip
-                                                                                                                 .gsub('window.open', '')
-                                                                                                                 .gsub('_blank', '')
-                                                                                                                 .gsub(/[\'\)\(\,]/, '')
-                                                                                                                 .split('http')[0]}"
+# html_content_home_page = open("http://www.loxam-bastia.fr/").read
+# doc_home_page = Nokogiri::HTML(html_content_home_page)
+# doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
+#   url_category = "http://www.loxam-bastia.fr/#{a_home_page.text}"
+#   name_category =  a_home_page.text.strip.upcase.gsub("MATERIEL/", "")
+#                                                   .gsub(/\d/, "")
+#                                                   .gsub("-", " ")
+#                                                   .strip.downcase
 
 
+#   new_category = Category.create(name: name_category)
+#   puts "Category #{name_category} created!"
 
-        unless pdf_scraped == "http://www.loxam-bastia.fr/"
-          if pdf_scraped.split('/')[5] == "fiches"
-            technical_sheet_scraped = pdf_scraped
-            if pdf_scraped.include? "pdfresources"
-              technical_sheet_scraped = "#{pdf_scraped.split("resources")[0]}resources#{pdf_scraped.split("resources")[1]}"
-              features_scraped = "http://www.loxam-bastia.fr/resources#{pdf_scraped.split("resources")[2]}"
-            end
-          else
-            features_scraped = pdf_scraped
-          end
-        end
+#   # parsing each category page
+#   html_content_category_page = open(url_category).read
 
-        deposit_scraped = doc_product_page.search('#artcontain p').text.strip.split("Montant dépôt de garantie :")[1]
-                                                                             .split('€')[0]
-                                                                             .gsub(' ', '').to_f
+#   doc_category_page = Nokogiri::HTML(html_content_category_page)
 
-        ref_scraped = doc_product_page.search('fieldset input/@value').text.strip.split("-")[0]
-        new_product = Product.new( name: name_scraped,
-                                   price: price_scraped,
-                                   description: description_scraped,
-                                   reference: ref_scraped,
-                                   deposit: deposit_scraped,
-                                   category_id: new_category.id )
+#   doc_category_page.search('.pagination a/@href').each do |a_category_page|
+#     url_each_category_page = "http://www.loxam-bastia.fr/#{a_category_page.text.strip.gsub('location.href=', '').gsub('\'', '')}"
 
-        new_product.remote_photo_url = image_scraped
+#     html_each_category_page_content = open(url_each_category_page).read
+#     doc_each_category_page = Nokogiri::HTML(html_each_category_page_content)
 
-        unless features_scraped.nil?
-          new_product.remote_features_url = features_scraped
-        end
-        new_product.remote_technical_sheet_url = technical_sheet_scraped
-        new_product.save
-        index_product += 1
-        puts "#{index_product} - #{new_product.name} created!"
-    end
-  end
-end
+#       doc_each_category_page.search('.produits button/@onclick').each do |each_category_page|
+#         url_product_page = "http://www.loxam-bastia.fr/#{each_category_page.text.strip.gsub('location.href=', '').gsub(/\'/, '')}"
 
-puts "Procuts created!"
+#       # parsing each product page
+#         html_content_product_page = open(url_product_page).read
+#         doc_product_page = Nokogiri::HTML(html_content_product_page)
+#         image_scraped = nil
+#         doc_product_page.search('.wrapper img/@src').each do |img|
+#           unless "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
+#             "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/cfpdt.png" ||
+#             "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new-grey.png" ||
+#             "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/isula-informatique-2016.png" ||
+#             "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/logo-new.png" ||
+#             "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/fb_grey.png" ||
+#             "http://www.loxam-bastia.fr/#{img.text.strip}" == "http://www.loxam-bastia.fr/resources/images/inst_grey.png"
 
-promo = Promo.new(title: "Perseuse", description: "Hola, perseuse au top!")
-promo[:display] = true
-promo.remote_media_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
-promo.save
+#             image_scraped = "http://www.loxam-bastia.fr/#{img.text.strip}"
+#           end
+#         end
+#           name_scraped = doc_product_page.search('#arthead h3').text.strip
+#           price_scraped = doc_product_page.search('#arthead span strong:first-child').text.strip.to_f
+#           description_scraped = doc_product_page.search('#artcontain p').text.strip.split("CALCUL DU TEMPS DE LOCATION*")[0]
+#           pdf_scraped = "http://www.loxam-bastia.fr/#{doc_product_page.search('#artcontain button/@onclick').text.strip
+#                                                                                                                  .gsub('window.open', '')
+#                                                                                                                  .gsub('_blank', '')
+#                                                                                                                  .gsub(/[\'\)\(\,]/, '')
+#                                                                                                                  .split('http')[0]}"
 
-rental_catalog = Catalog.new(catalog_type: "location", link: "http://www.loxam.fr/location/catalogue/index.html")
-rental_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
-rental_catalog.save
 
-sales_catalog = Catalog.new(catalog_type: "vente", link: "http://www.loxam.fr/location/catalogue/index.html")
-sales_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531744211/catalogue-vente.png"
-sales_catalog.save
 
-puts "Catalogs created!"
-puts "Promo!"
+#         unless pdf_scraped == "http://www.loxam-bastia.fr/"
+#           if pdf_scraped.split('/')[5] == "fiches"
+#             technical_sheet_scraped = pdf_scraped
+#             if pdf_scraped.include? "pdfresources"
+#               technical_sheet_scraped = "#{pdf_scraped.split("resources")[0]}resources#{pdf_scraped.split("resources")[1]}"
+#               features_scraped = "http://www.loxam-bastia.fr/resources#{pdf_scraped.split("resources")[2]}"
+#             end
+#           else
+#             features_scraped = pdf_scraped
+#           end
+#         end
 
-User.create(email: "loxam@loxam.fr", password: "loxambastia", name: "loxam bastia", admin: true)
+#         deposit_scraped = doc_product_page.search('#artcontain p').text.strip.split("Montant dépôt de garantie :")[1]
+#                                                                              .split('€')[0]
+#                                                                              .gsub(' ', '').to_f
+
+#         ref_scraped = doc_product_page.search('fieldset input/@value').text.strip.split("-")[0]
+#         new_product = Product.new( name: name_scraped,
+#                                    price: price_scraped,
+#                                    description: description_scraped,
+#                                    reference: ref_scraped,
+#                                    deposit: deposit_scraped,
+#                                    category_id: new_category.id )
+
+#         new_product.remote_photo_url = image_scraped
+
+#         unless features_scraped.nil?
+#           new_product.remote_features_url = features_scraped
+#         end
+#         new_product.remote_technical_sheet_url = technical_sheet_scraped
+#         new_product.save
+#         index_product += 1
+#         puts "#{index_product} - #{new_product.name} created!"
+#     end
+#   end
+# end
+
+# puts "Procuts created!"
+
+# promo = Promo.new(title: "Perseuse", description: "Hola, perseuse au top!")
+# promo[:display] = true
+# promo.remote_media_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
+# promo.save
+
+# rental_catalog = Catalog.new(catalog_type: "location", link: "http://www.loxam.fr/location/catalogue/index.html")
+# rental_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
+# rental_catalog.save
+
+# sales_catalog = Catalog.new(catalog_type: "vente", link: "http://www.loxam.fr/location/catalogue/index.html")
+# sales_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531744211/catalogue-vente.png"
+# sales_catalog.save
+
+# puts "Catalogs created!"
+# puts "Promo!"
+
+# User.create(email: "loxam@loxam.fr", password: "loxambastia", name: "loxam bastia", admin: true)
 
 puts "User created!"
 
