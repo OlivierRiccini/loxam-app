@@ -26,8 +26,8 @@
 </div>
 <div class="sub-footer">
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <% if image_tag 'logo' %>
-        <%= image_tag 'logo' %>
+    <% if image_tag('logo').present? %>
+        <%= image_tag('logo') %>
       <% else %>
         <%= cl_image_tag 'logo.jpg' %>
       <% end %>
