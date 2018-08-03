@@ -21,8 +21,6 @@ gem 'faker'
 gem 'gibbon'
 gem 'chart-js-rails'
 
-gem 'faker'
-
 # For scraping DB
 gem 'nokogiri'
 
