@@ -13,6 +13,9 @@
 // find affiliates container's height
 const logoAffiliates = document.getElementById('affiliates-logo-navigation-container');
 
+// Get text affilliate
+// const textAffiliate = document.getElementById('affiliate-intro');
+
 // Get slider
 const slider = document.getElementById('slider-affiliate-images');
 
@@ -22,8 +25,8 @@ const sliderImages = document.querySelectorAll('#slider-affiliate-images img');
 // Set slider height
 if (slider) {
   slider.style.height = `${logoAffiliates.offsetHeight}px`;
+  // textAffiliate.style.height = `${logoAffiliates.offsetHeight}px`;
 }
-
 
 let i = 0;
 let j = -1;

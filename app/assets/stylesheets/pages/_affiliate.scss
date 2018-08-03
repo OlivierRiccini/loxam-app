@@ -1,14 +1,9 @@
 .banner-affiliate {
   background-color: #fff;
-  // box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 0 0 rgba(0, 0, 0, 0.03);
-  // box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07)
   box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.07);
-  // h1 {
-  //   // background-color: $loxam-color;
-  //   // color: #fff;
-  //   // text-align: center;
-  //   // margin-top: 0;
-  // };
+  .col-xs-12:nth-child(2) {
+    margin-top: 20px;
+  };
   .col-xs-12:first-child {
     padding-right: 0;
   };
@@ -17,12 +12,17 @@
   };
 }
 
+.banner-affiliate .col-xs-12:nth-child(2) {
+  p:first-child {
+    font-weight: bolder;
+  };
+  a {
+    width: fit-content
+  }
+};
+
 #slider-affiliate-images {
   position: relative;
-  // display: flex;
-  // justify-content: center;
-  // height: 40vh;
-  // margin: 0 auto;
   img {
     position: absolute;
     // height: 100%;
@@ -38,15 +38,12 @@
 }
 
 .affiliate-category-card {
-  // padding: 10px;
   display: flex;
-  // align-items: center;
   font-size: 0.9em;
   margin: 20px auto;
   .loxam-btn {
     display: block;
     width: fit-content;
-    // float: right;
     margin-bottom: 10px;
   }
 }

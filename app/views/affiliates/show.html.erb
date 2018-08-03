@@ -1,16 +1,5 @@
 <div class="banner-affiliate row">
   <div class="col-xs-12 col-sm-1">
-    <!-- <h1><%= @affiliate.name.upcase %></h1> -->
-    <!-- <div style="background-image: url('<%= cl_image_path @affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
-    <%= cl_image_tag @affiliate.logo, height: '80' %>
-    <h2><%= @affiliate.tagline.capitalize %></h2>
-    <% @affiliates.each do |affiliate| %>
-      <% unless affiliate == @affiliate %>
-        <%= link_to affiliate_path(affiliate.name) do %>
-          <%= cl_image_tag affiliate.logo, height: '80' %>
-        <% end %>
-      <% end %>
-    <% end %> -->
     <div id="affiliates-logo-navigation-container">
       <% @affiliates.each do |affiliate| %>
         <% unless affiliate == @affiliate %>
@@ -26,9 +15,11 @@
     </div>
   </div>
     <div class="col-xs-12 col-sm-4">
-      <p><%= @affiliate.tagline.capitalize %></p>
-      <p>Loxam Bastia toujours présent pour répondre à vos questions!</p>
-      <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
+      <div>
+        <p><%= @affiliate.tagline.capitalize %></p>
+        <p>Loxam Bastia toujours présent pour répondre à vos questions!</p>
+        <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
+      </div>
     </div>
 
 
