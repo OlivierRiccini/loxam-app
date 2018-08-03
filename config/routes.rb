@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
 
-
-  get 'expendables/create'
-
-  get 'expendables/update'
-
-  get 'expendables/destroy'
-
   devise_for :users
 
   devise_scope :user do

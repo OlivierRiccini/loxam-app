@@ -8,7 +8,6 @@
     <div class="col-xs-12 col-sm-6">
       <ul>
         <h4>NOTRE MÉTIER</h4>
-        <li><%= link_to 'Minilease', minilease_path %></li>
         <li><%= link_to 'Garantie dommages', garantie_dommages_path %></li>
         <li><%= link_to 'Conditions générales de location',conditions_generales_de_location_path %></li>
         <li><%= link_to 'Conditions générales de vente',conditions_generales_de_vente_path %></li>
@@ -27,7 +26,11 @@
 </div>
 <div class="sub-footer">
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= cl_image_tag 'logo.jpg' %>
+    <% if image_tag 'logo' %>
+        <%= image_tag 'logo' %>
+      <% else %>
+        <%= cl_image_tag 'logo.jpg' %>
+      <% end %>
   <% end %>
   <p>Copyright <i class="fa fa-copyright"></i> <%= Time.now.year %></p>
 </div>
