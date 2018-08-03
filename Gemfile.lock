@@ -280,7 +280,6 @@ DEPENDENCIES
   puma (~> 3.7)
   pundit
   rails (~> 5.1.5)
-  rails_12factor
   roo (~> 2.7.0)
   sass-rails (~> 5.0)
   selenium-webdriver
