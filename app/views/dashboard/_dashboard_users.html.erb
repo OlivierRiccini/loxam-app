@@ -4,15 +4,14 @@
   <div class="container-users">
     <div class="row">
       <div class="col-xs-4">Nom</div>
+      <div class="col-xs-4">Adresse email</div>
       <div class="col-xs-4">Nb factures</div>
-      <div class="col-xs-4">Action</div>
     </div>
     <% @users.each do |user| %>
       <div class="row">
         <div class="col-xs-4"><%= user.name %></div>
+        <div class="col-xs-4"><%= user.email %></div>
         <div class="col-xs-4"><%= user.invoices.count %></div>
-        <div class="col-xs-4"><%= link_to "Supprimer", user_registration_path(user), remote: true, :method => :delete, :data => {:confirm => "Veux-tu vraiment supprimer ce client Jano?"} %>
-        </div>
       </div>
     <% end %>
   </div>

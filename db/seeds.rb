@@ -219,11 +219,12 @@ require 'nokogiri'
 # end
 
 # puts "Procuts created!"
+Promo.destroy_all
 
-# promo = Promo.new(title: "Perseuse", description: "Hola, perseuse au top!")
-# promo[:display] = true
-# promo.remote_media_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
-# promo.save
+promo = Promo.new(title: "Bétonnière", description: "Hola, bétonnière au top!")
+promo[:display] = true
+promo.remote_media_url = "http://res.cloudinary.com/dqgpcthzg/image/upload/v1533302764/Loxam-Aff-OPlocation-700x500px.jpg"
+promo.save
 
 # rental_catalog = Catalog.new(catalog_type: "location", link: "http://www.loxam.fr/location/catalogue/index.html")
 # rental_catalog.remote_image_url = "https://res.cloudinary.com/dqgpcthzg/image/upload/v1531735927/catalogue-location.png"
