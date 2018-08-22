@@ -68,8 +68,13 @@
     margin-top: 10px;
   }
 }
-
 @media screen and (max-width: 991px) {
+  .wrapper-affiliate {
+    margin-top: 100px;
+  };
+}
+
+@media screen and (max-width: 770px) {
   .wrapper-affiliate {
     margin-top: 100px;
   };
