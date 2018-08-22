@@ -37,7 +37,7 @@
   display: none;
   position: absolute;
   z-index: 9;
-  top: 130px;
+  top: 140px;
   left: 0;
   width: 70%;
   height: 100%;
@@ -77,8 +77,8 @@
 #toggle-categories-arrow {
   display: none;
   position: fixed;
-  z-index: 10;
-  top: 90px;
+  z-index: 9;
+  top: 100px;
   width: 100vw;
   text-align: center;
   background-color: $loxam-color;

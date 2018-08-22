@@ -68,3 +68,28 @@
     margin-top: 10px;
   }
 }
+
+@media screen and (max-width: 991px) {
+  .wrapper-affiliate {
+    margin-top: 100px;
+  };
+  #affiliates-logo-navigation-container {
+    width: 100vw;
+    display: inline-flex;
+    div {
+      flex-grow: 1;
+      min-width: 25vw;
+      min-height: 25vw;
+    }
+  };
+  .col-sm-4 {
+    margin-bottom: 20px;
+    padding: 0 25px;
+  };
+  .affiliate-category-card-image {
+    display: none;
+  };
+  .affiliate-category-card-content {
+    width: 100%;
+  }
+}
