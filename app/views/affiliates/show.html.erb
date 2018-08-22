@@ -1,47 +1,49 @@
-<div class="banner-affiliate row">
-  <div class="col-xs-12 col-sm-1">
-    <div id="affiliates-logo-navigation-container">
-      <% @affiliates.each do |affiliate| %>
-        <% unless affiliate == @affiliate %>
-          <%= link_to affiliate_path(affiliate.name) do %>
-            <div style="background-image: linear-gradient(-225deg, rgba(244, 244, 244, 0.6), rgba(244, 244, 244, 0.6)), url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
-          <% end %>
-        <% else %>
-          <%= link_to affiliate_path(affiliate.name) do %>
-            <div style="background-image: url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+<div class="wrapper-affiliate">
+  <div class="banner-affiliate row">
+    <div class="col-xs-12 col-sm-1">
+      <div id="affiliates-logo-navigation-container">
+        <% @affiliates.each do |affiliate| %>
+          <% unless affiliate == @affiliate %>
+            <%= link_to affiliate_path(affiliate.name) do %>
+              <div style="background-image: linear-gradient(-225deg, rgba(244, 244, 244, 0.6), rgba(244, 244, 244, 0.6)), url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+            <% end %>
+          <% else %>
+            <%= link_to affiliate_path(affiliate.name) do %>
+              <div style="background-image: url('<%= cl_image_path affiliate.logo %>'); height: 80px; width: 80px; background-size: cover;"></div>
+            <% end %>
           <% end %>
         <% end %>
+      </div>
+    </div>
+      <div class="col-xs-12 col-sm-4">
+        <div>
+          <p><%= @affiliate.tagline.capitalize %></p>
+          <p>Loxam Bastia toujours présent pour répondre à vos questions!</p>
+          <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
+        </div>
+      </div>
+
+
+    <div class="col-xs-12 col-sm-7" id="slider-affiliate-images">
+      <% @affiliate.affiliate_images.each do |image| %>
+        <%= cl_image_tag image.url %>
       <% end %>
     </div>
   </div>
-    <div class="col-xs-12 col-sm-4">
-      <div>
-        <p><%= @affiliate.tagline.capitalize %></p>
-        <p>Loxam Bastia toujours présent pour répondre à vos questions!</p>
-        <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
+
+  <div class="container">
+    <% @affiliate.affiliate_categories.each do |category| %>
+      <div class="affiliate-category-card white-box">
+        <div class="affiliate-category-card-image">
+          <%= cl_image_tag category.image %>
+        </div>
+        <div class="affiliate-category-card-content">
+          <h3><%= category.name.upcase %></h3>
+          <strong><%= category.spec %></strong>
+          <p><%= category.description %></p>
+          <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
+        </div>
       </div>
-    </div>
-
-
-  <div class="col-xs-12 col-sm-7" id="slider-affiliate-images">
-    <% @affiliate.affiliate_images.each do |image| %>
-      <%= cl_image_tag image.url %>
     <% end %>
   </div>
-</div>
-
-<div class="container">
-  <% @affiliate.affiliate_categories.each do |category| %>
-    <div class="affiliate-category-card white-box">
-      <div class="affiliate-category-card-image">
-        <%= cl_image_tag category.image %>
-      </div>
-      <div class="affiliate-category-card-content">
-        <h3><%= category.name.upcase %></h3>
-        <strong><%= category.spec %></strong>
-        <p><%= category.description %></p>
-        <%= link_to "Demande d'informations", contact_path, class: 'loxam-btn' %>
-      </div>
-    </div>
-  <% end %>
 </div>
