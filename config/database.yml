@@ -20,6 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: postgres
+
 
 development:
   <<: *default
@@ -80,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: loxam-app_production
-  username: loxam-app
-  password: <%= ENV['LOXAM-APP_DATABASE_PASSWORD'] %>
+#  database: loxam_app_production
+  database: loxam_app_production_tmp
+  username: root
+  password: postgres

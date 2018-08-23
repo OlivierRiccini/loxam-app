@@ -6,10 +6,12 @@
     </div>
     <div class="row">
       <% @affiliates.each do |affiliate| %>
+        <% if affiliate.name.present? && affiliate.logo.present? %>
         <div class="col-xs-12 col-sm-6 col-md-3"><%= link_to affiliate_path(affiliate.name) do %>
             <%= cl_image_tag(affiliate.logo) %>
           <% end %>
         </div>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -124,11 +126,11 @@
       <div class="promo-container">
         <h2>PROMOS</h2>
         <div class="promo-card-image">
-          <% if @promo.display_description %>
+          <% if @promo.present? && @promo.display_description %>
             <h3><%= @promo.title %></h3>
             <p><%= @promo.description %></p>
           <% end %>
-          <%= cl_image_tag @promo.media %>
+          <%= (cl_image_tag @promo.media) if @promo.present?%>
           <div class="promo-card-hover">
             <strong>Agrandir l'image</strong>
             <i class="fa fa-arrows-alt" id="expand-cross"></i>
@@ -138,7 +140,7 @@
     </div>
   </div>
   <div class="full-screen-promo">
-    <%= cl_image_tag @promo.media %>
+    <%= cl_image_tag @promo.media  if @promo.present?%>
     <i class="fa fa-times-circle" id="closing-cross"></i>
   </div>
 </div>
