@@ -8,7 +8,7 @@
       <% @affiliates.each do |affiliate| %>
         <% if affiliate.name.present? && affiliate.logo.present? %>
         <div class="col-xs-12 col-sm-6 col-md-3"><%= link_to affiliate_path(affiliate.name) do %>
-            <%= cl_image_tag(affiliate.logo) %>
+            <%= image_tag(affiliate.logo) %>
           <% end %>
         </div>
         <% end %>
