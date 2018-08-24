@@ -21,14 +21,7 @@ import 'components/_scroll_to_top';
 import 'components/_slider_affiliate';
 import '_product_page';
 
-// $('.promo-card-image img').click(function() {
-//   $(this).toggleClass('promo-card-image-img-active');
-//   var top = ($(window).height() / 2) - ($(this).height() / 2);
-//   var left = ($(window).width() / 2) - ($(this).width() / 2);
-//   console.log($(this).height());
-//   $(this).css({'top': top,
-//                'left': left});
-// });
+console.log('Welcome to Webpack!');
 
 $('#expand-cross').click(function() {
   $('.full-screen-promo').addClass('full-screen-promo-active');
