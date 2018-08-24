@@ -138,6 +138,7 @@ doc_home_page.search('nav .lignesmenu .wrapper a/@href').each do |a_home_page|
 
 
   new_category = Category.create(name: name_category)
+  raise
   puts "Category #{name_category} created!"
 
   # parsing each category page
