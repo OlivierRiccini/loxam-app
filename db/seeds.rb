@@ -283,7 +283,7 @@ puts "Affiliates deleted!"
 # LOXAM ACCESS
 loxam_access = Affiliate.new(name: "loxam-access",
                              tagline: "L'élevation en toute confiance")
-loxam_access.remote_logo_url = 'app/assets/images/access.png'
+loxam_access.remote_logo_url = 'app/assets/images/loxam-access.png'
 loxam_access.save
 
 html_home_page = open("http://www.loxam-access.com/").read
@@ -353,7 +353,7 @@ puts "ACCES OK!"
 # LOXAM MODULE
 loxam_module = Affiliate.new(name: "loxam-module",
                              tagline: "Location et vente de constructions modulaires")
-loxam_module.remote_logo_url = 'app/assets/images/module.png'
+loxam_module.remote_logo_url = 'app/assets/images/loxam-module.png'
 loxam_module.save
 
 module_categories = [
@@ -465,7 +465,7 @@ loxam_tp = Affiliate.new(name: "loxam-tp",
                          tagline: "Loxam TP est le spécialiste de la location
                                    de matériels lourds pour le terrassement,
                                    le compactage et la démolition.")
-loxam_tp.remote_logo_url = 'app/assets/images/tp.png'
+loxam_tp.remote_logo_url = 'app/assets/images/loxam-tp.png'
 loxam_tp.save
 
 tp_categories = [
@@ -592,7 +592,7 @@ puts "TP OK!"
 # LOXAM POWER
 loxam_power = Affiliate.new(name: "loxam-power",
                             tagline: "Location de matériel industriel.")
-loxam_power.remote_logo_url = 'app/assets/images/power.png'
+loxam_power.remote_logo_url = 'app/assets/images/loxam-power.png'
 loxam_power.save
 
 power_categories = [
