@@ -1,9 +1,14 @@
 .documentations-container {
-  margin-top: 140px;
   .row {
     padding-bottom: 25px;
   };
   h4 {
     margin: 20px auto;
   }
+}
+
+@media screen and (max-width: 991px) {
+  .documentations-container {
+    margin-top: 140px;
+  };
 }
