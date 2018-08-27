@@ -119,12 +119,12 @@
     <div class="col-sm-12 col-md-5 contact-column">
       <!-- Demande de devis -->
       <div class="contact-container form-container">
-        <h2>DEMANDE DE LOCATION?</h2>
+        <h2 class="title-gray-background">DEMANDE DE LOCATION?</h2>
         <%= render 'messages/form' %>
       </div>
       <!-- Promos -->
       <div class="promo-container">
-        <h2>PROMOS</h2>
+        <h2 class="title-gray-background">PROMOS</h2>
         <div class="promo-card-image">
           <% if @promo.present? && @promo.display_description %>
             <h3><%= @promo.title %></h3>

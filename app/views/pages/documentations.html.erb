@@ -1,0 +1,17 @@
+<div class="container documentations-container">
+  <div class="row white-box">
+    <h1>Accedez à nos catalogues</h1>
+    <div class="col-xs-12 col-sm-6">
+      <h4 class="title-gray-background">CATALOGUE DE LOCATION LOXAM</h4>
+      <a class="img-catalog" href="<%= @rental_catalog.link %>" target="_blank">
+        <%= cl_image_tag @rental_catalog.image, height: '300' %>
+      </a>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h4 class="title-gray-background">CATALOGUE DE VENTE LOXAM</h4>
+        <a class="img-catalog" href="<%= @sales_catalog.link %>" target="_blank">
+          <%= cl_image_tag @sales_catalog.image, height: '300' %>
+        </a>
+    </div>
+  </div>
+</div>
