@@ -7,6 +7,8 @@ class UserMailer < ApplicationMailer
   #
   def welcome(user)
     @user = user
-    mail(to: @user.email, subject: 'Bienvenu chez Loxam Bastia !')
+    mail(from: 'contact@loxambastia.com',
+         to: @user.email,
+         subject: 'Bienvenu chez Loxam Bastia!')
   end
 end

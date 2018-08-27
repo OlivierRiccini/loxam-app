@@ -7,7 +7,6 @@ class MessageMailer < ApplicationMailer
   #
   def contact(message)
     @message = message
-
     mail(from: @message.email, to: "contact@loxambastia.com")
   end
 end
