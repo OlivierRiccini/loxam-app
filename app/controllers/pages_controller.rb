@@ -191,7 +191,7 @@ class PagesController < ApplicationController
 
         unless User.where(loxam_id: file_order_columns[2]).exists? && file_order_columns[2] == "inexistant@lng.fr"
           User.create(name: file_order_columns[3], email: file_order_columns[8],
-                      password: Faker::IDNumber.valid, loxam_id: file_order_columns[2])
+                      password: file_order_columns[2], loxam_id: file_order_columns[2])
         end
 
         files_pdf.each do |pdf_doc|

@@ -21,6 +21,9 @@ gem 'faker'
 gem 'gibbon'
 gem 'chart-js-rails'
 
+# Send emails
+gem 'postmark-rails'
+
 # For scraping DB
 gem 'nokogiri'
 
