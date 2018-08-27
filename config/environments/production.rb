@@ -82,7 +82,7 @@ Rails.application.configure do
   # Send emails
   config.action_mailer.delivery_method     = :postmark
   config.action_mailer.postmark_settings   = { api_key: ENV['POSTMARK_API_KEY'] }
-  config.action_mailer.default_url_options = { host: "loxambastia.com" }
+  # config.action_mailer.default_url_options = { host: "loxambastia.com" }
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
