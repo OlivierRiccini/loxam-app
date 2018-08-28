@@ -11,14 +11,50 @@
 }
 
 .container-invoices .row-invoice {
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+}
+
+.invoice-datas {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoice-btn-box {
+  width: 20%;
+  .loxam-btn {
+    float: right;
+  }
 }
 
 @media screen and (max-width: 991px) {
   .container-mon-espace {
     margin-top: 140px;
+  };
+  .container-invoices .row-invoice {
+    font-size: 0.7em;
+  };
+  .invoice-datas {
+    width: 65%;
+  };
+  .invoice-btn-box {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container-invoices .row-invoice {
+    font-size: 0.5em;
+  };
+  .invoice-datas {
+    width: 65%;
+  };
+  .invoice-btn-box {
+    width: 35%;
   }
 }

@@ -45,11 +45,15 @@
     <%= content_tag(:p, "Vous n'avez aucune facture disponible") if @invoices.empty? %>
     <% @invoices.each do |invoice| %>
       <div class="row-invoice white-box">
-        <span><%= invoice.date.strftime('%m/%Y') %></span>
-        <span><%= invoice.document_type %></span>
-        <span><%= invoice.amount %>€ HT</span>
-        <span><%= (invoice.amount * 1.2).round(2) %>€ TTC</span>
-        <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>
+        <div class="invoice-datas">
+          <span><%= invoice.date.strftime('%m/%Y') %></span>
+          <span><%= invoice.document_type %> n°<%= invoice.id_invoice_loxam %></span>
+          <span><strong><%= invoice.amount %>€ HT</strong></span>
+          <span><%= (invoice.amount * 1.2).round(2) %>€ TTC</span>
+        </div>
+        <div class="invoice-btn-box">
+          <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>
+        </div>
       </div>
     <% end %>
   </div>

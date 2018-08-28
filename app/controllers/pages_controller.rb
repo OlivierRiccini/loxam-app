@@ -184,18 +184,33 @@ class PagesController < ApplicationController
       puts "Downloading file #{fname}"
       ftp.getbinaryfile(fname, fname)
 
+      puts "///////////////////////"
+      puts "I AM INSIDE ORDER FILE!"
+      puts "///////////////////////"
+
       text = File.open(fname).read
       text.each_line do |line|
         file_order_columns = line.strip.split(/\;/)
 
+        puts "///////////////////////"
+        puts "I AM CHECKING EACH LINE OF ORDER FILE!"
+        puts "///////////////////////"
 
         unless User.where(loxam_id: file_order_columns[2]).exists? && file_order_columns[2] == "inexistant@lng.fr"
+          puts "///////////////////////"
+          puts "CREATING USER!"
+          puts "///////////////////////"
           User.create(name: file_order_columns[3], email: file_order_columns[8],
-                      password: file_order_columns[2], loxam_id: file_order_columns[2])
+                      password: "#{file_order_columns[2]}-#{file_order_columns[8]}-#{file_order_columns[2]}",
+                      loxam_id: file_order_columns[2])
         end
 
         files_pdf.each do |pdf_doc|
           # file_order_columns[6] == pdf id
+          puts "///////////////////////"
+          puts "CHECKING EACH PDF! #{pdf_doc} == #{file_order_columns[6]}"
+          puts "///////////////////////"
+
           user = User.where(loxam_id: file_order_columns[2]).take
           if pdf_doc == file_order_columns[6] && !user.nil?
 
@@ -210,9 +225,11 @@ class PagesController < ApplicationController
               new_doc.remote_pdf_url = pdf_doc
               new_doc.save
             end
-            File.delete(pdf_doc)
-            ftp.delete(pdf_doc)
+            # File.delete(pdf_doc)
+            # ftp.delete(pdf_doc)
           end
+          File.delete(pdf_doc)
+          ftp.delete(pdf_doc)
         end
       end
       File.delete(fname)
