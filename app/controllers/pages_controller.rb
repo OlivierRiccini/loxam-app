@@ -136,7 +136,7 @@ class PagesController < ApplicationController
         name: category.name,
         nb_of_searches: Product.where(category_id: category.id)
                                .pluck(:nb_of_searches)
-                               .reduce(:+)
+                               .reduce(:+) || 0
       }
 
     @categories_hashes.sort_by! { |category| category[:nb_of_searches] }.reverse!
