@@ -40,4 +40,7 @@ Rails.application.routes.draw do
   resources :catalogs, only: [ :create, :update ]
 
   get 'affiliates/:name', to: "affiliates#show", as: "affiliate"
+
+  # Receive email
+  post "/hook" => "webhooks#receive_email"
 end
