@@ -21,7 +21,6 @@ class User < ApplicationRecord
   def send_welcome_email
     # response.set_header('Content-Type', 'application/json')
     # response.set_header('Accept', 'application/json')
-    response.set_header('X-Postmark-Account-Token', 'd9d5b157-c617-4500-8195-f4cffde890fd')
     UserMailer.welcome(self).deliver_now
   end
 
