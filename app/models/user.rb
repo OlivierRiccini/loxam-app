@@ -19,11 +19,21 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
+    uri = URI('https://api.postmarkapp.com/email')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    headers = { 'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'X-Postmark-Server-Token' => Rails.application.config.postmark_token}
+    http.post(uri.request_uri, headers)
+    rescue => e
+    puts "http request error: #{e.message}"
+
     UserMailer.welcome(self).deliver_now
   end
 
   def subscribe_to_newsletter
     SubscribeToNewsletterService.new(self).call
   end
-
 end

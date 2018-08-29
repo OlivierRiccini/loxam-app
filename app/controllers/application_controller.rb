@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :all_categories, :all_products
-  before_action :postmark_api_token
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
 
@@ -47,9 +46,5 @@ class ApplicationController < ActionController::Base
       render 'layouts/authenticate_error.js'
       flash[:error] = "Vous devez être connecté pour pouvoir effectuer cette action"
     end
-  end
-
-  def postmark_api_token
-    response.set_header('X-Postmark-Account-Token', 'd9d5b157-c617-4500-8195-f4cffde890fd')
   end
 end
