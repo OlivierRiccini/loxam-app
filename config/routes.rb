@@ -41,6 +41,4 @@ Rails.application.routes.draw do
 
   get 'affiliates/:name', to: "affiliates#show", as: "affiliate"
 
-  # Receive email
-  post "/hook" => "webhooks#receive_email"
 end
