@@ -19,6 +19,7 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
+    mail.headers['X-Postmark-Account-Token'] = 'd9d5b157-c617-4500-8195-f4cffde890fd'
     UserMailer.welcome(self).deliver_now
   end
 
