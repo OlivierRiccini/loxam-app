@@ -39,7 +39,7 @@
           <div class="card-infos">
           <h3><%= product.name %></h3>
             <div class="card-price-and-btn">
-              <p><span class="price"><%= product.price %>€</span> / <%= product.pricing %> H.T</p>
+              <p><span class="price"><%= number_to_currency(product.price,:unit => '€', delimiter: " ", precision: 2, format: "%n%u") %></span> / <%= product.pricing %> H.T</p>
               <%= link_to 'Détails', product_path(product), class: 'loxam-btn' %>
             </div>
           </div>
