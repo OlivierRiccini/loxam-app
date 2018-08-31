@@ -124,7 +124,7 @@
       </div>
       <!-- Promos -->
       <div class="promo-container">
-        <h2 class="title-gray-background">PROMOS</h2>
+        <h2 class="title-gray-background"><%= @promo.title.upcase %></h2>
         <div class="promo-card-image">
           <% if @promo.present? && @promo.display_description %>
             <h3><%= @promo.title %></h3>
