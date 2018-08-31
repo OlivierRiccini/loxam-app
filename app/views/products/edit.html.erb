@@ -16,7 +16,7 @@
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <p><strong><%= f.input :price, label: false %> HT / <%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %></strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 0, format: "%n%u") %> TTC / jour</p>
+        <p><strong><%= f.input :price, label: false %> HT / <%= f.input :pricing, collection: ['jour', 'mois', 'an'], label: false %></strong> soit <%= number_to_currency(@product.price * 1.2,:unit => '€', delimiter: " ", precision: 2, format: "%n%u") %> TTC / jour</p>
         <p><%= f.input :reference, label: 'Référence' %></p>
         <%= f.input :description, as: :summernote, label: 'Description' %>
         <%= f.input :technical_sheet, label: 'Fiche technique' %>
