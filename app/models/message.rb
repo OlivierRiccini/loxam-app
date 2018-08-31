@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
-  after_create :send_contact_email
+  # A décommenter lors de la configuration de Postmark!!!!!!!!
+  # after_create :send_contact_email
 
   validates :name, presence: true
   validates :email, presence: true
