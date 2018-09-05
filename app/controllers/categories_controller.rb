@@ -6,9 +6,7 @@ class CategoriesController < ApplicationController
   def show
     @products = Product.where(category_id: @category.id).order('name ASC')
     authorize @products
-    @categories = Category.order('name ASC').all
-    # @all_products = Product.order('name ASC').all
-    # @new_favorite = Favorite.new
+    # @categories = Category.order('name ASC').all
   end
 
   def create
@@ -55,7 +53,6 @@ class CategoriesController < ApplicationController
   def find_category_by_name
     @category = Category.find_by_name(params[:name])
   end
-
 
   def category_params
     params.require(:category).permit(:name)

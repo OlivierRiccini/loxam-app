@@ -11,6 +11,23 @@ function seach() {
   if ( input.includes('É')) input = input.replace('É', 'E');
   if ( input.includes('È')) input = input.replace('È', 'E');
 
+  // Allows search flexibility
+  if ( input.includes('DIAMETRE')) input = input.replace('DIAMETRE', 'Ø');
+
+  function modifMistakes(arrayOfMistakes, correction) {
+    arrayOfMistakes.forEach(function(character) {
+      if ( input.includes(character) ) input = input.replace(character, correction);
+    });
+  }
+
+  const arrayOfMistakesPonceuse = [ 'PONSEUSE',
+                                    'PONSEUSES',
+                                    'PONCEUS',
+                                    'PONSEUS',
+                                    'PONSEUSES' ];
+
+  modifMistakes(arrayOfMistakesPonceuse, 'PONCEUSE');
+
   listSearchItems.forEach(function(item) {
     if ( event.type === "click" ) {
       item.parentElement.classList.remove('result-search');

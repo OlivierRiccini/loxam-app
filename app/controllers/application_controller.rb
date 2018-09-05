@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def all_products
-    @products = Product.order('name ASC')
+    @all_products = Product.order('name ASC')
   end
 
   def authenticate_user!
