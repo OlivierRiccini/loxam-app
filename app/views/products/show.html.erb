@@ -78,7 +78,7 @@
           <ul>
             <% @product.expendables.each do |expendable| %>
             <li>
-              <h4><%= expendable.name %> - <%= number_to_currency(expendable.price,:unit => '€', delimiter: " ", precision: 2, format: "%n%u") %></h4>
+              <h4><strong><%= expendable.name %> -</strong> <%= number_to_currency(expendable.price,:unit => '€', delimiter: " ", precision: 2, format: "%n%u") %> HT soit <%= number_to_currency(expendable.price,:unit => '€', delimiter: " ", precision: 2, format: "%n%u") * 1.2 %> TTC</h4>
               <p><%= expendable.description %></p>
             </li>
             <% end %>
