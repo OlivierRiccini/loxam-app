@@ -3,7 +3,7 @@
     <div class="product-title-container">
       <%= f.input :name, label: 'Nom' %>
     </div>
-
+      <%= f.association :category, label: 'Categorie' %>
     <div class="row-presentation-product">
       <div class="col-xs-12 col-sm-6 image-col">
         <% if @product.photo? %>
