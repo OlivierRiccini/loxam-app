@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   # skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: [ :show ]
-  before_action :find_product, only: [ :show, :edit, :update, :destroy ]
-
+  before_action :find_product, only: [ :edit, :update, :destroy ]
+  before_action :find_product_by_name, only: :show
    # include ActionView::Helpers::UrlHelper
 
   def show
@@ -20,8 +20,9 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     authorize @product
     # respond_to do |format|
+    @product.name.gsub!('.', ',')
     if @product.save
-      redirect_to product_path(@product)
+      redirect_to product_name_path(@product.name)
     else
       render admin_dashboard_path
     end
@@ -36,10 +37,14 @@ class ProductsController < ApplicationController
   def update
     authorize @product
     if @product.update(product_params)
+
+      # Removing '.' because of routing issue
+      @product.name.gsub!('.', ',')
+      @product.save
       if request.referrer.include? admin_dashboard_path
         respond_to { |format| format.js {flash[:success] = "#{@product.name} a été modifié"} }
       else
-        redirect_to product_path(@product)
+        redirect_to product_name_path(@product.name)
       end
     else
       if request.referrer.include? admin_dashboard_path
@@ -72,5 +77,9 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find(params[:id])
+  end
+
+  def find_product_by_name
+    @product = Product.find_by_name(params[:name])
   end
 end

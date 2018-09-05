@@ -54,7 +54,6 @@ class CategoriesController < ApplicationController
     @category = Category.find_by_name(params[:name])
   end
 
-
   def category_params
     params.require(:category).permit(:name)
   end
