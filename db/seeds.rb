@@ -117,11 +117,19 @@
 # puts "Expendables created!"
 
 # /////////////////////////////////////////////////////////////
-Product.all.each do |product|
-  if product.name.include? '.'
-    product.update(name: product.name.gsub('.', ','))
-    puts product.name
-  end
+Affiliate.first.affiliate_images.destroy_all
+
+images_access = [ "https://res.cloudinary.com/djhma0mde/image/upload/v1536217237/access-1.jpg",
+                  "https://res.cloudinary.com/djhma0mde/image/upload/v1536217280/access-2.jpg",
+                  "https://res.cloudinary.com/djhma0mde/image/upload/v1536217257/access-3.jpg",
+                  "https://res.cloudinary.com/djhma0mde/image/upload/v1536217264/access-4.jpg",
+                  "https://res.cloudinary.com/djhma0mde/image/upload/v1536217271/access-5.jpg"]
+
+# Images for LOXAM ACCESS
+images_access.each do |image|
+  new_image = AffiliateImage.new(affiliate_id: Affiliate.first.id)
+  new_image.remote_url_url = image
+  new_image.save
 end
 
 # #scraping
