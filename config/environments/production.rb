@@ -81,7 +81,8 @@ Rails.application.configure do
 
   # Send emails
   config.action_mailer.delivery_method     = :postmark
-  config.action_mailer.postmark_settings   = { api_key: ENV['POSTMARK_API_KEY'] }
+  config.action_mailer.postmark_settings   = { api_key: ENV['POSTMARK_API_KEY'],
+                                               :api_token => Rails.application.secrets.postmark_api_token }
   # config.action_mailer.default_url_options = { host: "loxambastia.com" }
 
   # Use a different logger for distributed setups.
