@@ -1,2 +1,2 @@
-Gibbon::API.api_key = Rails.application.secrets.mailchimp_api_key
-Gibbon::API.timeout = 15
+Gibbon::Request.api_key = Rails.application.secrets.mailchimp_api_key
+Gibbon::Request.timeout = 15
