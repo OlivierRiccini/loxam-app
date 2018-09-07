@@ -2,7 +2,7 @@ class SubscribeToNewsletterService
   def initialize(user)
     @user = user
     @gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'])
-    @list_id = ENV['MAILCHIMP_LIST_ID']
+    @list_id = ENV['MAILCHIMP_LIST_ID'] || '3be1ca221d'
   end
 
   def call
@@ -10,10 +10,10 @@ class SubscribeToNewsletterService
       body: {
         email_address: @user.email,
         status: "subscribed",
-        # merge_fields: {
-        #   FNAME: @user.first_name,
-        #   LNAME: @user.last_name
-        # }
+        merge_fields: {
+          NAME: @user.name,
+          # LNAME: @user.last_name
+        }
       }
     )
   end
