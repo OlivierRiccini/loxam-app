@@ -6,10 +6,6 @@
 
     <div class="form-inputs">
       <%= f.input :name, label: 'Nom', required: true %>
-      <!-- <label>Ajoutez une image (optionnel)</label>
-      <%= f.file_field  :avatar %> -->
-        <%= f.input :avatar_cache, as: :hidden  %>
-        <br>
       <%= f.input :email, required: true, autofocus: true %>
       <%= f.input :password, label: 'Créer un mot de passe', required: true, hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
       <%= f.input :password_confirmation, label: 'Confirmez votre nouveau mot de passe', required: true %>
