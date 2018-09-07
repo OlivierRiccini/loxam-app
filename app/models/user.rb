@@ -1,12 +1,12 @@
 class User < ApplicationRecord
   after_create :send_welcome_email
-  # after_create :subscribe_to_newsletter
+  after_create :subscribe_to_newsletter
 
   has_many :invoices, dependent: :destroy
   has_many :favorites
   has_many :products, :through => :favorites
 
-  # validates :name, presence: true
+  validates :name, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
