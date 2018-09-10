@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
   # before_action :all_products, only: [ :home, :mon_espace, :admin_dashboard, :vente, :location ]
   skip_before_action :authenticate_user!, only: [ :home, :location, :vente, :reparation,
-                                                  :contact, :garantie_dommages, :documentations ]
+                                                  :contact, :garantie_dommages, :documentations,
+                                                  :conditions_generales_de_location ]
 
   include ActionView::Helpers::UrlHelper
 

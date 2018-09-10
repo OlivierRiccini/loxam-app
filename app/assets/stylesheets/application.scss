@@ -60,3 +60,11 @@ textarea:focus,
 button:focus {
     outline: none;
 }
+
+@media screen and (max-width: 991px) {
+  .container-mon-espace,
+  .container-conditions-generales-de-location {
+    margin-top: 140px;
+  }
+}
+
