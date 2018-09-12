@@ -5,9 +5,9 @@ fr:
         message:
           attributes:
             name:
-              blank: "Vous devez indiquez un nom"
+              blank: "Vous devez indiquer un nom"
             email:
-              blank: "Vous devez indiquez une adresse email"
+              blank: "Vous devez indiquer une adresse email"
               invalid: "Cette adresse email est invalide"
             content:
               too_short: "Le message est trop court"
