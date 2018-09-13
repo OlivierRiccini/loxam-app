@@ -52,7 +52,8 @@
           <span><%= (invoice.amount * 1.2).round(2) %>€ TTC</span>
         </div>
         <div class="invoice-btn-box">
-          <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>
+          <!-- <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>-->
+          <%= link_to 'Consulter facture', 'assets/invoices/' + invoice.pdf, class: 'loxam-btn', target: '_blank' %>
         </div>
       </div>
     <% end %>

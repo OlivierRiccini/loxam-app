@@ -191,7 +191,8 @@ class PagesController < ApplicationController
 
       text = File.open(fname).read
       text.each_line do |line|
-        file_order_columns = line.strip.split(/\;/)
+        file_order_columns = line.strip.encode('UTF-8', :invalid => :replace)
+                                       .split(/\;/)
 
         puts "///////////////////////"
         puts "I AM CHECKING EACH LINE OF ORDER FILE!"
@@ -202,7 +203,7 @@ class PagesController < ApplicationController
           puts "CREATING USER!"
           puts "///////////////////////"
           User.create(name: file_order_columns[3], email: file_order_columns[8],
-                      password: "#{file_order_columns[2]}-#{file_order_columns[8]}-#{file_order_columns[2]}",
+                      password: "#{file_order_columns[2]}-#{file_order_columns[8]}",
                       loxam_id: file_order_columns[2])
         end
 
@@ -216,25 +217,28 @@ class PagesController < ApplicationController
           if pdf_doc == file_order_columns[6] && !user.nil?
 
           puts "#{pdf_doc} == #{file_order_columns[6]}"
-            ftp.getbinaryfile(pdf_doc, pdf_doc)
+            # ftp.getbinaryfile(pdf_doc, pdf_doc)
+            ftp.getbinaryfile(pdf_doc, "public/assets/invoices/#{pdf_doc}")
 
-            unless user.invoices.any? { |invoice| invoice[:id_invoice_loxam] == file_order_columns[0] }
+            # unless user.invoices.any? { |invoice| invoice[:id_invoice_loxam] == file_order_columns[0] &&
+            unless Invoice.where(id_invoice_loxam: file_order_columns[0]).exists?
+
               file_order_columns[1] == "FCLI" ? document_type = "Facture" : document_type = "Avoir"
               new_doc = Invoice.new(id_invoice_loxam: file_order_columns[0], document_type: document_type,
                                     date: file_order_columns[7], amount: file_order_columns[4],
-                                    user_id: user.id)
-              new_doc.remote_pdf_url = pdf_doc
+                                    user_id: user.id, pdf: file_order_columns[6])
+              # new_doc.remote_pdf_url = pdf_doc if File.size(pdf_doc) > 0
               new_doc.save
             end
             # File.delete(pdf_doc)
             # ftp.delete(pdf_doc)
           end
-          File.delete(pdf_doc)
-          ftp.delete(pdf_doc)
+          # File.delete(pdf_doc)
+          # ftp.delete(pdf_doc)
         end
       end
       File.delete(fname)
-      ftp.delete(fname)
+      # ftp.delete(fname)
     end
   end
 
