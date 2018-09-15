@@ -8,6 +8,6 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(from: 'contact@loxambastia.com',
          to: @user.email,
-         subject: 'Bienvenu chez Loxam Bastia!')
+         subject: 'Bienvenue chez Loxam Bastia!')
   end
 end
