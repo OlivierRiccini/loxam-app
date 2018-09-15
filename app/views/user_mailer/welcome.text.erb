@@ -1,5 +1,13 @@
-<p>Hi <%= @user.email %>,</p>
+<p>Bonjour <%= @user.name %>,</p>
+<br>
+<p>A parti du 1er Septembre 2018, votre agence LOXAM BASTIA à fait peau neuve de son site internet : <a href="http://www.loxam-bastia.fr" target="_blank">www.loxam-bastia.com</a></p>
+<p>Cela vous permettra entre autres de vous connecter à votre espace personnel dans lequel vous aurez la possibilité de consulter vos factures.</p>
+<br>
+<p>Pour y accéder cliquez sur ce lien <a href="http://www.loxam-bastia.fr/users/sign_in" target="_blank">Se connecter</a> et utilisez l’identifiant et le mot de passe suivant:</p>
 
-<p>Today we'll talk about SMTP and Postmark!</p>
+<p>Identifiant: <%= @user.email %></p>
+<p>Mot de passe: <%= @user.password %></p>
+<br>
+<p>Bonne navigation et à bientôt ! :)</p>
 
-<p>See ya!</p>
+<p>PS : Si vous rencontrez des difficultés, n'hésitez pas à nous contacter par email <a href="mailto:contact@loxambastia.com">contact@loxambastia.com</a></p>
