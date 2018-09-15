@@ -53,7 +53,7 @@
         </div>
         <div class="invoice-btn-box">
           <!-- <a href="<%= cl_image_path invoice.pdf %>" target="_blank" class="loxam-btn">Consulter facture</a>-->
-          <%= link_to 'Consulter facture', 'assets/invoices/' + invoice.pdf, class: 'loxam-btn', target: '_blank' %>
+          <%= link_to 'Consulter facture', "assets/invoices/#{invoice.date.to_s.gsub!('-', '')[0..5]}/#{invoice.pdf}", class: 'loxam-btn', target: '_blank' %>
         </div>
       </div>
     <% end %>

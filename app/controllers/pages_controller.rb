@@ -207,6 +207,10 @@ class PagesController < ApplicationController
                       loxam_id: file_order_columns[2])
         end
 
+        date_to_dir_name = file_order_columns[7][0..5]
+        dir_name = "public/assets/invoices/#{date_to_dir_name}"
+        Dir.mkdir(dir_name) unless File.exists?(dir_name)
+
         files_pdf.each do |pdf_doc|
           # file_order_columns[6] == pdf id
           puts "///////////////////////"
@@ -218,7 +222,7 @@ class PagesController < ApplicationController
 
           puts "#{pdf_doc} == #{file_order_columns[6]}"
             # ftp.getbinaryfile(pdf_doc, pdf_doc)
-            ftp.getbinaryfile(pdf_doc, "public/assets/invoices/#{pdf_doc}")
+            ftp.getbinaryfile(pdf_doc, "#{dir_name}/#{pdf_doc}")
 
             # unless user.invoices.any? { |invoice| invoice[:id_invoice_loxam] == file_order_columns[0] &&
             unless Invoice.where(id_invoice_loxam: file_order_columns[0]).exists?
