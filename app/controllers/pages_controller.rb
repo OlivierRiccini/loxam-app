@@ -169,10 +169,10 @@ class PagesController < ApplicationController
   def synchronization
     require 'faker'
     require 'net/ftp'
-    ftp = Net::FTP.new("ftp.cluster021.hosting.ovh.net")
+    ftp = Net::FTP.new("ftp.cluster005.ovh.net")
   # run the script like
   # ruby ftp.rb username password
-    ftp.login("loxambasii", "gaUhVmu4qXth")
+    ftp.login("loxamcitjg-jyr", "D2HJfZdVbmebmEjM56Bn0JO7SIRsTu")
     ftp.chdir("/gcom_tmp")
 
     files_ord = ftp.nlst('*.ord')
