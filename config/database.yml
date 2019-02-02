@@ -23,7 +23,6 @@ default: &default
   username: root
   password: postgres
 
-
 development:
   <<: *default
   database: loxam-app_development
