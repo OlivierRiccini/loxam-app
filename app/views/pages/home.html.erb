@@ -123,22 +123,20 @@
         <%= render 'messages/form' %>
       </div>
       <!-- Promos -->
-      <% if @promo.present? %>
-        <div class="promo-container">
-          <h2 class="title-gray-background"><%= @promo.title.upcase %></h2>
-          <div class="promo-card-image">
-            <% if @promo.present? && @promo.display_description %>
-              <h3><%= @promo.title %></h3>
-              <p><%= @promo.description %></p>
-            <% end %>
-            <%= (cl_image_tag @promo.media) if @promo.present?%>
-            <div class="promo-card-hover">
-              <strong>Agrandir l'image</strong>
-              <i class="fa fa-arrows-alt" id="expand-cross"></i>
-            </div>
+      <div class="promo-container">
+        <h2 class="title-gray-background"><%= @promo.title.upcase if @promo.present? %></h2>
+        <div class="promo-card-image">
+          <% if @promo.present? && @promo.display_description %>
+            <h3><%= @promo.title %></h3>
+            <p><%= @promo.description %></p>
+          <% end %>
+          <%= (cl_image_tag @promo.media) if @promo.present?%>
+          <div class="promo-card-hover">
+            <strong>Agrandir l'image</strong>
+            <i class="fa fa-arrows-alt" id="expand-cross"></i>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
   <div class="full-screen-promo">
