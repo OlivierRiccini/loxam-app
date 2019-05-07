@@ -53,7 +53,7 @@ class PagesController < ApplicationController
     @message = Message.new
 
     # Displaying promo and catalogs
-    @promo = Promo.where(display: true).last
+    @promo = Promo.last
     @catalogs = Catalog.all
 
     # @new_favorite = Favorite.new
