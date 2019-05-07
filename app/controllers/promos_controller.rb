@@ -7,9 +7,9 @@ class PromosController < ApplicationController
     authorize @promo
     respond_to do |format|
       if @promo.save
-        format.js
+        redirect_to '/'
       else
-        format.js
+        redirect_to '/'
       end
     end
   end
@@ -22,9 +22,9 @@ class PromosController < ApplicationController
     authorize @promo
     respond_to do |format|
       if @promo.update(promo_params)
-        format.js
+        redirect_to '/'
       else
-        format.js
+        redirect_to '/'
       end
     end
   end
@@ -33,9 +33,9 @@ class PromosController < ApplicationController
     authorize @promo
     respond_to do |format|
       if @promo.destroy
-        format.js
+        redirect_to '/'
       else
-        format.js
+        redirect_to '/'
       end
     end
   end
