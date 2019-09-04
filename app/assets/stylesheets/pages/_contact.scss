@@ -16,3 +16,12 @@
   width: 100%;
   margin-top: 50px;
 }
+
+.address-box {
+  background-color: $light-gray;
+  padding: 10px;
+  margin-bottom: 10px;
+  p {
+    margin: 0;
+  }
+}
