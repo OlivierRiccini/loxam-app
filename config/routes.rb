@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   get 'conditions_generales_de_vente', to: "pages#conditions_generales_de_vente"
   get 'documentations', to: "pages#documentations"
 
-  get ':name/products', to: "categories#show", as: "category_products"
-  get ':name', to: "products#show", as: "product_name"
+  get ':slug/products', to: "categories#show", as: "category_products"
+  get ':slug', to: "products#show", as: "product_name"
 
   resources :categories, only: [ :create, :update, :destroy ]
   resources :products, only: [ :create, :edit, :update, :destroy ] do

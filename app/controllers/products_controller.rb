@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     # respond_to do |format|
     @product.name.gsub!('.', ',')
     if @product.save
-      redirect_to product_name_path(@product.name)
+      redirect_to product_name_path(@product.slug)
     else
       render admin_dashboard_path
     end
@@ -40,11 +40,12 @@ class ProductsController < ApplicationController
 
       # Removing '.' because of routing issue
       @product.name.gsub!('.', ',')
+      @product.slug.gsub!(' ', '-')
       @product.save
       if request.referrer.include? admin_dashboard_path
         respond_to { |format| format.js {flash[:success] = "#{@product.name} a été modifié"} }
       else
-        redirect_to product_name_path(@product.name)
+        redirect_to product_name_path(@product.slug)
       end
     else
       if request.referrer.include? admin_dashboard_path
@@ -76,10 +77,10 @@ class ProductsController < ApplicationController
   end
 
   def find_product
-    @product = Product.find(params[:id])
+    @product = Product.friendly.find(params[:id])
   end
 
   def find_product_by_name
-    @product = Product.find_by_name(params[:name])
+    @product = Product.friendly.find(params[:slug])
   end
 end

@@ -30,6 +30,9 @@ gem 'nokogiri'
 # Nested forms
 gem "cocoon"
 
+# Format url
+gem 'friendly_id', '~> 5.2.4'
+
 # Text area
 gem 'summernote-rails', '~> 0.8.10.0'
 

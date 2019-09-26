@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180831075734) do
+ActiveRecord::Schema.define(version: 20190926225346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20180831075734) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "expendables", force: :cascade do |t|
@@ -74,6 +76,17 @@ ActiveRecord::Schema.define(version: 20180831075734) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_favorites_on_product_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -116,7 +129,9 @@ ActiveRecord::Schema.define(version: 20180831075734) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "pricing", default: "jour"
+    t.string "slug"
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["slug"], name: "index_products_on_slug", unique: true
   end
 
   create_table "promos", force: :cascade do |t|

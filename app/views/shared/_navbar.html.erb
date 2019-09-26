@@ -16,7 +16,7 @@
     <ul id="search-list">
       <% if !@all_products.nil? %>
         <% @all_products.each do |product| %>
-          <li class="product-item"><%= link_to product.name, product_name_path(product.name) %></li>
+          <li class="product-item"><%= link_to product.name, product_name_path(product.slug) %></li>
         <% end %>
       <% end %>
     </ul>

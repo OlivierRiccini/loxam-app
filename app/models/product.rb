@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  extend FriendlyId
   # has_many :transactions
   has_many :expendables, dependent: :destroy
   accepts_nested_attributes_for :expendables, reject_if: :all_blank, allow_destroy: true
@@ -8,6 +9,7 @@ class Product < ApplicationRecord
 
 
   validates :name, presence: true
+  friendly_id :name, use: :slugged
   validates :reference, uniqueness: true, presence: true
   validates :category, presence: true
   validates :price, presence: true

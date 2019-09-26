@@ -47,11 +47,11 @@ class CategoriesController < ApplicationController
   private
 
   def find_category
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
   end
 
   def find_category_by_name
-    @category = Category.find_by_name(params[:name])
+    @category = Category.friendly.find(params[:slug])
   end
 
   def category_params
