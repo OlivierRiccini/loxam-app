@@ -3,7 +3,7 @@
     <% if policy(@product).update? %>
       <%= link_to 'Modifier matériel', edit_product_path(@product), class: "btn-edit" %>
     <% end %>
-    <h2><%= @product.name %></h2>
+    <h1><%= @product.name %></h1>
     <div class="favorite-star-container-product-<%= @product.id %>">
       <% if (user_signed_in?) && (current_user.products.include? @product) %>
         <%= link_to product_favorite_path(current_user, @product), class: 'btn-favorite-active', remote: true, :method => :delete, :data => { toggle: 'popover', trigger: 'hover', content: 'Retirer des favoris', placement: 'left' } do %>
