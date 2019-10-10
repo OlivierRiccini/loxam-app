@@ -3,8 +3,11 @@
   <span class="error" id="name-errro"></span>
   <%= f.input :email %>
   <span class="error" id="email-errro"></span>
+  <%= f.input :agency, :label => 'Choisissez une agence', :collection => ['LOXAM AJACCIO', 'LOXAM BASTIA'], include_blank: true %>
+  <span class="error" id="agency-errro"></span>
   <%= f.input :content, label: 'Message' %>
   <span class="error" id="content-errro"></span>
+  <%= invisible_captcha %>
   <%= f.button :submit, value: 'Envoyer', class: 'loxam-btn btn-send' %>
 <% end %>
 

@@ -20,8 +20,14 @@
         <p><%= f.input :reference, label: 'Référence' %></p>
         <%= f.input :description, as: :summernote, label: 'Description' %>
         <%= f.input :technical_sheet, label: 'Fiche technique' %>
+        <% if @product.technical_sheet? %>
+          <%= f.input :remove_technical_sheet, :label => 'Supprimer fiche technique', :as => :boolean, input_html: {checked: false} %>
+        <% end %>
         <%= f.input :technical_sheet_cache, as: :hidden %>
         <%= f.input :features, label: 'Caractéristiques' %>
+        <% if @product.features? %>
+          <%= f.input :remove_features, :label => 'Supprimer caractéristiques', :as => :boolean, input_html: { checked: false } %>
+        <% end %>
         <%= f.input :features_cache, as: :hidden %>
       </div>
     </div>
@@ -71,6 +77,8 @@
               <span class="error" id="email-errro"></span>
             </div>
           </div>
+          <%= f.select :agency, ["LOXAM AJACCIO", "LOXAM BASTIA"], label: "Choisissez une agence", include_blank: true %>
+          <span class="error" id="agency-errro"></span>
           <%= f.input :content, label: 'Message' %>
           <span class="error" id="content-errro"></span>
           <%= f.button :submit, value: 'Demande informations', class: 'loxam-btn btn-send' %>

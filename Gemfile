@@ -20,6 +20,7 @@ gem 'cloudinary'
 gem 'faker'
 gem 'gibbon'
 gem 'chart-js-rails'
+gem 'invisible_captcha'
 
 # Send emails
 gem 'postmark-rails'

@@ -44,6 +44,30 @@
   height: 55px;
 }
 
+
+.secondary-logo {
+  max-width: 80px;
+  display: block;
+}
+
+@media screen and (max-width: 1190px) {
+  .secondary-logo {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .secondary-logo {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .secondary-logo {
+    display: none;
+  }
+}
+
 /* User Avatar */
 .navbar-wagon .avatar {
   max-height: 35px;

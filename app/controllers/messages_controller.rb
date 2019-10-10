@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   before_action :find_message, only: [ :destroy, :show ]
   skip_after_action :verify_authorized, only: [ :check!, :uncheck! ]
   skip_before_action :authenticate_user!, only: [ :create ]
+  invisible_captcha only: [:create]
 
   def show
     authorize @message
@@ -70,6 +71,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:name, :email, :content)
+    params.require(:message).permit(:name, :email, :agency, :content)
   end
 end
