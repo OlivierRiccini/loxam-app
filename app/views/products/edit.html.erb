@@ -70,17 +70,17 @@
           <div class="row">
             <div class="col-xs-12 col-sm-6">
               <%= f.input :name, label: 'Nom/Société' %>
-              <span class="error" id="name-errro"></span>
+              <span class="error" id="name-error"></span>
             </div>
             <div class="col-xs-12 col-sm-6">
               <%= f.input :email %>
-              <span class="error" id="email-errro"></span>
+              <span class="error" id="email-error"></span>
             </div>
           </div>
           <%= f.select :agency, ["LOXAM AJACCIO", "LOXAM BASTIA"], label: "Choisissez une agence", include_blank: true %>
-          <span class="error" id="agency-errro"></span>
+          <span class="error" id="agency-error"></span>
           <%= f.input :content, label: 'Message' %>
-          <span class="error" id="content-errro"></span>
+          <span class="error" id="content-error"></span>
           <%= f.button :submit, value: 'Demande informations', class: 'loxam-btn btn-send' %>
         <% end %>
         </div>

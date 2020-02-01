@@ -9,7 +9,7 @@
 <% else %>
 
   function erros(field, messageError) {
-    var fieldError = document.getElementById(`${field}-errro`);
+    var fieldError = document.getElementById(`${field}-error`);
     fieldError.innerText = messageError;
     fieldError.style.color = 'rgb(225, 12, 34)';
     document.querySelector(`.message_${field} label`).style.color = 'rgb(225, 12, 34)';
@@ -17,7 +17,7 @@
   }
 
   function noErros(field) {
-    document.getElementById(`${field}-errro`).innerText = '';
+    document.getElementById(`${field}-error`).innerText = '';
     document.querySelector(`.message_${field} label`).style.color = '#000000';
     document.getElementById(`message_${field}`).style.borderColor = '#ccc';
   }

@@ -1,12 +1,12 @@
 <%= simple_form_for @message, remote: true  do |f| %>
   <%= f.input :name, label: 'Nom/Société'%>
-  <span class="error" id="name-errro"></span>
+  <span class="error" id="name-error"></span>
   <%= f.input :email %>
-  <span class="error" id="email-errro"></span>
+  <span class="error" id="email-error"></span>
   <%= f.input :agency, :label => 'Choisissez une agence', :collection => ['LOXAM AJACCIO', 'LOXAM BASTIA'], include_blank: true %>
-  <span class="error" id="agency-errro"></span>
+  <span class="error" id="agency-error"></span>
   <%= f.input :content, label: 'Message' %>
-  <span class="error" id="content-errro"></span>
+  <span class="error" id="content-error"></span>
   <%= invisible_captcha %>
   <%= f.button :submit, value: 'Envoyer', class: 'loxam-btn btn-send' %>
 <% end %>
