@@ -15,7 +15,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem "pundit"
 gem 'figaro'
-gem 'carrierwave', '~> 1.2'
+gem 'carrierwave', '~> 1.3'
 gem 'cloudinary'
 gem 'faker'
 gem 'gibbon'
